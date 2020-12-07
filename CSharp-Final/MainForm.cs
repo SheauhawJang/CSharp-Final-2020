@@ -52,12 +52,7 @@ namespace CSharp_Final
             // Marks
             foreach (Location mark in NetConfig.MarkLocation)
             {
-                Point centerPoint = new Point
-                {
-                    X = mark.X * NetConfig.NetD + NetConfig.NetR,
-                    Y = mark.Y * NetConfig.NetD + NetConfig.NetR
-                };
-                Point markPoint = centerPoint;
+                Point markPoint = mark.CenterPoint;
                 markPoint.Offset(-NetConfig.MarkR, -NetConfig.MarkR);
                 Size size = new Size(NetConfig.MarkD, NetConfig.MarkD);
                 Rectangle rect = new Rectangle(markPoint, size);
@@ -66,18 +61,20 @@ namespace CSharp_Final
             // Points
             for (int i = 0; i < Piece.History.Count; ++i)
                 Piece.DrawPiece((Panel)sender, Piece.History[i], i);
+            // WinLine
+            Piece.DrawWinLine((Panel)sender);
         }
 
         private void BoardPanel_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            Location loc = new Location(e.X / NetConfig.NetD, e.Y / NetConfig.NetD);
-            Piece.SetPiece(loc, (Panel)sender);
+            Location loc = GlobalManager.Location.GetFromPoint(e.Location);
+            Piece.SetCheckPiece(loc, (Panel)sender);
         }
 
         private void OpenRecordDialog_FileOk(object sender, CancelEventArgs e)
         {
-           
+
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 using CSharp_Final;
 using CSharp_Final.Properties;
+using RecordManager;
 
 namespace GlobalManager
 {
@@ -22,6 +23,7 @@ namespace GlobalManager
         public static int NetTotal => NetD * NetSize;
         public static int NetEnd => NetTotal - NetR;
         public static int LineWidth => 2;
+        public static int WinLineWidth => 5;
         public static int PieceR => 20;
         public static int PieceD => 2 * PieceR;
         public static int MarkR => 5;
@@ -71,7 +73,11 @@ namespace GlobalManager
         public static Manhattan operator -(Location a, Location b) => new Manhattan(a.X - b.X, a.Y - b.Y);
         public static int NullNumber => -65536;
         public static Location Null { get; } = new Location(NullNumber, NullNumber);
-        public bool IsNull => X != Null.X && Y != Null.Y;
+        public bool IsNull => X == Null.X && Y == Null.Y;
+
+        public static Location GetFromPoint(Point e) => new Location(e.X / NetConfig.NetD, e.Y / NetConfig.NetD);
+        public Point CenterPoint => new Point(X * NetConfig.NetD + NetConfig.NetR,
+            Y * NetConfig.NetD + NetConfig.NetR);
     }
     public class PieceInfo
     {
@@ -131,7 +137,7 @@ namespace GlobalManager
                     if (Pieces[i, j].Empty)
                         continue;
                     for (int w = 0; w < 4; ++w)
-                        if (!Connects[i, j].ConnectFather[w].IsNull)
+                        if (Connects[i, j].ConnectFather[w].IsNull)
                         {
                             Location org = new Location(i, j);
                             Location now = new Location(i, j);
@@ -163,7 +169,7 @@ namespace GlobalManager
     {
         public static Bitmap BlackPiece { get => Resources.BlackPiece; }
         public static Bitmap WhitePiece { get => Resources.WhitePiece; }
-        public static PieceInfoSet InfoSet { get; set; } = new PieceInfoSet();
+        public static PieceInfoSet InfoSet { get; private set; } = new PieceInfoSet();
         public static List<Location> History
         {
             get => InfoSet.History;
@@ -176,17 +182,15 @@ namespace GlobalManager
         }
         public static Color CurrectColor { get => PieceInfo.ColorFromInt(History.Count); }
         public static PieceInfo GetInfo(Location loc) => Infos[loc.X, loc.Y];
+        public static Location WinFather { get; private set; } = Location.Null;
+        public static Location WinMother { get; private set; } = Location.Null;
         public static void DrawPiece(Control sender, Location loc, int i)
         {
             Control panel = sender;
             Graphics g = panel.CreateGraphics();
             Color color = (i & 1) == 0 ? Color.Black : Color.White;
             Color reColor = (i & 1) == 1 ? Color.Black : Color.White;
-            Point centerPoint = new Point
-            {
-                X = loc.X * NetConfig.NetD + NetConfig.NetR,
-                Y = loc.Y * NetConfig.NetD + NetConfig.NetR
-            };
+            Point centerPoint = loc.CenterPoint;
             Point piecePoint = centerPoint;
             piecePoint.Offset(-NetConfig.PieceR, -NetConfig.PieceR);
             Size size = new Size(NetConfig.PieceD, NetConfig.PieceD);
@@ -207,18 +211,50 @@ namespace GlobalManager
             SolidBrush fontBrush = new SolidBrush(reColor);
             g.FillPath(fontBrush, path);
         }
-        public static int SetPiece(Location loc, Control sender)
+        public static void DrawWinLine(Control sender)
         {
-            int CheckAns = CheckPiece(loc, sender);
-            string BanedInfo = "您犯规了！\n原因：", BanedTitle = "禁手警告";
-            switch (CheckAns)
+            if (WinFather.IsNull)
+                return;
+            Pen win = new Pen(Color.Red)
             {
-                case 1: case 2:
+                Width = NetConfig.WinLineWidth
+            };
+            Graphics g = sender.CreateGraphics();
+            g.DrawLine(win, WinFather.CenterPoint, WinMother.CenterPoint);
+        }
+        public static void SetCheckPiece(Location loc, Control sender, bool replay = false)
+        {
+            int checkAns = SetPiece(loc, sender);
+            if (checkAns >= 10)
+            {
+                int way = checkAns - 10;
+                WinFather = InfoSet.ConnectAt(loc).ConnectFather[way];
+                WinMother = InfoSet.ConnectAt(loc).ConnectMother[way];
+                DrawWinLine(sender);
+                MessageBox.Show(string.Format("{0}赢了", (History.Count & 1) == 1 ? "黑方" : "白方"),
+                    "游戏结束", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!replay)
+                {
+                    Record record = new Record(History);
+                    record.OutputRecord();
+                }
+            }
+        }
+        static int SetPiece(Location loc, Control sender)
+        {
+            int checkAns = CheckPiece(loc, sender);
+            string BanedInfo = "您犯规了！\n原因：", BanedTitle = "禁手警告";
+            switch (checkAns)
+            {
+                case 1:
                     DrawPiece(sender, loc, History.Count);
                     InfoSet.PieceAt(loc).Id = History.Count;
                     History.Add(loc);
                     InfoSet.UpdateConnect();
-                    return CheckAns;
+                    for (int i = 0; i < 4; ++i)
+                        if (InfoSet.ConnectAt(loc).Connect[i] >= 5)
+                            return i + 10;
+                    return 0;
                 case -33:
                     BanedInfo += "三三禁手"; break;
                 case -44:
@@ -238,17 +274,19 @@ namespace GlobalManager
             if (CurrectColor == Color.Black)
             {
                 int ban = CheckPieceRule(loc);
-                InfoSet.PieceAt(loc).Id = PieceInfo.NullNumber;
-                InfoSet.UpdateConnect();
                 if (ban < 0)
                     return ban;
             }
-            foreach (int len in InfoSet.ConnectAt(loc).Connect)
-                if (len >= 5)
-                    return 2;
             return 1;
         }
         static int CheckPieceRule(Location loc)
+        {
+            int ban = CheckPieceRuleUnsafe(loc);
+            InfoSet.PieceAt(loc).Id = PieceInfo.NullNumber;
+            InfoSet.UpdateConnect();
+            return ban;
+        }
+        static int CheckPieceRuleUnsafe(Location loc)
         {
             InfoSet.PieceAt(loc).Id = History.Count;
             InfoSet.UpdateConnect();

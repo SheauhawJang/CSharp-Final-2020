@@ -46,7 +46,6 @@
             // OpenRecordDialog
             // 
             this.OpenRecordDialog.FileName = "openFileDialog1";
-            this.OpenRecordDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenRecordDialog_FileOk);
             // 
             // MainForm
             // 
