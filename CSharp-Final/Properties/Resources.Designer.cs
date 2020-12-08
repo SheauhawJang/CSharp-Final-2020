@@ -73,9 +73,49 @@ namespace CSharp_Final.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap BlackPool {
+            get {
+                object obj = ResourceManager.GetObject("BlackPool", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Head_I {
+            get {
+                object obj = ResourceManager.GetObject("Head_I", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Head_II {
+            get {
+                object obj = ResourceManager.GetObject("Head_II", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap WhitePiece {
             get {
                 object obj = ResourceManager.GetObject("WhitePiece", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap WhitePool {
+            get {
+                object obj = ResourceManager.GetObject("WhitePool", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

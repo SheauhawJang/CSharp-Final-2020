@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using GlobalManager;
+using Manager;
 
 namespace CSharp_Final
 {
@@ -68,7 +68,8 @@ namespace CSharp_Final
         private void BoardPanel_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            Location loc = GlobalManager.Location.GetFromPoint(e.Location);
+            if (!PlayRight.Ability) return;
+            Location loc = Manager.Location.GetFromPoint(e.Location);
             Piece.SetCheckPiece(loc, (Panel)sender);
         }
 

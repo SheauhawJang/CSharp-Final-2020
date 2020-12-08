@@ -8,12 +8,12 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Collections;
 
 using CSharp_Final;
 using CSharp_Final.Properties;
-using RecordManager;
 
-namespace GlobalManager
+namespace Manager
 {
     public static class NetConfig
     {
@@ -225,19 +225,14 @@ namespace GlobalManager
         public static void SetCheckPiece(Location loc, Control sender, bool replay = false)
         {
             int checkAns = SetPiece(loc, sender);
-            if (checkAns >= 10)
+            if (checkAns >= 1)
             {
-                int way = checkAns - 10;
+                int way = checkAns >> 1;
                 WinFather = InfoSet.ConnectAt(loc).ConnectFather[way];
                 WinMother = InfoSet.ConnectAt(loc).ConnectMother[way];
                 DrawWinLine(sender);
-                MessageBox.Show(string.Format("{0}赢了", (History.Count & 1) == 1 ? "黑方" : "白方"),
-                    "游戏结束", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                if (!replay)
-                {
-                    Record record = new Record(History);
-                    record.OutputRecord();
-                }
+                WinningInfo info = new WinningInfo { Winner = History.Count & 1 };
+                Announcement.Announce(info);
             }
         }
         static int SetPiece(Location loc, Control sender)
@@ -253,7 +248,7 @@ namespace GlobalManager
                     InfoSet.UpdateConnect();
                     for (int i = 0; i < 4; ++i)
                         if (InfoSet.ConnectAt(loc).Connect[i] >= 5)
-                            return i + 10;
+                            return (i << 1) | 1;
                     return 0;
                 case -33:
                     BanedInfo += "三三禁手"; break;
@@ -335,6 +330,31 @@ namespace GlobalManager
             if (san >= 2)
                 return -33;
             return 1;
+        }
+    }
+    public class WinningInfo
+    {
+        public int Winner { get; set; }
+        public string WinWay { get; set; } = "";
+    }
+    public static class Announcement
+    {
+        public static void Announce(WinningInfo info)
+        {
+            List<Location> his = Piece.History;
+            string boxtext = string.Format("{0}赢了！", info.Winner == 1 ? "黑方" : "白方");
+            switch (info.WinWay)
+            {
+                case "TIMEOUT":
+                    boxtext += string.Format("原因:{0}超时！", info.Winner == 0 ? "黑方" : "白方");
+                    break;
+            }
+            MessageBox.Show(boxtext, "游戏结束", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (!PlayRight.Replay)
+            {
+                Record record = new Record(his);
+                record.OutputRecord();
+            }
         }
     }
 }
