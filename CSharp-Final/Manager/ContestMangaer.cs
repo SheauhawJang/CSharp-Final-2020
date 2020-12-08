@@ -184,6 +184,11 @@ namespace Manager
         public static PieceInfo GetInfo(Location loc) => Infos[loc.X, loc.Y];
         public static Location WinFather { get; private set; } = Location.Null;
         public static Location WinMother { get; private set; } = Location.Null;
+        public static void Clear()
+        {
+            InfoSet = new PieceInfoSet();
+            WinFather = WinMother = Location.Null;
+        }
         public static void DrawPiece(Control sender, Location loc, int i)
         {
             Control panel = sender;
@@ -194,22 +199,19 @@ namespace Manager
             Point piecePoint = centerPoint;
             piecePoint.Offset(-NetConfig.PieceR, -NetConfig.PieceR);
             Size size = new Size(NetConfig.PieceD, NetConfig.PieceD);
-            Rectangle rect = new Rectangle(piecePoint, size);
             if (color == Color.Black)
                 g.DrawImage(BlackPiece, piecePoint);
             else if (color == Color.White)
                 g.DrawImage(WhitePiece, piecePoint);
-            Font font = new Font("Arial", 24);
+            Rectangle rect = new Rectangle(piecePoint, size);
+            Font font = new Font("Arial", i >= 99 ? 12 : 18);
             StringFormat format = new StringFormat
             {
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
             };
-            GraphicsPath path = new GraphicsPath();
-            path.AddString(Convert.ToString(i + 1), font.FontFamily,
-                (int)font.Style, font.Size, rect, format);
             SolidBrush fontBrush = new SolidBrush(reColor);
-            g.FillPath(fontBrush, path);
+            g.DrawString(Convert.ToString(i + 1), font, fontBrush, rect, format);
         }
         public static void DrawWinLine(Control sender)
         {
@@ -231,7 +233,12 @@ namespace Manager
                 WinFather = InfoSet.ConnectAt(loc).ConnectFather[way];
                 WinMother = InfoSet.ConnectAt(loc).ConnectMother[way];
                 DrawWinLine(sender);
-                WinningInfo info = new WinningInfo { Winner = History.Count & 1 };
+                WinningInfo info = new WinningInfo { Winner = (History.Count & 1) ^ 1 };
+                Announcement.Announce(info);
+            }
+            else if (History.Count == NetConfig.NetSize * NetConfig.NetSize)
+            {
+                WinningInfo info = new WinningInfo { WinWay = "PEACE" };
                 Announcement.Announce(info);
             }
         }
@@ -243,6 +250,7 @@ namespace Manager
             {
                 case 1:
                     DrawPiece(sender, loc, History.Count);
+                    Clock.Swap(History.Count & 1);
                     InfoSet.PieceAt(loc).Id = History.Count;
                     History.Add(loc);
                     InfoSet.UpdateConnect();
@@ -339,21 +347,119 @@ namespace Manager
     }
     public static class Announcement
     {
+        public static bool Playing { get; set; } = false;
         public static void Announce(WinningInfo info)
         {
+            PlayAccess.Ability = false;
+            PlayAccess.UpdateCursor();
+            Clock.Stop();
             List<Location> his = Piece.History;
-            string boxtext = string.Format("{0}赢了！", info.Winner == 1 ? "黑方" : "白方");
+            string boxtext = string.Format("{0}赢了！\n", info.Winner == 0 ? "黑方" : "白方");
             switch (info.WinWay)
             {
                 case "TIMEOUT":
-                    boxtext += string.Format("原因:{0}超时！", info.Winner == 0 ? "黑方" : "白方");
+                    boxtext += string.Format("原因:{0}超时！\n", info.Winner == 1 ? "黑方" : "白方");
+                    break;
+                case "PEACE":
+                    boxtext = "和棋！\n";
                     break;
             }
-            MessageBox.Show(boxtext, "游戏结束", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            if (!PlayRight.Replay)
+            if (!PlayAccess.Replay)
             {
                 Record record = new Record(his);
                 record.OutputRecord();
+                boxtext += string.Format("棋谱已保存至{0}\n", record.FileName);
+            }
+            MessageBox.Show(boxtext, "游戏结束", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void StartGame()
+        {
+            Piece.Clear();
+            PlayAccess.Ability = true;
+            PlayAccess.UpdateCursor();
+            Clock.Start();
+        }
+    }
+    public static class Clock
+    {
+        public static int PlayerI { get; set; }
+        public static int PlayerII { get; set; }
+        static Timer timerI, timerII;
+        static Panel playerI, playerII;
+        static Color nowColor = Color.SpringGreen;
+        public static void SetTimer(Timer a, Timer b)
+        {
+            if (timerI == null)
+                timerI = a;
+            if (timerII == null)
+                timerII = b;
+        }
+        public static void SetPanel(Panel a, Panel b)
+        {
+            if (playerI == null)
+                playerI = a;
+            if (playerII == null)
+                playerII = b;
+        }
+
+        public static string ToStringFromTime(int time)
+        {
+            int hour = time / 60 / 60;
+            int mint = time / 60 % 60;
+            int secd = time % 60;
+            string ans = "";
+            if (Config.EConfig.Time >= 60 * 60)
+                ans += string.Format("{0:00}:", hour);
+            if (Config.EConfig.Time >= 60)
+                ans += string.Format("{0:00}:", mint);
+            ans += string.Format("{0:00}", secd);
+            return ans;
+        }
+
+        public static void Tick(int player)
+        {
+            int rmn = player == 0 ? --PlayerI : --PlayerII;
+            if (rmn == 0)
+            {
+                WinningInfo info = new WinningInfo
+                {
+                    Winner = player ^ 1,
+                    WinWay = "TIMEOUT"
+                };
+                Announcement.Announce(info);
+            }
+        }
+
+        public static void Start()
+        {
+            PlayerI = PlayerII = Config.EConfig.Time;
+            timerI.Start();
+            playerI.BackColor = nowColor;
+        }
+
+        public static void Stop()
+        {
+            timerI.Stop();
+            timerII.Stop();
+            playerI.BackColor = playerII.BackColor = Color.Transparent;
+        }
+
+        public static void Swap(int now)
+        {
+            if (now == 0)
+            {
+                timerI.Stop();
+                timerII.Start();
+                playerI.BackColor = Color.Transparent;
+                playerII.BackColor = nowColor;
+            }
+            else
+            {
+                timerI.Start();
+                timerII.Stop();
+                playerI.BackColor = nowColor;
+                playerII.BackColor = Color.Transparent;
             }
         }
     }

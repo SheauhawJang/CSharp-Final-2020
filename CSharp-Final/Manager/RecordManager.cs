@@ -21,6 +21,8 @@ namespace Manager
         public BigInteger Dec { get; private set; }
         public List<Location> History { get; private set; }
         readonly static int size = NetConfig.NetSize;
+        public string DateName { get; private set; }
+        public string FileName => string.Format("Records/Record-{0}.record", DateName);
         static char ToHexChar(int x)
         {
             if (x >= size || x < 0)
@@ -61,6 +63,9 @@ namespace Manager
                 Hex.Add(ToHexChar(loc.Y));
             }
             Dec = ToBigInteger(Hex);
+            DateTime now = DateTime.Now;
+            DateName = string.Format("{0:0000}{1:00}{2:00}{3:00}{4:00}{5:00}",
+                now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
         }
         const int hashA = 998244353, hashB = 1000000007, hashC = 19260817;
         public static long GetHashCode(BigInteger x, int p, int b)
@@ -82,14 +87,10 @@ namespace Manager
         }
         public void OutputRecord()
         {
-            DateTime now = DateTime.Now;
             Directory.CreateDirectory("./Records");
-            string dateName = string.Format("{0:0000}{1:00}{2:00}{3:00}{4:00}{5:00}",
-                now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
-            string fileName = string.Format("Records/Record-{0}.record", dateName);
-            StreamWriter save = new StreamWriter(fileName);
+            StreamWriter save = new StreamWriter(FileName);
             save.WriteLine("Written by Sheauhaw Jang");
-            save.WriteLine(dateName);
+            save.WriteLine(DateName);
             save.WriteLine(new string(Hex.ToArray()));
             save.WriteLine(GetHashCode(Hex, hashA, hashC));
             save.WriteLine(GetHashCode(Hex, hashB, hashC));

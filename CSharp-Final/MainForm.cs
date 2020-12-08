@@ -68,14 +68,63 @@ namespace CSharp_Final
         private void BoardPanel_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            if (!PlayRight.Ability) return;
+            if (!PlayAccess.Ability) return;
             Location loc = Manager.Location.GetFromPoint(e.Location);
             Piece.SetCheckPiece(loc, (Panel)sender);
         }
 
-        private void OpenRecordDialog_FileOk(object sender, CancelEventArgs e)
+        private void BoardPanel_Layout(object sender, LayoutEventArgs e)
         {
+            PlayAccess.SetControl((Panel)sender);
+            PlayAccess.UpdateCursor();
+        }
 
+        private void ClockPanel_Paint(object sender, PaintEventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            Graphics g = panel.CreateGraphics();
+            Font font = new Font("Consolas", 18);
+            StringFormat format = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+            Rectangle rect = new Rectangle(new Point(0, 0), panel.Size);
+            int time = sender == ClockPanelI ? Clock.PlayerI : Clock.PlayerII;
+            SolidBrush fontBrush = new SolidBrush(Color.Black);
+            g.DrawString(Clock.ToStringFromTime(time), font, fontBrush, rect, format);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Config.GetConfig();
+            Clock.SetTimer(TimerI, TimerII);
+            Clock.SetPanel(InfoPanelI, InfoPanelII);
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Clock.Tick(sender == TimerI ? 0 : 1);
+            ClockPanelI.Refresh();
+            ClockPanelII.Refresh();
+        }
+
+        private void BeginButton_Click(object sender, EventArgs e)
+        {
+            Announcement.StartGame();
+            Refresh();
+        }
+
+        private void InfoPanel_Paint(object sender, PaintEventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            Graphics g = panel.Parent.CreateGraphics();
+            Pen pen = new Pen(Color.Black) { Width = 4 };
+            Point point = panel.Location;
+            point.Offset(-3, -3);
+            Size size = new Size(panel.Width + 6, panel.Height + 6);
+            Rectangle rect = new Rectangle(point, size);
+            g.DrawRectangle(pen, rect);
         }
     }
 }
