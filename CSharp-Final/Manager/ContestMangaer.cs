@@ -10,10 +10,9 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Collections;
 
-using CSharp_Final;
 using CSharp_Final.Properties;
 
-namespace Manager
+namespace CSharp_Final.Manager
 {
     public static class NetConfig
     {
@@ -245,7 +244,7 @@ namespace Manager
         static int SetPiece(Location loc, Control sender)
         {
             int checkAns = CheckPiece(loc, sender);
-            string BanedInfo = "您犯规了！\n原因：", BanedTitle = "禁手警告";
+            string BanedInfo = Localisation.BanInfo, BanedTitle = Localisation.BanTitle;
             switch (checkAns)
             {
                 case 1:
@@ -259,11 +258,11 @@ namespace Manager
                             return (i << 1) | 1;
                     return 0;
                 case -33:
-                    BanedInfo += "三三禁手"; break;
+                    BanedInfo += Localisation.BanT33; break;
                 case -44:
-                    BanedInfo += "四四禁手"; break;
+                    BanedInfo += Localisation.BanT44; break;
                 case -6:
-                    BanedInfo += "长连禁手"; break;
+                    BanedInfo += Localisation.BanTLong; break;
                 default:
                     return -1;
             }
@@ -319,6 +318,7 @@ namespace Manager
                         if (island.InRange && !InfoSet.PieceAt(island).Empty
                             && InfoSet.PieceAt(island).Color == nowPiece.Color)
                         {
+                            --alive;
                             int islandnum = InfoSet.ConnectAt(island).Connect[i];
                             if (islandnum + nowConnect.Connect[i] == 3)
                                 if (InfoSet.AliveAt(parentP[k ^ 1])
@@ -354,23 +354,27 @@ namespace Manager
             PlayAccess.UpdateCursor();
             Clock.Stop();
             List<Location> his = Piece.History;
-            string boxtext = string.Format("{0}赢了！\n", info.Winner == 0 ? "黑方" : "白方");
+            string boxtext = string.Format("{0}{1}\n", 
+                info.Winner == 0 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
+                Localisation.WinNotice);
             switch (info.WinWay)
             {
                 case "TIMEOUT":
-                    boxtext += string.Format("原因:{0}超时！\n", info.Winner == 1 ? "黑方" : "白方");
+                    boxtext += string.Format("{2}:{0}{1}\n", 
+                        info.Winner == 1 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
+                        Localisation.TimeoutNotice, Localisation.ReasonNotice);
                     break;
                 case "PEACE":
-                    boxtext = "和棋！\n";
+                    boxtext = string.Format("{0}\n", Localisation.PeaceNotice);
                     break;
             }
             if (!PlayAccess.Replay)
             {
                 Record record = new Record(his);
                 record.OutputRecord();
-                boxtext += string.Format("棋谱已保存至{0}\n", record.FileName);
+                boxtext += string.Format("{1}{0}\n", record.FileName, Localisation.RecordSaveNotice);
             }
-            MessageBox.Show(boxtext, "游戏结束", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(boxtext, Localisation.GameOver, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public static void StartGame()
@@ -387,7 +391,7 @@ namespace Manager
         public static int PlayerII { get; set; }
         static Timer timerI, timerII;
         static Panel playerI, playerII;
-        static Color nowColor = Color.SpringGreen;
+        readonly static Color nowColor = Color.SpringGreen;
         public static void SetTimer(Timer a, Timer b)
         {
             if (timerI == null)

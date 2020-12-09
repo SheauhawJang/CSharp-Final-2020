@@ -42,8 +42,8 @@
             this.NamePanelII = new System.Windows.Forms.Panel();
             this.HeadPictureII = new System.Windows.Forms.PictureBox();
             this.TimerI = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.TimerII = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             this.InfoPanelI.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureI)).BeginInit();
@@ -55,6 +55,7 @@
             // BoardPanel
             // 
             this.BoardPanel.BackColor = System.Drawing.Color.BurlyWood;
+            this.BoardPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.BoardPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.BoardPanel.Location = new System.Drawing.Point(50, 50);
             this.BoardPanel.Name = "BoardPanel";
@@ -71,11 +72,12 @@
             // InfoPanelI
             // 
             this.InfoPanelI.BackColor = System.Drawing.Color.Transparent;
+            this.InfoPanelI.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.InfoPanelI.Controls.Add(this.ColorPictureI);
             this.InfoPanelI.Controls.Add(this.ClockPanelI);
             this.InfoPanelI.Controls.Add(this.NamePanelI);
             this.InfoPanelI.Controls.Add(this.HeadPictureI);
-            this.InfoPanelI.Location = new System.Drawing.Point(825, 50);
+            this.InfoPanelI.Location = new System.Drawing.Point(850, 50);
             this.InfoPanelI.Name = "InfoPanelI";
             this.InfoPanelI.Size = new System.Drawing.Size(200, 360);
             this.InfoPanelI.TabIndex = 1;
@@ -123,11 +125,12 @@
             // InfoPanelII
             // 
             this.InfoPanelII.BackColor = System.Drawing.Color.Transparent;
+            this.InfoPanelII.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.InfoPanelII.Controls.Add(this.ColorPictureII);
             this.InfoPanelII.Controls.Add(this.ClockPanelII);
             this.InfoPanelII.Controls.Add(this.NamePanelII);
             this.InfoPanelII.Controls.Add(this.HeadPictureII);
-            this.InfoPanelII.Location = new System.Drawing.Point(825, 440);
+            this.InfoPanelII.Location = new System.Drawing.Point(850, 440);
             this.InfoPanelII.Name = "InfoPanelII";
             this.InfoPanelII.Size = new System.Drawing.Size(200, 360);
             this.InfoPanelII.TabIndex = 1;
@@ -177,32 +180,34 @@
             this.TimerI.Interval = 1000;
             this.TimerI.Tick += new System.EventHandler(this.Timer_Tick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1031, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.BeginButton_Click);
-            // 
             // TimerII
             // 
             this.TimerII.Interval = 1000;
             this.TimerII.Tick += new System.EventHandler(this.Timer_Tick);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.PaleVioletRed;
+            this.panel1.Location = new System.Drawing.Point(1100, 200);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(250, 75);
+            this.panel1.TabIndex = 4;
+            this.panel1.Click += new System.EventHandler(this.StartButton_Click);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.StartButton_Paint);
+            this.panel1.MouseEnter += new System.EventHandler(this.StartButton_MouseEnter);
+            this.panel1.MouseLeave += new System.EventHandler(this.StartButton_MouseLeave);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1424, 841);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.InfoPanelII);
             this.Controls.Add(this.InfoPanelI);
             this.Controls.Add(this.BoardPanel);
             this.Name = "MainForm";
-            this.Text = "五子棋对战程序";
+            this.Text = Properties.Localisation.连珠五子棋对战程序;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.InfoPanelI.ResumeLayout(false);
@@ -230,8 +235,8 @@
         private System.Windows.Forms.Panel NamePanelII;
         private System.Windows.Forms.PictureBox HeadPictureII;
         private System.Windows.Forms.Timer TimerI;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer TimerII;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

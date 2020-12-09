@@ -9,7 +9,9 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace Manager
+using CSharp_Final.Properties;
+
+namespace CSharp_Final.Manager
 {
     public class RecordInfoExpection : ApplicationException
     {
@@ -133,7 +135,7 @@ namespace Manager
             catch
             {
                 ans = new Record(new List<Location>());
-                MessageBox.Show("文件已损坏！", "棋谱错误", 
+                MessageBox.Show(Localisation.RecordFileError, Localisation.RecordError, 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return ans;

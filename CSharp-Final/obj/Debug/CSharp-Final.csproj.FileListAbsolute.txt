@@ -18,3 +18,10 @@ C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.Pro
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp-Final.exe
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp-Final.pdb
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.MainForm.resources
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.Properties.Localisation.resources
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\zh-TW\CSharp-Final.resources.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.Properties.Localisation.zh-TW.resources
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\zh-TW\CSharp-Final.resources.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.Properties.Localisation.ja-JP.resources
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\ja-JP\CSharp-Final.resources.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\ja-JP\CSharp-Final.resources.dll

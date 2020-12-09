@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Manager
+using CSharp_Final.Properties;
+
+namespace CSharp_Final.Manager
 {
     public static class PlayAccess
     {
@@ -45,6 +47,7 @@ namespace Manager
         const char smallSplitor = '=';
         public static void GetConfig()
         {
+            Localisation.Culture = new System.Globalization.CultureInfo("ja-JP");
             try
             {
                 StreamReader config = new StreamReader("./config.txt");

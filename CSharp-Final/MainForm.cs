@@ -9,7 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Manager;
+using CSharp_Final.Manager;
+using CSharp_Final.Properties;
 
 namespace CSharp_Final
 {
@@ -109,7 +110,7 @@ namespace CSharp_Final
             ClockPanelII.Refresh();
         }
 
-        private void BeginButton_Click(object sender, EventArgs e)
+        private void StartButton_Click(object sender, EventArgs e)
         {
             Announcement.StartGame();
             Refresh();
@@ -125,6 +126,35 @@ namespace CSharp_Final
             Size size = new Size(panel.Width + 6, panel.Height + 6);
             Rectangle rect = new Rectangle(point, size);
             g.DrawRectangle(pen, rect);
+        }
+
+        private void StartButton_MouseEnter(object sender, EventArgs e)
+        {
+            Control control = (Control)sender;
+            control.BackColor = Color.LightPink;
+        }
+
+        private void StartButton_MouseLeave(object sender, EventArgs e)
+        {
+            Control control = (Control)sender;
+            control.BackColor = Color.PaleVioletRed;
+        }
+
+        private void StartButton_Paint(object sender, PaintEventArgs e)
+        {
+            Control control = (Control)sender;
+            Graphics g = control.CreateGraphics();
+            Font font = new Font(Localisation.ButtonFont, 32);
+            Point location = new Point(0, 5);
+            Size size = control.Size;
+            Rectangle rect = new Rectangle(location, size);
+            SolidBrush brush = new SolidBrush(Color.Black);
+            StringFormat format = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+            g.DrawString(Localisation.开始对局, font, brush, rect, format);
         }
     }
 }
