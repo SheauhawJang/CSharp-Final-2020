@@ -163,14 +163,14 @@
   <data name="RecordSaveNotice" xml:space="preserve">
     <value>棋譜已保存至{0}</value>
   </data>
+  <data name="StartGame" xml:space="preserve">
+    <value>開始對局</value>
+  </data>
   <data name="TimeoutNotice" xml:space="preserve">
     <value>超時！</value>
   </data>
   <data name="WinNotice" xml:space="preserve">
     <value>赢了！</value>
-  </data>
-  <data name="开始对局" xml:space="preserve">
-    <value>開始對局</value>
   </data>
   <data name="连珠五子棋" xml:space="preserve">
     <value>連珠五子棋</value>

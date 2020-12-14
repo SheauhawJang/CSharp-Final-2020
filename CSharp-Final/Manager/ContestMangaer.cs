@@ -81,7 +81,8 @@ namespace CSharp_Final.Manager
     public class PieceInfo
     {
         public int Id { get; set; }
-        public static Color ColorFromInt(int x) => (x & 1) == 0 ? Color.Black : Color.White;
+        public static Color ColorFromInt(int x) => 
+            (x & 1) == 0 ? Color.Black : Color.White;
         public Color Color { get => ColorFromInt(Id); }
         public bool Empty => Id < 0;
         public static int NullNumber => -65536;
@@ -179,7 +180,9 @@ namespace CSharp_Final.Manager
             get => InfoSet.Pieces; 
             set => InfoSet.Pieces = value; 
         }
-        public static Color CurrectColor { get => PieceInfo.ColorFromInt(History.Count); }
+        public static int CurrectID => History.Count;
+        public static int CurrectColorID => CurrectID & 1;
+        public static Color CurrectColor => PieceInfo.ColorFromInt(History.Count);
         public static PieceInfo GetInfo(Location loc) => Infos[loc.X, loc.Y];
         public static Location WinFather { get; private set; } = Location.Null;
         public static Location WinMother { get; private set; } = Location.Null;
@@ -232,7 +235,7 @@ namespace CSharp_Final.Manager
                 WinFather = InfoSet.ConnectAt(loc).ConnectFather[way];
                 WinMother = InfoSet.ConnectAt(loc).ConnectMother[way];
                 DrawWinLine(sender);
-                WinningInfo info = new WinningInfo { Winner = (History.Count & 1) ^ 1 };
+                WinningInfo info = new WinningInfo { Winner = CurrectColorID ^ 1 };
                 Announcement.Announce(info);
             }
             else if (History.Count == NetConfig.NetSize * NetConfig.NetSize)
@@ -249,10 +252,11 @@ namespace CSharp_Final.Manager
             {
                 case 1:
                     DrawPiece(sender, loc, History.Count);
-                    Clock.Swap(History.Count & 1);
+                    Clock.Swap(CurrectColorID);
                     InfoSet.PieceAt(loc).Id = History.Count;
                     History.Add(loc);
-                    InfoSet.UpdateConnect();
+                    InfoSet.UpdateConnect(); 
+                    PlayAccess.UpdateCursor(CurrectColorID);
                     for (int i = 0; i < 4; ++i)
                         if (InfoSet.ConnectAt(loc).Connect[i] >= 5)
                             return (i << 1) | 1;
@@ -381,7 +385,7 @@ namespace CSharp_Final.Manager
         {
             Piece.Clear();
             PlayAccess.Ability = true;
-            PlayAccess.UpdateCursor();
+            PlayAccess.UpdateCursor(0);
             Clock.Start();
         }
     }

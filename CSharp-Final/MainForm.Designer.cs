@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.BoardPanel = new System.Windows.Forms.Panel();
             this.OpenRecordDialog = new System.Windows.Forms.OpenFileDialog();
             this.InfoPanelI = new System.Windows.Forms.Panel();
             this.ColorPictureI = new System.Windows.Forms.PictureBox();
@@ -44,26 +43,18 @@
             this.TimerI = new System.Windows.Forms.Timer(this.components);
             this.TimerII = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.BoardPanel = new System.Windows.Forms.Panel();
             this.InfoPanelI.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureI)).BeginInit();
             this.InfoPanelII.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureII)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // BoardPanel
-            // 
-            this.BoardPanel.BackColor = System.Drawing.Color.BurlyWood;
-            this.BoardPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.BoardPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.BoardPanel.Location = new System.Drawing.Point(50, 50);
-            this.BoardPanel.Name = "BoardPanel";
-            this.BoardPanel.Size = new System.Drawing.Size(750, 750);
-            this.BoardPanel.TabIndex = 0;
-            this.BoardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.BoradPanel_Paint);
-            this.BoardPanel.Layout += new System.Windows.Forms.LayoutEventHandler(this.BoardPanel_Layout);
-            this.BoardPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BoardPanel_MouseUp);
             // 
             // OpenRecordDialog
             // 
@@ -116,7 +107,7 @@
             this.HeadPictureI.BackColor = System.Drawing.Color.Transparent;
             this.HeadPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_I;
             this.HeadPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.HeadPictureI.Location = new System.Drawing.Point(0, 0);
+            this.HeadPictureI.Location = new System.Drawing.Point(-3, 0);
             this.HeadPictureI.Name = "HeadPictureI";
             this.HeadPictureI.Size = new System.Drawing.Size(200, 240);
             this.HeadPictureI.TabIndex = 0;
@@ -169,7 +160,7 @@
             this.HeadPictureII.BackColor = System.Drawing.Color.Transparent;
             this.HeadPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_II;
             this.HeadPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.HeadPictureII.Location = new System.Drawing.Point(0, 0);
+            this.HeadPictureII.Location = new System.Drawing.Point(-3, 0);
             this.HeadPictureII.Name = "HeadPictureII";
             this.HeadPictureII.Size = new System.Drawing.Size(200, 240);
             this.HeadPictureII.TabIndex = 0;
@@ -197,17 +188,48 @@
             this.panel1.MouseEnter += new System.EventHandler(this.StartButton_MouseEnter);
             this.panel1.MouseLeave += new System.EventHandler(this.StartButton_MouseLeave);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(1100, 300);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 120);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(1250, 300);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 120);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
+            // BoardPanel
+            // 
+            this.BoardPanel.BackColor = System.Drawing.Color.BurlyWood;
+            this.BoardPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.BoardPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.BoardPanel.Location = new System.Drawing.Point(50, 50);
+            this.BoardPanel.Name = "BoardPanel";
+            this.BoardPanel.Size = new System.Drawing.Size(750, 750);
+            this.BoardPanel.TabIndex = 0;
+            this.BoardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.BoardPanel_Paint);
+            this.BoardPanel.Layout += new System.Windows.Forms.LayoutEventHandler(this.BoardPanel_Layout);
+            this.BoardPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BoardPanel_MouseUp);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1424, 841);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.InfoPanelII);
             this.Controls.Add(this.InfoPanelI);
             this.Controls.Add(this.BoardPanel);
             this.Name = "MainForm";
-            this.Text = Properties.Localisation.连珠五子棋对战程序;
+            this.Text = "连珠五子棋对战程序";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.InfoPanelI.ResumeLayout(false);
@@ -216,13 +238,13 @@
             this.InfoPanelII.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureII)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel BoardPanel;
         private System.Windows.Forms.OpenFileDialog OpenRecordDialog;
         private System.Windows.Forms.Panel InfoPanelI;
         private System.Windows.Forms.PictureBox ColorPictureI;
@@ -237,6 +259,9 @@
         private System.Windows.Forms.Timer TimerI;
         private System.Windows.Forms.Timer TimerII;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Panel BoardPanel;
     }
 }
 

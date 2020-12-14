@@ -61,6 +61,16 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] BlackCursor {
+            get {
+                object obj = ResourceManager.GetObject("BlackCursor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap BlackPiece {
@@ -97,6 +107,16 @@ namespace CSharp_Final.Properties {
             get {
                 object obj = ResourceManager.GetObject("Head_II", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] WhiteCursor {
+            get {
+                object obj = ResourceManager.GetObject("WhiteCursor", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

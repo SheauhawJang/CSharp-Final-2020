@@ -119,7 +119,7 @@
   </resheader>
   <data name="BanInfo" xml:space="preserve">
     <value>反則する！
-理由は：</value>
+理由：</value>
   </data>
   <data name="BanT33" xml:space="preserve">
     <value>三三反則</value>
@@ -149,7 +149,7 @@
     <value>白</value>
   </data>
   <data name="ReasonNotice" xml:space="preserve">
-    <value>理由は</value>
+    <value>理由</value>
   </data>
   <data name="RecordError" xml:space="preserve">
     <value>棋譜エラー</value>
@@ -160,19 +160,19 @@
   <data name="RecordSaveNotice" xml:space="preserve">
     <value>棋譜がこのファイルに保存されました：</value>
   </data>
+  <data name="StartGame" xml:space="preserve">
+    <value>対局開始</value>
+  </data>
   <data name="TimeoutNotice" xml:space="preserve">
-    <value>タイムアウト！</value>
+    <value>はタイムアウトです！</value>
   </data>
   <data name="WinNotice" xml:space="preserve">
     <value>の勝利！</value>
   </data>
-  <data name="开始对局" xml:space="preserve">
-    <value>対局開始</value>
-  </data>
   <data name="连珠五子棋" xml:space="preserve">
-    <value>連珠ゲーム</value>
+    <value>連珠の五目並べ</value>
   </data>
   <data name="连珠五子棋对战程序" xml:space="preserve">
-    <value>連珠ゲームのアプリケーション</value>
+    <value>連珠の五目並べのアプリケーション</value>
   </data>
 </root>

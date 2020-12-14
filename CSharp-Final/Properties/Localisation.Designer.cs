@@ -197,6 +197,15 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 开始对局 的本地化字符串。
+        /// </summary>
+        public static string StartGame {
+            get {
+                return ResourceManager.GetString("StartGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 超时！ 的本地化字符串。
         /// </summary>
         public static string TimeoutNotice {
@@ -211,15 +220,6 @@ namespace CSharp_Final.Properties {
         public static string WinNotice {
             get {
                 return ResourceManager.GetString("WinNotice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 开始对局 的本地化字符串。
-        /// </summary>
-        public static string 开始对局 {
-            get {
-                return ResourceManager.GetString("开始对局", resourceCulture);
             }
         }
         

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Runtime.InteropServices;
 
 using CSharp_Final.Properties;
 
@@ -20,21 +22,31 @@ namespace CSharp_Final.Manager
             if (area == null)
                 area = a;
         }
-        public static void UpdateCursor()
+        public static void UpdateCursor(int x = -1)
         {
             if (area == null)
                 return;
-            area.Cursor = Ability ? Cursors.Hand : Cursors.Arrow;
+
+            if (!Ability)
+                area.Cursor = Cursors.Arrow;
+            else if (x == 0)
+                area.Cursor = Config.CursorBlack;
+            else if (x == 1)
+                area.Cursor = Config.CursorWrite;
+            else
+                area.Cursor = Cursors.Hand;
         }
     }
     public class Player
     {
-        public string Name { get; internal set; }
-        public string Avatar { get; internal set; }
+        public bool AI { get; set; }
+        public string Name { get; set; }
+        public string Avatar { get; set; }
     }
     public class EConfig
     {
-        public int Time { get; internal set; } = 60;
+        public int Time { get; set; } = 3600;
+        public string Lang { get; set; } = "en-US";
     }
 
     public static class Config
@@ -42,24 +54,27 @@ namespace CSharp_Final.Manager
         public static Player PlayerI { get; set; } = new Player();
         public static Player PlayerII { get; set; } = new Player();
         public static EConfig EConfig { get; set; } = new EConfig();
+        public static Cursor CursorWrite { get; } = 
+            new Cursor(new MemoryStream(Resources.WhiteCursor));
+        public static Cursor CursorBlack { get; } =
+            new Cursor(new MemoryStream(Resources.BlackCursor));
         readonly static List<char> ingore = new List<char>() { ' ', '\t', ';' };
         const char bigSplitor = ':';
         const char smallSplitor = '=';
         public static void GetConfig()
         {
-            Localisation.Culture = new System.Globalization.CultureInfo("ja-JP");
+            StreamReader config;
             try
             {
-                StreamReader config = new StreamReader("./config.txt");
+                config = new StreamReader("./config.txt");
+            }
+            catch { return; }
+            try
+            {
                 string pro = config.ReadLine();
                 while (pro.Contains(bigSplitor))
                 {
-                    for (int i = 0; i < pro.Length; ++i)
-                        if (ingore.Contains(pro[i]))
-                        {
-                            pro.Remove(i, 1);
-                            --i;
-                        }
+                    pro = pro.Trim();
                     string info = config.ReadLine();
                     for (int i = 0; i < info.Length; ++i)
                         if (ingore.Contains(info[i]))
@@ -105,6 +120,9 @@ namespace CSharp_Final.Manager
                                     case "Time":
                                         EConfig.Time = Convert.ToInt32(infos[1]);
                                         break;
+                                    case "Lang":
+                                        EConfig.Lang = infos[1];
+                                        break;
                                 }
                                 break;
                         }
@@ -115,6 +133,12 @@ namespace CSharp_Final.Manager
                 }
             }
             catch { }
+            finally { config.Close(); }
+        }
+
+        public static void WriteConfig()
+        {
+
         }
     }
 }

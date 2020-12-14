@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 using CSharp_Final.Manager;
 using CSharp_Final.Properties;
@@ -25,7 +26,7 @@ namespace CSharp_Final
         {
         }
 
-        private void BoradPanel_Paint(object sender, PaintEventArgs e)
+        private void BoardPanel_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             Pen linePen = new Pen(Color.Black) { Width = NetConfig.LineWidth };
@@ -77,7 +78,7 @@ namespace CSharp_Final
         private void BoardPanel_Layout(object sender, LayoutEventArgs e)
         {
             PlayAccess.SetControl((Panel)sender);
-            PlayAccess.UpdateCursor();
+            //PlayAccess.UpdateCursor(Piece.History.Count & 1);
         }
 
         private void ClockPanel_Paint(object sender, PaintEventArgs e)
@@ -99,6 +100,8 @@ namespace CSharp_Final
         private void MainForm_Load(object sender, EventArgs e)
         {
             Config.GetConfig();
+            Localisation.Culture = new CultureInfo(Config.EConfig.Lang);
+            Text = Localisation.连珠五子棋对战程序;
             Clock.SetTimer(TimerI, TimerII);
             Clock.SetPanel(InfoPanelI, InfoPanelII);
         }
@@ -154,7 +157,7 @@ namespace CSharp_Final
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
             };
-            g.DrawString(Localisation.开始对局, font, brush, rect, format);
+            g.DrawString(Localisation.StartGame, font, brush, rect, format);
         }
     }
 }

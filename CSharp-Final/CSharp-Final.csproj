@@ -115,9 +115,6 @@
     <None Include="Resources\黑子.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\白字.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 和 x64%29</ProductName>
@@ -140,6 +137,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\黑罐.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\白鼠.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\黑鼠.cur" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
