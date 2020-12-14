@@ -215,6 +215,33 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 悔棋提示 的本地化字符串。
+        /// </summary>
+        public static string Undo {
+            get {
+                return ResourceManager.GetString("Undo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请求悔棋！ 的本地化字符串。
+        /// </summary>
+        public static string UndoAsk {
+            get {
+                return ResourceManager.GetString("UndoAsk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已悔棋！ 的本地化字符串。
+        /// </summary>
+        public static string UndoNotice {
+            get {
+                return ResourceManager.GetString("UndoNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 赢了！ 的本地化字符串。
         /// </summary>
         public static string WinNotice {

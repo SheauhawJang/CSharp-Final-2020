@@ -159,5 +159,11 @@ namespace CSharp_Final
             };
             g.DrawString(Localisation.StartGame, font, brush, rect, format);
         }
+
+        private void UndoButton_Click(object sender, EventArgs e)
+        {
+            UndoPiece.Undo();
+            BoardPanel.Invalidate();
+        }
     }
 }

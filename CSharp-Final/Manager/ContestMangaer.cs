@@ -116,8 +116,8 @@ namespace CSharp_Final.Manager
             = new PieceInfo[NetConfig.NetSize, NetConfig.NetSize];
         public ConnectInfo[,] Connects { get; set; } 
             = new ConnectInfo[NetConfig.NetSize, NetConfig.NetSize];
-        public PieceInfo PieceAt(Location loc) => Pieces[loc.X, loc.Y];
-        public ConnectInfo ConnectAt(Location loc) => Connects[loc.X, loc.Y];
+        public ref PieceInfo PieceAt(Location loc) => ref Pieces[loc.X, loc.Y];
+        public ref ConnectInfo ConnectAt(Location loc) => ref Connects[loc.X, loc.Y];
         public bool AliveAt(Location loc) => loc.InRange && PieceAt(loc).Empty;
         public PieceInfoSet()
         {
@@ -225,6 +225,16 @@ namespace CSharp_Final.Manager
             };
             Graphics g = sender.CreateGraphics();
             g.DrawLine(win, WinFather.CenterPoint, WinMother.CenterPoint);
+        }
+
+        public static void RemovePiece()
+        {
+            Location last = History.Last();
+            Clock.Swap(CurrectColorID);
+            InfoSet.PieceAt(last) = new PieceInfo();
+            History.Remove(last);
+            InfoSet.UpdateConnect();
+            PlayAccess.UpdateCursor(CurrectColorID);
         }
         public static void SetCheckPiece(Location loc, Control sender, bool replay = false)
         {

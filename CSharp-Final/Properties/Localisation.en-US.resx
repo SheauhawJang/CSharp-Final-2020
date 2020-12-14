@@ -118,73 +118,64 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BanInfo" xml:space="preserve">
-    <value>您犯规了！
-原因：</value>
+    <value>You fouled!
+Reason:</value>
   </data>
   <data name="BanT33" xml:space="preserve">
-    <value>三三禁手</value>
+    <value>3 3 Forbidden</value>
   </data>
   <data name="BanT44" xml:space="preserve">
-    <value>四四禁手</value>
+    <value>4 4 Forbidden</value>
   </data>
   <data name="BanTitle" xml:space="preserve">
-    <value>禁手警告</value>
+    <value>Forbidden Warning</value>
   </data>
   <data name="BanTLong" xml:space="preserve">
-    <value>长连禁手</value>
+    <value>Long Connection Forbidden</value>
   </data>
   <data name="ButtonFont" xml:space="preserve">
-    <value>华文行楷</value>
+    <value>Arial</value>
   </data>
   <data name="ButtonFontSize" xml:space="preserve">
     <value>32</value>
   </data>
   <data name="GameOver" xml:space="preserve">
-    <value>游戏结束</value>
+    <value>GameOver</value>
   </data>
   <data name="PeaceNotice" xml:space="preserve">
-    <value>和棋！</value>
+    <value>Drew!</value>
   </data>
   <data name="PlayerBlack" xml:space="preserve">
-    <value>黑方</value>
+    <value>Black player</value>
   </data>
   <data name="PlayerWhite" xml:space="preserve">
-    <value>白方</value>
+    <value>White player</value>
   </data>
   <data name="ReasonNotice" xml:space="preserve">
-    <value>原因</value>
+    <value>Reason</value>
   </data>
   <data name="RecordError" xml:space="preserve">
-    <value>棋谱错误</value>
+    <value>Record error!</value>
   </data>
   <data name="RecordFileError" xml:space="preserve">
-    <value>文件已损坏！</value>
+    <value>Record file damaged!</value>
   </data>
   <data name="RecordSaveNotice" xml:space="preserve">
-    <value>棋谱已保存至</value>
+    <value>Record has saved to </value>
   </data>
   <data name="StartGame" xml:space="preserve">
-    <value>开始对局</value>
+    <value>Start</value>
   </data>
   <data name="TimeoutNotice" xml:space="preserve">
-    <value>超时！</value>
-  </data>
-  <data name="Undo" xml:space="preserve">
-    <value>悔棋提示</value>
-  </data>
-  <data name="UndoAsk" xml:space="preserve">
-    <value>请求悔棋！</value>
-  </data>
-  <data name="UndoNotice" xml:space="preserve">
-    <value>已悔棋！</value>
+    <value>Timeout!</value>
   </data>
   <data name="WinNotice" xml:space="preserve">
-    <value>赢了！</value>
+    <value> won!</value>
   </data>
   <data name="连珠五子棋" xml:space="preserve">
-    <value>连珠五子棋</value>
+    <value>Renju Gomoku</value>
   </data>
   <data name="连珠五子棋对战程序" xml:space="preserve">
-    <value>连珠五子棋对战程序</value>
+    <value>Renju Gomoku Application</value>
   </data>
 </root>
