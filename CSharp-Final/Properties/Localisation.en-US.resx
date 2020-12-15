@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Renju Gomoku Application</value>
+  </data>
   <data name="BanInfo" xml:space="preserve">
     <value>You fouled!
 Reason:</value>
@@ -128,7 +131,7 @@ Reason:</value>
     <value>4 4 Forbidden</value>
   </data>
   <data name="Bantip" xml:space="preserve">
-    <value />
+    <value>Ban Tip</value>
   </data>
   <data name="BanTitle" xml:space="preserve">
     <value>Forbidden Warning</value>
@@ -142,14 +145,26 @@ Reason:</value>
   <data name="ButtonFontSize" xml:space="preserve">
     <value>32</value>
   </data>
+  <data name="ConfigGame" xml:space="preserve">
+    <value>Config</value>
+  </data>
   <data name="GameOver" xml:space="preserve">
     <value>GameOver</value>
+  </data>
+  <data name="PeaceAsk" xml:space="preserve">
+    <value> request draw!</value>
+  </data>
+  <data name="PeaceB" xml:space="preserve">
+    <value>Draw</value>
+  </data>
+  <data name="PeaceInfo" xml:space="preserve">
+    <value>Draw Requestion</value>
   </data>
   <data name="PeaceNotice" xml:space="preserve">
     <value>Drew!</value>
   </data>
-  <data name="PeaceRequest" xml:space="preserve">
-    <value />
+  <data name="PeaceRequestNotice" xml:space="preserve">
+    <value>Both player agree to draw!</value>
   </data>
   <data name="PlayerBlack" xml:space="preserve">
     <value>Black player</value>
@@ -173,13 +188,16 @@ Reason:</value>
     <value>Arial</value>
   </data>
   <data name="SmallButtonFontSize" xml:space="preserve">
-    <value>16</value>
+    <value>12</value>
   </data>
   <data name="StartGame" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="Surrender" xml:space="preserve">
-    <value />
+    <value>Surrender</value>
+  </data>
+  <data name="SurrenderNotice" xml:space="preserve">
+    <value> surrendered!</value>
   </data>
   <data name="TimeoutNotice" xml:space="preserve">
     <value>Timeout!</value>
@@ -201,8 +219,5 @@ Reason:</value>
   </data>
   <data name="连珠五子棋" xml:space="preserve">
     <value>Renju Gomoku</value>
-  </data>
-  <data name="连珠五子棋对战程序" xml:space="preserve">
-    <value>Renju Gomoku Application</value>
   </data>
 </root>

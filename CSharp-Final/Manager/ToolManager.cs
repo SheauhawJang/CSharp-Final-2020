@@ -47,4 +47,25 @@ namespace CSharp_Final.Manager
                 }
         }
     }
+    public static class PeacePiece
+    {
+        public static void Peace()
+        {
+            string name = Piece.CurrectColorID == 0 ?
+                Localisation.PlayerBlack : Localisation.PlayerWhite;
+            if (MessageBox.Show(string.Format("{0}{1}",
+                name, Localisation.PeaceAsk),
+                Localisation.PeaceInfo, MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                WinningInfo info = new WinningInfo
+                {
+                    Winner = -1,
+                    WinWay = "REQUEST"
+                };
+                Announcement.Announce(info);
+            }
+        }
+    }
+
 }

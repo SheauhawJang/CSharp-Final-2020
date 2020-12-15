@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>連珠五子棋對戰程序</value>
+  </data>
   <data name="BanInfo" xml:space="preserve">
     <value>您犯規了！
 原因：</value>
@@ -128,7 +131,7 @@
     <value>四四禁手</value>
   </data>
   <data name="Bantip" xml:space="preserve">
-    <value />
+    <value>禁點</value>
   </data>
   <data name="BanTitle" xml:space="preserve">
     <value>禁手警告</value>
@@ -142,14 +145,26 @@
   <data name="ButtonFontSize" xml:space="preserve">
     <value>32</value>
   </data>
+  <data name="ConfigGame" xml:space="preserve">
+    <value>對局配置</value>
+  </data>
   <data name="GameOver" xml:space="preserve">
     <value>遊戲結束</value>
+  </data>
+  <data name="PeaceAsk" xml:space="preserve">
+    <value>請求和棋！</value>
+  </data>
+  <data name="PeaceB" xml:space="preserve">
+    <value>求和</value>
+  </data>
+  <data name="PeaceInfo" xml:space="preserve">
+    <value>和棋提示</value>
   </data>
   <data name="PeaceNotice" xml:space="preserve">
     <value>和棋！</value>
   </data>
-  <data name="PeaceRequest" xml:space="preserve">
-    <value />
+  <data name="PeaceRequestNotice" xml:space="preserve">
+    <value>雙方同意和棋！</value>
   </data>
   <data name="PlayerBlack" xml:space="preserve">
     <value>黑方</value>
@@ -179,7 +194,10 @@
     <value>開始對局</value>
   </data>
   <data name="Surrender" xml:space="preserve">
-    <value />
+    <value>認輸</value>
+  </data>
+  <data name="SurrenderNotice" xml:space="preserve">
+    <value>認輸！</value>
   </data>
   <data name="TimeoutNotice" xml:space="preserve">
     <value>超時！</value>
@@ -201,8 +219,5 @@
   </data>
   <data name="连珠五子棋" xml:space="preserve">
     <value>連珠五子棋</value>
-  </data>
-  <data name="连珠五子棋对战程序" xml:space="preserve">
-    <value>連珠五子棋對戰程序</value>
   </data>
 </root>

@@ -61,6 +61,15 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 连珠五子棋对战程序 的本地化字符串。
+        /// </summary>
+        public static string ApplicationName {
+            get {
+                return ResourceManager.GetString("ApplicationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 您犯规了！
         ///原因： 的本地化字符串。
         /// </summary>
@@ -89,7 +98,7 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
-        ///   查找类似 提示 的本地化字符串。
+        ///   查找类似 禁点 的本地化字符串。
         /// </summary>
         public static string Bantip {
             get {
@@ -134,11 +143,47 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 对局配置 的本地化字符串。
+        /// </summary>
+        public static string ConfigGame {
+            get {
+                return ResourceManager.GetString("ConfigGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 游戏结束 的本地化字符串。
         /// </summary>
         public static string GameOver {
             get {
                 return ResourceManager.GetString("GameOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请求和棋！ 的本地化字符串。
+        /// </summary>
+        public static string PeaceAsk {
+            get {
+                return ResourceManager.GetString("PeaceAsk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 求和 的本地化字符串。
+        /// </summary>
+        public static string PeaceB {
+            get {
+                return ResourceManager.GetString("PeaceB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 和棋提示 的本地化字符串。
+        /// </summary>
+        public static string PeaceInfo {
+            get {
+                return ResourceManager.GetString("PeaceInfo", resourceCulture);
             }
         }
         
@@ -152,11 +197,11 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
-        ///   查找类似 求和 的本地化字符串。
+        ///   查找类似 双方同意和棋！ 的本地化字符串。
         /// </summary>
-        public static string PeaceRequest {
+        public static string PeaceRequestNotice {
             get {
-                return ResourceManager.GetString("PeaceRequest", resourceCulture);
+                return ResourceManager.GetString("PeaceRequestNotice", resourceCulture);
             }
         }
         
@@ -251,6 +296,15 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 认输！ 的本地化字符串。
+        /// </summary>
+        public static string SurrenderNotice {
+            get {
+                return ResourceManager.GetString("SurrenderNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 超时！ 的本地化字符串。
         /// </summary>
         public static string TimeoutNotice {
@@ -310,15 +364,6 @@ namespace CSharp_Final.Properties {
         public static string 连珠五子棋 {
             get {
                 return ResourceManager.GetString("连珠五子棋", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 连珠五子棋对战程序 的本地化字符串。
-        /// </summary>
-        public static string 连珠五子棋对战程序 {
-            get {
-                return ResourceManager.GetString("连珠五子棋对战程序", resourceCulture);
             }
         }
     }

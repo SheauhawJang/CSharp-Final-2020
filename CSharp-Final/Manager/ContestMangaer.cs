@@ -383,6 +383,8 @@ namespace CSharp_Final.Manager
             PlayAccess.Ability = false;
             PlayAccess.UpdateCursor();
             Clock.Stop();
+            ButtonAccess.SetStartButton(true);
+            ButtonAccess.SetToolButton(false);
             List<Location> his = Piece.History;
             string boxtext = string.Format("{0}{1}\n", 
                 info.Winner == 0 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
@@ -397,8 +399,13 @@ namespace CSharp_Final.Manager
                         Localisation.TimeoutNotice, Localisation.ReasonNotice);
                     break;
                 case "SURRENDER":
+                    boxtext += string.Format("{2}:{0}{1}\n",
+                        info.Winner == 1 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
+                        Localisation.SurrenderNotice, Localisation.ReasonNotice);
                     break;
                 case "REQUEST":
+                    boxtext += string.Format("{1}:{0}\n",
+                        Localisation.PeaceRequestNotice, Localisation.ReasonNotice);
                     break;
             }
             if (!PlayAccess.Replay)
@@ -446,9 +453,9 @@ namespace CSharp_Final.Manager
             int mint = time / 60 % 60;
             int secd = time % 60;
             string ans = "";
-            if (Config.EConfig.Time >= 60 * 60)
+            if (Config.EnConfig.Time >= 60 * 60)
                 ans += string.Format("{0:00}:", hour);
-            if (Config.EConfig.Time >= 60)
+            if (Config.EnConfig.Time >= 60)
                 ans += string.Format("{0:00}:", mint);
             ans += string.Format("{0:00}", secd);
             return ans;
@@ -470,7 +477,7 @@ namespace CSharp_Final.Manager
 
         public static void Start()
         {
-            PlayerI = PlayerII = Config.EConfig.Time;
+            PlayerI = PlayerII = Config.EnConfig.Time;
             timerI.Start();
             playerI.BackColor = nowColor;
         }

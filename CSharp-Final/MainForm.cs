@@ -76,7 +76,7 @@ namespace CSharp_Final
 
         private void BoardPanel_Layout(object sender, LayoutEventArgs e)
         {
-            PlayAccess.SetControl((Panel)sender);
+            PlayAccess.Area = (Panel)sender;
             //PlayAccess.UpdateCursor(Piece.History.Count & 1);
         }
 
@@ -96,35 +96,45 @@ namespace CSharp_Final
             g.DrawString(Clock.ToStringFromTime(time), font, fontBrush, rect, format);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void MainForm_Load_Control()
         {
-            Config.GetConfig();
-            Localisation.Culture = new CultureInfo(Config.EConfig.Lang);
-            Text = Localisation.连珠五子棋对战程序;
+            Localisation.Culture = new CultureInfo(Config.EnConfig.Lang);
+            Text = Localisation.ApplicationName;
             Font buttonfont = new Font(Localisation.SmallButtonFont,
                 Convert.ToSingle(Localisation.SmallButtonFontSize));
             UndoButton.Font = SurrenderButton.Font = PeaceButton.Font
                 = TipButton.Font = buttonfont;
             UndoButton.Text = Localisation.Undo;
             SurrenderButton.Text = Localisation.Surrender;
-            PeaceButton.Text = Localisation.PeaceRequest;
+            PeaceButton.Text = Localisation.PeaceB;
             TipButton.Text = Localisation.Bantip;
-
+            HeadPictureI.BackgroundImage = Avatar.GetBitmap
+                (Config.PlayerI.Avatar, 0);
+            HeadPictureII.BackgroundImage = Avatar.GetBitmap
+                (Config.PlayerII.Avatar, 1);
+        }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Config.GetConfig();
+            MainForm_Load_Control();
             Clock.SetTimer(TimerI, TimerII);
             Clock.SetPanel(InfoPanelI, InfoPanelII);
+            ButtonAccess.MainForm = this;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
             Clock.Tick(sender == TimerI ? 0 : 1);
-            ClockPanelI.Refresh();
-            ClockPanelII.Refresh();
+            ClockPanelI.Invalidate();
+            ClockPanelII.Invalidate();
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
             Announcement.StartGame();
-            Refresh();
+            ButtonAccess.SetStartButton(false);
+            ButtonAccess.SetToolButton(true);
+            Invalidate();
         }
 
         private void InfoPanel_Paint(object sender, PaintEventArgs e)
@@ -165,7 +175,12 @@ namespace CSharp_Final
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
             };
-            g.DrawString(Localisation.StartGame, font, brush, rect, format);
+            string text = "";
+            if (control == StartButton)
+                text = Localisation.StartGame;
+            if (control == ConfigButton)
+                text = Localisation.ConfigGame;
+            g.DrawString(text, font, brush, rect, format);
         }
 
         private void UndoButton_Click(object sender, EventArgs e)
@@ -179,21 +194,42 @@ namespace CSharp_Final
         }
         private void PeaceButton_Click(object sender, EventArgs e)
         {
-            WinningInfo info = new WinningInfo
-            {
-                Winner = -1,
-                WinWay = "REQUEST"
-            };
-            Announcement.Announce(info);
+            PeacePiece.Peace();
         }
         private void SurrenderButton_Click(object sender, EventArgs e)
         {
             WinningInfo info = new WinningInfo
             {
-                Winner = Piece.CurrectID ^ 1,
+                Winner = Piece.CurrectColorID ^ 1,
                 WinWay = "SURRENDER"
             };
             Announcement.Announce(info);
+        }
+
+        private void NamePanel_Paint(object sender, PaintEventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            Graphics g = panel.CreateGraphics();
+            Font font = new Font("Consolas", 18);
+            StringFormat format = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+            Rectangle rect = new Rectangle(new Point(0, 0), panel.Size);
+            Player time = sender == NamePanelI ? Config.PlayerI : Config.PlayerII;
+            SolidBrush fontBrush = new SolidBrush(Color.Black);
+            g.DrawString(time.Name, font, fontBrush, rect, format);
+        }
+
+        private void ConfigButton_Click(object sender, EventArgs e)
+        {
+            ConfigForm form = new ConfigForm();
+            form.ShowDialog();
+            MainForm_Load_Control();
+            Invalidate();
+            foreach (Control control in Controls)
+                control.Invalidate();
         }
     }
 }

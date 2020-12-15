@@ -28,3 +28,4 @@ C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\ja-JP\CSharp-Fin
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\en-US\CSharp-Final.resources.dll
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.Properties.Localisation.en-US.resources
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\en-US\CSharp-Final.resources.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.ConfigForm.resources

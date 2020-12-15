@@ -31,14 +31,18 @@
             this.components = new System.ComponentModel.Container();
             this.OpenRecordDialog = new System.Windows.Forms.OpenFileDialog();
             this.InfoPanelI = new System.Windows.Forms.Panel();
+            this.ColorPictureI = new System.Windows.Forms.PictureBox();
             this.ClockPanelI = new System.Windows.Forms.Panel();
             this.NamePanelI = new System.Windows.Forms.Panel();
+            this.HeadPictureI = new System.Windows.Forms.PictureBox();
             this.InfoPanelII = new System.Windows.Forms.Panel();
+            this.ColorPictureII = new System.Windows.Forms.PictureBox();
             this.ClockPanelII = new System.Windows.Forms.Panel();
             this.NamePanelII = new System.Windows.Forms.Panel();
+            this.HeadPictureII = new System.Windows.Forms.PictureBox();
             this.TimerI = new System.Windows.Forms.Timer(this.components);
             this.TimerII = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.StartButton = new System.Windows.Forms.Panel();
             this.BoardPanel = new System.Windows.Forms.Panel();
             this.UndoButton = new System.Windows.Forms.Button();
             this.PeaceButton = new System.Windows.Forms.Button();
@@ -46,18 +50,28 @@
             this.TipButton = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ColorPictureII = new System.Windows.Forms.PictureBox();
-            this.HeadPictureII = new System.Windows.Forms.PictureBox();
-            this.ColorPictureI = new System.Windows.Forms.PictureBox();
-            this.HeadPictureI = new System.Windows.Forms.PictureBox();
+            this.RecordButton = new System.Windows.Forms.Panel();
+            this.ConfigButton = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.全局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.对局PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.开始对局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.读取棋谱ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.对局配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.悔棋ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.请求和棋ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.认输ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.禁手提示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoPanelI.SuspendLayout();
-            this.InfoPanelII.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ColorPictureII)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureI)).BeginInit();
+            this.InfoPanelII.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorPictureII)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // OpenRecordDialog
@@ -78,6 +92,17 @@
             this.InfoPanelI.TabIndex = 1;
             this.InfoPanelI.Paint += new System.Windows.Forms.PaintEventHandler(this.InfoPanel_Paint);
             // 
+            // ColorPictureI
+            // 
+            this.ColorPictureI.BackColor = System.Drawing.Color.Transparent;
+            this.ColorPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.BlackPool;
+            this.ColorPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ColorPictureI.Location = new System.Drawing.Point(10, 250);
+            this.ColorPictureI.Name = "ColorPictureI";
+            this.ColorPictureI.Size = new System.Drawing.Size(40, 40);
+            this.ColorPictureI.TabIndex = 2;
+            this.ColorPictureI.TabStop = false;
+            // 
             // ClockPanelI
             // 
             this.ClockPanelI.BackColor = System.Drawing.Color.Transparent;
@@ -94,6 +119,18 @@
             this.NamePanelI.Name = "NamePanelI";
             this.NamePanelI.Size = new System.Drawing.Size(200, 60);
             this.NamePanelI.TabIndex = 1;
+            this.NamePanelI.Paint += new System.Windows.Forms.PaintEventHandler(this.NamePanel_Paint);
+            // 
+            // HeadPictureI
+            // 
+            this.HeadPictureI.BackColor = System.Drawing.Color.Transparent;
+            this.HeadPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_I;
+            this.HeadPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.HeadPictureI.Location = new System.Drawing.Point(-3, 0);
+            this.HeadPictureI.Name = "HeadPictureI";
+            this.HeadPictureI.Size = new System.Drawing.Size(200, 240);
+            this.HeadPictureI.TabIndex = 0;
+            this.HeadPictureI.TabStop = false;
             // 
             // InfoPanelII
             // 
@@ -108,6 +145,17 @@
             this.InfoPanelII.Size = new System.Drawing.Size(200, 360);
             this.InfoPanelII.TabIndex = 1;
             this.InfoPanelII.Paint += new System.Windows.Forms.PaintEventHandler(this.InfoPanel_Paint);
+            // 
+            // ColorPictureII
+            // 
+            this.ColorPictureII.BackColor = System.Drawing.Color.Transparent;
+            this.ColorPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.WhitePool;
+            this.ColorPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ColorPictureII.Location = new System.Drawing.Point(10, 250);
+            this.ColorPictureII.Name = "ColorPictureII";
+            this.ColorPictureII.Size = new System.Drawing.Size(40, 40);
+            this.ColorPictureII.TabIndex = 2;
+            this.ColorPictureII.TabStop = false;
             // 
             // ClockPanelII
             // 
@@ -125,6 +173,18 @@
             this.NamePanelII.Name = "NamePanelII";
             this.NamePanelII.Size = new System.Drawing.Size(200, 60);
             this.NamePanelII.TabIndex = 1;
+            this.NamePanelII.Paint += new System.Windows.Forms.PaintEventHandler(this.NamePanel_Paint);
+            // 
+            // HeadPictureII
+            // 
+            this.HeadPictureII.BackColor = System.Drawing.Color.Transparent;
+            this.HeadPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_II;
+            this.HeadPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.HeadPictureII.Location = new System.Drawing.Point(-3, 0);
+            this.HeadPictureII.Name = "HeadPictureII";
+            this.HeadPictureII.Size = new System.Drawing.Size(200, 240);
+            this.HeadPictureII.TabIndex = 0;
+            this.HeadPictureII.TabStop = false;
             // 
             // TimerI
             // 
@@ -136,17 +196,17 @@
             this.TimerII.Interval = 1000;
             this.TimerII.Tick += new System.EventHandler(this.Timer_Tick);
             // 
-            // panel1
+            // StartButton
             // 
-            this.panel1.BackColor = System.Drawing.Color.PaleVioletRed;
-            this.panel1.Location = new System.Drawing.Point(1100, 200);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(250, 75);
-            this.panel1.TabIndex = 4;
-            this.panel1.Click += new System.EventHandler(this.StartButton_Click);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.StartButton_Paint);
-            this.panel1.MouseEnter += new System.EventHandler(this.StartButton_MouseEnter);
-            this.panel1.MouseLeave += new System.EventHandler(this.StartButton_MouseLeave);
+            this.StartButton.BackColor = System.Drawing.Color.PaleVioletRed;
+            this.StartButton.Location = new System.Drawing.Point(1100, 200);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(250, 75);
+            this.StartButton.TabIndex = 4;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            this.StartButton.Paint += new System.Windows.Forms.PaintEventHandler(this.StartButton_Paint);
+            this.StartButton.MouseEnter += new System.EventHandler(this.StartButton_MouseEnter);
+            this.StartButton.MouseLeave += new System.EventHandler(this.StartButton_MouseLeave);
             // 
             // BoardPanel
             // 
@@ -163,8 +223,9 @@
             // 
             // UndoButton
             // 
+            this.UndoButton.Enabled = false;
             this.UndoButton.Font = new System.Drawing.Font("仿宋", 16F);
-            this.UndoButton.Location = new System.Drawing.Point(1100, 440);
+            this.UndoButton.Location = new System.Drawing.Point(1100, 640);
             this.UndoButton.Name = "UndoButton";
             this.UndoButton.Size = new System.Drawing.Size(100, 40);
             this.UndoButton.TabIndex = 6;
@@ -174,8 +235,9 @@
             // 
             // PeaceButton
             // 
+            this.PeaceButton.Enabled = false;
             this.PeaceButton.Font = new System.Drawing.Font("仿宋", 16F);
-            this.PeaceButton.Location = new System.Drawing.Point(1250, 500);
+            this.PeaceButton.Location = new System.Drawing.Point(1250, 700);
             this.PeaceButton.Name = "PeaceButton";
             this.PeaceButton.Size = new System.Drawing.Size(100, 40);
             this.PeaceButton.TabIndex = 6;
@@ -185,8 +247,9 @@
             // 
             // SurrenderButton
             // 
+            this.SurrenderButton.Enabled = false;
             this.SurrenderButton.Font = new System.Drawing.Font("仿宋", 16F);
-            this.SurrenderButton.Location = new System.Drawing.Point(1100, 500);
+            this.SurrenderButton.Location = new System.Drawing.Point(1100, 700);
             this.SurrenderButton.Name = "SurrenderButton";
             this.SurrenderButton.Size = new System.Drawing.Size(100, 40);
             this.SurrenderButton.TabIndex = 6;
@@ -196,8 +259,9 @@
             // 
             // TipButton
             // 
+            this.TipButton.Enabled = false;
             this.TipButton.Font = new System.Drawing.Font("仿宋", 16F);
-            this.TipButton.Location = new System.Drawing.Point(1250, 440);
+            this.TipButton.Location = new System.Drawing.Point(1250, 640);
             this.TipButton.Name = "TipButton";
             this.TipButton.Size = new System.Drawing.Size(100, 40);
             this.TipButton.TabIndex = 6;
@@ -221,49 +285,116 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // ColorPictureII
+            // RecordButton
             // 
-            this.ColorPictureII.BackColor = System.Drawing.Color.Transparent;
-            this.ColorPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.WhitePool;
-            this.ColorPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ColorPictureII.Location = new System.Drawing.Point(10, 250);
-            this.ColorPictureII.Name = "ColorPictureII";
-            this.ColorPictureII.Size = new System.Drawing.Size(40, 40);
-            this.ColorPictureII.TabIndex = 2;
-            this.ColorPictureII.TabStop = false;
+            this.RecordButton.BackColor = System.Drawing.Color.PaleVioletRed;
+            this.RecordButton.Location = new System.Drawing.Point(1100, 440);
+            this.RecordButton.Name = "RecordButton";
+            this.RecordButton.Size = new System.Drawing.Size(250, 75);
+            this.RecordButton.TabIndex = 4;
+            this.RecordButton.Click += new System.EventHandler(this.StartButton_Click);
+            this.RecordButton.Paint += new System.Windows.Forms.PaintEventHandler(this.StartButton_Paint);
+            this.RecordButton.MouseEnter += new System.EventHandler(this.StartButton_MouseEnter);
+            this.RecordButton.MouseLeave += new System.EventHandler(this.StartButton_MouseLeave);
             // 
-            // HeadPictureII
+            // ConfigButton
             // 
-            this.HeadPictureII.BackColor = System.Drawing.Color.Transparent;
-            this.HeadPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_II;
-            this.HeadPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.HeadPictureII.Location = new System.Drawing.Point(-3, 0);
-            this.HeadPictureII.Name = "HeadPictureII";
-            this.HeadPictureII.Size = new System.Drawing.Size(200, 240);
-            this.HeadPictureII.TabIndex = 0;
-            this.HeadPictureII.TabStop = false;
+            this.ConfigButton.BackColor = System.Drawing.Color.PaleVioletRed;
+            this.ConfigButton.Location = new System.Drawing.Point(1100, 540);
+            this.ConfigButton.Name = "ConfigButton";
+            this.ConfigButton.Size = new System.Drawing.Size(250, 75);
+            this.ConfigButton.TabIndex = 4;
+            this.ConfigButton.Click += new System.EventHandler(this.ConfigButton_Click);
+            this.ConfigButton.Paint += new System.Windows.Forms.PaintEventHandler(this.StartButton_Paint);
+            this.ConfigButton.MouseEnter += new System.EventHandler(this.StartButton_MouseEnter);
+            this.ConfigButton.MouseLeave += new System.EventHandler(this.StartButton_MouseLeave);
             // 
-            // ColorPictureI
+            // menuStrip1
             // 
-            this.ColorPictureI.BackColor = System.Drawing.Color.Transparent;
-            this.ColorPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.BlackPool;
-            this.ColorPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ColorPictureI.Location = new System.Drawing.Point(10, 250);
-            this.ColorPictureI.Name = "ColorPictureI";
-            this.ColorPictureI.Size = new System.Drawing.Size(40, 40);
-            this.ColorPictureI.TabIndex = 2;
-            this.ColorPictureI.TabStop = false;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.全局ToolStripMenuItem,
+            this.对局PToolStripMenuItem,
+            this.关于AToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1424, 25);
+            this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // HeadPictureI
+            // 全局ToolStripMenuItem
             // 
-            this.HeadPictureI.BackColor = System.Drawing.Color.Transparent;
-            this.HeadPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_I;
-            this.HeadPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.HeadPictureI.Location = new System.Drawing.Point(-3, 0);
-            this.HeadPictureI.Name = "HeadPictureI";
-            this.HeadPictureI.Size = new System.Drawing.Size(200, 240);
-            this.HeadPictureI.TabIndex = 0;
-            this.HeadPictureI.TabStop = false;
+            this.全局ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开始对局ToolStripMenuItem,
+            this.读取棋谱ToolStripMenuItem,
+            this.对局配置ToolStripMenuItem});
+            this.全局ToolStripMenuItem.Name = "全局ToolStripMenuItem";
+            this.全局ToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
+            this.全局ToolStripMenuItem.Text = "全局(&G)";
+            // 
+            // 对局PToolStripMenuItem
+            // 
+            this.对局PToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.悔棋ToolStripMenuItem,
+            this.请求和棋ToolStripMenuItem,
+            this.认输ToolStripMenuItem,
+            this.禁手提示ToolStripMenuItem});
+            this.对局PToolStripMenuItem.Name = "对局PToolStripMenuItem";
+            this.对局PToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
+            this.对局PToolStripMenuItem.Text = "对局(&P)";
+            // 
+            // 关于AToolStripMenuItem
+            // 
+            this.关于AToolStripMenuItem.Name = "关于AToolStripMenuItem";
+            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
+            this.关于AToolStripMenuItem.Text = "关于(&A)";
+            // 
+            // 开始对局ToolStripMenuItem
+            // 
+            this.开始对局ToolStripMenuItem.Name = "开始对局ToolStripMenuItem";
+            this.开始对局ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.开始对局ToolStripMenuItem.Text = "开始对局";
+            this.开始对局ToolStripMenuItem.Click += new System.EventHandler(this.StartButton_Click);
+            // 
+            // 读取棋谱ToolStripMenuItem
+            // 
+            this.读取棋谱ToolStripMenuItem.Name = "读取棋谱ToolStripMenuItem";
+            this.读取棋谱ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.读取棋谱ToolStripMenuItem.Text = "读取棋谱";
+            // 
+            // 对局配置ToolStripMenuItem
+            // 
+            this.对局配置ToolStripMenuItem.Name = "对局配置ToolStripMenuItem";
+            this.对局配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.对局配置ToolStripMenuItem.Text = "对局配置";
+            this.对局配置ToolStripMenuItem.Click += new System.EventHandler(this.ConfigButton_Click);
+            // 
+            // 悔棋ToolStripMenuItem
+            // 
+            this.悔棋ToolStripMenuItem.Name = "悔棋ToolStripMenuItem";
+            this.悔棋ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.悔棋ToolStripMenuItem.Text = "悔棋";
+            this.悔棋ToolStripMenuItem.Click += new System.EventHandler(this.UndoButton_Click);
+            // 
+            // 请求和棋ToolStripMenuItem
+            // 
+            this.请求和棋ToolStripMenuItem.Name = "请求和棋ToolStripMenuItem";
+            this.请求和棋ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.请求和棋ToolStripMenuItem.Text = "请求和棋";
+            this.请求和棋ToolStripMenuItem.Click += new System.EventHandler(this.PeaceButton_Click);
+            // 
+            // 认输ToolStripMenuItem
+            // 
+            this.认输ToolStripMenuItem.Name = "认输ToolStripMenuItem";
+            this.认输ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.认输ToolStripMenuItem.Text = "认输";
+            this.认输ToolStripMenuItem.Click += new System.EventHandler(this.SurrenderButton_Click);
+            // 
+            // 禁手提示ToolStripMenuItem
+            // 
+            this.禁手提示ToolStripMenuItem.Name = "禁手提示ToolStripMenuItem";
+            this.禁手提示ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.禁手提示ToolStripMenuItem.Text = "禁手提示";
+            this.禁手提示ToolStripMenuItem.Click += new System.EventHandler(this.TipButton_Click);
             // 
             // MainForm
             // 
@@ -276,23 +407,28 @@
             this.Controls.Add(this.UndoButton);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.ConfigButton);
+            this.Controls.Add(this.RecordButton);
+            this.Controls.Add(this.StartButton);
             this.Controls.Add(this.InfoPanelII);
             this.Controls.Add(this.InfoPanelI);
             this.Controls.Add(this.BoardPanel);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "MainForm";
             this.Text = "连珠五子棋对战程序";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.InfoPanelI.ResumeLayout(false);
-            this.InfoPanelII.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ColorPictureII)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureI)).EndInit();
+            this.InfoPanelII.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ColorPictureII)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -310,7 +446,7 @@
         private System.Windows.Forms.PictureBox HeadPictureII;
         private System.Windows.Forms.Timer TimerI;
         private System.Windows.Forms.Timer TimerII;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel StartButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel BoardPanel;
@@ -318,6 +454,19 @@
         private System.Windows.Forms.Button PeaceButton;
         private System.Windows.Forms.Button SurrenderButton;
         private System.Windows.Forms.Button TipButton;
+        private System.Windows.Forms.Panel RecordButton;
+        private System.Windows.Forms.Panel ConfigButton;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 全局ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 开始对局ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 读取棋谱ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 对局配置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 对局PToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 悔棋ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 请求和棋ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 认输ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 禁手提示ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem;
     }
 }
 
