@@ -77,6 +77,20 @@ namespace CSharp_Final.Manager
         public static Location GetFromPoint(Point e) => new Location(e.X / NetConfig.NetD, e.Y / NetConfig.NetD);
         public Point CenterPoint => new Point(X * NetConfig.NetD + NetConfig.NetR,
             Y * NetConfig.NetD + NetConfig.NetR);
+        public Point GetCorner(Size size)
+        {
+            Point piecePoint = CenterPoint;
+            piecePoint.Offset(-size.Width / 2, -size.Height / 2);
+            return piecePoint;
+        }
+        public Rectangle GetRectangle(Size size)
+        {
+            return new Rectangle(GetCorner(size), size);
+        }
+        public static Size PieceSize => new Size(NetConfig.PieceD, NetConfig.PieceD);
+        public Point PieceCorner => GetCorner(PieceSize);
+        public Rectangle PieceRectangle => GetRectangle(PieceSize);
+        public Rectangle NetRectangle => GetRectangle(new Size(NetConfig.NetD, NetConfig.NetD));
     }
     public class PieceInfo
     {
@@ -194,18 +208,19 @@ namespace CSharp_Final.Manager
         public static void DrawPiece(Control sender, Location loc, int i)
         {
             Control panel = sender;
+            List<Location> tips = new List<Location>();
+            foreach (Location tip in TipShow.Tips)
+                tips.Add(tip);
+            foreach (Location tip in tips)
+                panel.Invalidate(tip.NetRectangle);
             Graphics g = panel.CreateGraphics();
             Color color = (i & 1) == 0 ? Color.Black : Color.White;
             Color reColor = (i & 1) == 1 ? Color.Black : Color.White;
-            Point centerPoint = loc.CenterPoint;
-            Point piecePoint = centerPoint;
-            piecePoint.Offset(-NetConfig.PieceR, -NetConfig.PieceR);
-            Size size = new Size(NetConfig.PieceD, NetConfig.PieceD);
             if (color == Color.Black)
-                g.DrawImage(BlackPiece, piecePoint);
+                g.DrawImage(BlackPiece, loc.PieceCorner);
             else if (color == Color.White)
-                g.DrawImage(WhitePiece, piecePoint);
-            Rectangle rect = new Rectangle(piecePoint, size);
+                g.DrawImage(WhitePiece, loc.PieceCorner);
+            Rectangle rect = loc.PieceRectangle;
             Font font = new Font("Arial", i >= 99 ? 12 : 18);
             StringFormat format = new StringFormat
             {
@@ -227,7 +242,7 @@ namespace CSharp_Final.Manager
             g.DrawLine(win, WinFather.CenterPoint, WinMother.CenterPoint);
         }
 
-        public static void RemovePiece()
+        public static void RemovePiece(Control sender)
         {
             Location last = History.Last();
             Clock.Swap(CurrectColorID);
@@ -235,6 +250,7 @@ namespace CSharp_Final.Manager
             History.Remove(last);
             InfoSet.UpdateConnect();
             PlayAccess.UpdateCursor(CurrectColorID);
+            sender.Invalidate(last.NetRectangle);
         }
         public static void SetCheckPiece(Location loc, Control sender, bool replay = false)
         {
@@ -256,7 +272,7 @@ namespace CSharp_Final.Manager
         }
         static int SetPiece(Location loc, Control sender)
         {
-            int checkAns = CheckPiece(loc, sender);
+            int checkAns = CheckPiece(loc);
             string BanedInfo = Localisation.BanInfo, BanedTitle = Localisation.BanTitle;
             switch (checkAns)
             {
@@ -283,7 +299,7 @@ namespace CSharp_Final.Manager
             MessageBox.Show(BanedInfo, BanedTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return -2;
         }
-        static int CheckPiece(Location loc, Control sender)
+        public static int CheckPiece(Location loc)
         {
             if (!loc.InRange) return 0;
             if (History.Contains(loc)) return 0;
@@ -371,6 +387,8 @@ namespace CSharp_Final.Manager
             string boxtext = string.Format("{0}{1}\n", 
                 info.Winner == 0 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
                 Localisation.WinNotice);
+            if (info.Winner < 0)
+                boxtext = string.Format("{0}\n", Localisation.PeaceNotice);
             switch (info.WinWay)
             {
                 case "TIMEOUT":
@@ -378,8 +396,9 @@ namespace CSharp_Final.Manager
                         info.Winner == 1 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
                         Localisation.TimeoutNotice, Localisation.ReasonNotice);
                     break;
-                case "PEACE":
-                    boxtext = string.Format("{0}\n", Localisation.PeaceNotice);
+                case "SURRENDER":
+                    break;
+                case "REQUEST":
                     break;
             }
             if (!PlayAccess.Replay)

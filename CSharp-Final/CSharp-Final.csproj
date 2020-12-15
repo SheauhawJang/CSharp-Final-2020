@@ -146,5 +146,8 @@
   <ItemGroup>
     <None Include="Resources\黑鼠.cur" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\禁止.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

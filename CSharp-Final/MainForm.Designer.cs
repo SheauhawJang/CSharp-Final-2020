@@ -31,30 +31,33 @@
             this.components = new System.ComponentModel.Container();
             this.OpenRecordDialog = new System.Windows.Forms.OpenFileDialog();
             this.InfoPanelI = new System.Windows.Forms.Panel();
-            this.ColorPictureI = new System.Windows.Forms.PictureBox();
             this.ClockPanelI = new System.Windows.Forms.Panel();
             this.NamePanelI = new System.Windows.Forms.Panel();
-            this.HeadPictureI = new System.Windows.Forms.PictureBox();
             this.InfoPanelII = new System.Windows.Forms.Panel();
-            this.ColorPictureII = new System.Windows.Forms.PictureBox();
             this.ClockPanelII = new System.Windows.Forms.Panel();
             this.NamePanelII = new System.Windows.Forms.Panel();
-            this.HeadPictureII = new System.Windows.Forms.PictureBox();
             this.TimerI = new System.Windows.Forms.Timer(this.components);
             this.TimerII = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.BoardPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.UndoButton = new System.Windows.Forms.Button();
+            this.PeaceButton = new System.Windows.Forms.Button();
+            this.SurrenderButton = new System.Windows.Forms.Button();
+            this.TipButton = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ColorPictureII = new System.Windows.Forms.PictureBox();
+            this.HeadPictureII = new System.Windows.Forms.PictureBox();
+            this.ColorPictureI = new System.Windows.Forms.PictureBox();
+            this.HeadPictureI = new System.Windows.Forms.PictureBox();
             this.InfoPanelI.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeadPictureI)).BeginInit();
             this.InfoPanelII.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureII)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HeadPictureI)).BeginInit();
             this.SuspendLayout();
             // 
             // OpenRecordDialog
@@ -75,17 +78,6 @@
             this.InfoPanelI.TabIndex = 1;
             this.InfoPanelI.Paint += new System.Windows.Forms.PaintEventHandler(this.InfoPanel_Paint);
             // 
-            // ColorPictureI
-            // 
-            this.ColorPictureI.BackColor = System.Drawing.Color.Transparent;
-            this.ColorPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.BlackPool;
-            this.ColorPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ColorPictureI.Location = new System.Drawing.Point(10, 250);
-            this.ColorPictureI.Name = "ColorPictureI";
-            this.ColorPictureI.Size = new System.Drawing.Size(40, 40);
-            this.ColorPictureI.TabIndex = 2;
-            this.ColorPictureI.TabStop = false;
-            // 
             // ClockPanelI
             // 
             this.ClockPanelI.BackColor = System.Drawing.Color.Transparent;
@@ -103,17 +95,6 @@
             this.NamePanelI.Size = new System.Drawing.Size(200, 60);
             this.NamePanelI.TabIndex = 1;
             // 
-            // HeadPictureI
-            // 
-            this.HeadPictureI.BackColor = System.Drawing.Color.Transparent;
-            this.HeadPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_I;
-            this.HeadPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.HeadPictureI.Location = new System.Drawing.Point(-3, 0);
-            this.HeadPictureI.Name = "HeadPictureI";
-            this.HeadPictureI.Size = new System.Drawing.Size(200, 240);
-            this.HeadPictureI.TabIndex = 0;
-            this.HeadPictureI.TabStop = false;
-            // 
             // InfoPanelII
             // 
             this.InfoPanelII.BackColor = System.Drawing.Color.Transparent;
@@ -127,17 +108,6 @@
             this.InfoPanelII.Size = new System.Drawing.Size(200, 360);
             this.InfoPanelII.TabIndex = 1;
             this.InfoPanelII.Paint += new System.Windows.Forms.PaintEventHandler(this.InfoPanel_Paint);
-            // 
-            // ColorPictureII
-            // 
-            this.ColorPictureII.BackColor = System.Drawing.Color.Transparent;
-            this.ColorPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.WhitePool;
-            this.ColorPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ColorPictureII.Location = new System.Drawing.Point(10, 250);
-            this.ColorPictureII.Name = "ColorPictureII";
-            this.ColorPictureII.Size = new System.Drawing.Size(40, 40);
-            this.ColorPictureII.TabIndex = 2;
-            this.ColorPictureII.TabStop = false;
             // 
             // ClockPanelII
             // 
@@ -155,17 +125,6 @@
             this.NamePanelII.Name = "NamePanelII";
             this.NamePanelII.Size = new System.Drawing.Size(200, 60);
             this.NamePanelII.TabIndex = 1;
-            // 
-            // HeadPictureII
-            // 
-            this.HeadPictureII.BackColor = System.Drawing.Color.Transparent;
-            this.HeadPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_II;
-            this.HeadPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.HeadPictureII.Location = new System.Drawing.Point(-3, 0);
-            this.HeadPictureII.Name = "HeadPictureII";
-            this.HeadPictureII.Size = new System.Drawing.Size(200, 240);
-            this.HeadPictureII.TabIndex = 0;
-            this.HeadPictureII.TabStop = false;
             // 
             // TimerI
             // 
@@ -189,22 +148,6 @@
             this.panel1.MouseEnter += new System.EventHandler(this.StartButton_MouseEnter);
             this.panel1.MouseLeave += new System.EventHandler(this.StartButton_MouseLeave);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(1100, 300);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 120);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(1250, 300);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 120);
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            // 
             // BoardPanel
             // 
             this.BoardPanel.BackColor = System.Drawing.Color.BurlyWood;
@@ -218,23 +161,119 @@
             this.BoardPanel.Layout += new System.Windows.Forms.LayoutEventHandler(this.BoardPanel_Layout);
             this.BoardPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BoardPanel_MouseUp);
             // 
-            // button1
+            // UndoButton
             // 
-            this.button1.Font = new System.Drawing.Font("仿宋", 18F);
-            this.button1.Location = new System.Drawing.Point(1100, 440);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 40);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "悔棋";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.UndoButton_Click);
+            this.UndoButton.Font = new System.Drawing.Font("仿宋", 16F);
+            this.UndoButton.Location = new System.Drawing.Point(1100, 440);
+            this.UndoButton.Name = "UndoButton";
+            this.UndoButton.Size = new System.Drawing.Size(100, 40);
+            this.UndoButton.TabIndex = 6;
+            this.UndoButton.Text = "悔棋";
+            this.UndoButton.UseVisualStyleBackColor = true;
+            this.UndoButton.Click += new System.EventHandler(this.UndoButton_Click);
+            // 
+            // PeaceButton
+            // 
+            this.PeaceButton.Font = new System.Drawing.Font("仿宋", 16F);
+            this.PeaceButton.Location = new System.Drawing.Point(1250, 500);
+            this.PeaceButton.Name = "PeaceButton";
+            this.PeaceButton.Size = new System.Drawing.Size(100, 40);
+            this.PeaceButton.TabIndex = 6;
+            this.PeaceButton.Text = "求和";
+            this.PeaceButton.UseVisualStyleBackColor = true;
+            this.PeaceButton.Click += new System.EventHandler(this.PeaceButton_Click);
+            // 
+            // SurrenderButton
+            // 
+            this.SurrenderButton.Font = new System.Drawing.Font("仿宋", 16F);
+            this.SurrenderButton.Location = new System.Drawing.Point(1100, 500);
+            this.SurrenderButton.Name = "SurrenderButton";
+            this.SurrenderButton.Size = new System.Drawing.Size(100, 40);
+            this.SurrenderButton.TabIndex = 6;
+            this.SurrenderButton.Text = "认输";
+            this.SurrenderButton.UseVisualStyleBackColor = true;
+            this.SurrenderButton.Click += new System.EventHandler(this.SurrenderButton_Click);
+            // 
+            // TipButton
+            // 
+            this.TipButton.Font = new System.Drawing.Font("仿宋", 16F);
+            this.TipButton.Location = new System.Drawing.Point(1250, 440);
+            this.TipButton.Name = "TipButton";
+            this.TipButton.Size = new System.Drawing.Size(100, 40);
+            this.TipButton.TabIndex = 6;
+            this.TipButton.Text = "禁手";
+            this.TipButton.UseVisualStyleBackColor = true;
+            this.TipButton.Click += new System.EventHandler(this.TipButton_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(1250, 300);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 120);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(1100, 300);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 120);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // ColorPictureII
+            // 
+            this.ColorPictureII.BackColor = System.Drawing.Color.Transparent;
+            this.ColorPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.WhitePool;
+            this.ColorPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ColorPictureII.Location = new System.Drawing.Point(10, 250);
+            this.ColorPictureII.Name = "ColorPictureII";
+            this.ColorPictureII.Size = new System.Drawing.Size(40, 40);
+            this.ColorPictureII.TabIndex = 2;
+            this.ColorPictureII.TabStop = false;
+            // 
+            // HeadPictureII
+            // 
+            this.HeadPictureII.BackColor = System.Drawing.Color.Transparent;
+            this.HeadPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_II;
+            this.HeadPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.HeadPictureII.Location = new System.Drawing.Point(-3, 0);
+            this.HeadPictureII.Name = "HeadPictureII";
+            this.HeadPictureII.Size = new System.Drawing.Size(200, 240);
+            this.HeadPictureII.TabIndex = 0;
+            this.HeadPictureII.TabStop = false;
+            // 
+            // ColorPictureI
+            // 
+            this.ColorPictureI.BackColor = System.Drawing.Color.Transparent;
+            this.ColorPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.BlackPool;
+            this.ColorPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ColorPictureI.Location = new System.Drawing.Point(10, 250);
+            this.ColorPictureI.Name = "ColorPictureI";
+            this.ColorPictureI.Size = new System.Drawing.Size(40, 40);
+            this.ColorPictureI.TabIndex = 2;
+            this.ColorPictureI.TabStop = false;
+            // 
+            // HeadPictureI
+            // 
+            this.HeadPictureI.BackColor = System.Drawing.Color.Transparent;
+            this.HeadPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_I;
+            this.HeadPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.HeadPictureI.Location = new System.Drawing.Point(-3, 0);
+            this.HeadPictureI.Name = "HeadPictureI";
+            this.HeadPictureI.Size = new System.Drawing.Size(200, 240);
+            this.HeadPictureI.TabIndex = 0;
+            this.HeadPictureI.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1424, 841);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.TipButton);
+            this.Controls.Add(this.SurrenderButton);
+            this.Controls.Add(this.PeaceButton);
+            this.Controls.Add(this.UndoButton);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
@@ -246,13 +285,13 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.InfoPanelI.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeadPictureI)).EndInit();
             this.InfoPanelII.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureII)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HeadPictureI)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -275,7 +314,10 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel BoardPanel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button UndoButton;
+        private System.Windows.Forms.Button PeaceButton;
+        private System.Windows.Forms.Button SurrenderButton;
+        private System.Windows.Forms.Button TipButton;
     }
 }
 

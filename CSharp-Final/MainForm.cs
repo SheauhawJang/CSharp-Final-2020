@@ -54,17 +54,16 @@ namespace CSharp_Final
             // Marks
             foreach (Location mark in NetConfig.MarkLocation)
             {
-                Point markPoint = mark.CenterPoint;
-                markPoint.Offset(-NetConfig.MarkR, -NetConfig.MarkR);
                 Size size = new Size(NetConfig.MarkD, NetConfig.MarkD);
-                Rectangle rect = new Rectangle(markPoint, size);
-                g.FillEllipse(markBrush, rect);
+                g.FillEllipse(markBrush, mark.GetRectangle(size));
             }
             // Points
             for (int i = 0; i < Piece.History.Count; ++i)
                 Piece.DrawPiece((Panel)sender, Piece.History[i], i);
             // WinLine
             Piece.DrawWinLine((Panel)sender);
+            // Tips
+            TipShow.Tips.Clear();
         }
 
         private void BoardPanel_MouseUp(object sender, MouseEventArgs e)
@@ -102,6 +101,15 @@ namespace CSharp_Final
             Config.GetConfig();
             Localisation.Culture = new CultureInfo(Config.EConfig.Lang);
             Text = Localisation.连珠五子棋对战程序;
+            Font buttonfont = new Font(Localisation.SmallButtonFont,
+                Convert.ToSingle(Localisation.SmallButtonFontSize));
+            UndoButton.Font = SurrenderButton.Font = PeaceButton.Font
+                = TipButton.Font = buttonfont;
+            UndoButton.Text = Localisation.Undo;
+            SurrenderButton.Text = Localisation.Surrender;
+            PeaceButton.Text = Localisation.PeaceRequest;
+            TipButton.Text = Localisation.Bantip;
+
             Clock.SetTimer(TimerI, TimerII);
             Clock.SetPanel(InfoPanelI, InfoPanelII);
         }
@@ -162,8 +170,30 @@ namespace CSharp_Final
 
         private void UndoButton_Click(object sender, EventArgs e)
         {
-            UndoPiece.Undo();
-            BoardPanel.Invalidate();
+            UndoPiece.Undo(BoardPanel);
+        }
+
+        private void TipButton_Click(object sender, EventArgs e)
+        {
+            TipShow.Tip(BoardPanel);
+        }
+        private void PeaceButton_Click(object sender, EventArgs e)
+        {
+            WinningInfo info = new WinningInfo
+            {
+                Winner = -1,
+                WinWay = "REQUEST"
+            };
+            Announcement.Announce(info);
+        }
+        private void SurrenderButton_Click(object sender, EventArgs e)
+        {
+            WinningInfo info = new WinningInfo
+            {
+                Winner = Piece.CurrectID ^ 1,
+                WinWay = "SURRENDER"
+            };
+            Announcement.Announce(info);
         }
     }
 }

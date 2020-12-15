@@ -89,6 +89,15 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 提示 的本地化字符串。
+        /// </summary>
+        public static string Bantip {
+            get {
+                return ResourceManager.GetString("Bantip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 禁手警告 的本地化字符串。
         /// </summary>
         public static string BanTitle {
@@ -139,6 +148,15 @@ namespace CSharp_Final.Properties {
         public static string PeaceNotice {
             get {
                 return ResourceManager.GetString("PeaceNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 求和 的本地化字符串。
+        /// </summary>
+        public static string PeaceRequest {
+            get {
+                return ResourceManager.GetString("PeaceRequest", resourceCulture);
             }
         }
         
@@ -197,11 +215,38 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 华文仿宋 的本地化字符串。
+        /// </summary>
+        public static string SmallButtonFont {
+            get {
+                return ResourceManager.GetString("SmallButtonFont", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 16 的本地化字符串。
+        /// </summary>
+        public static string SmallButtonFontSize {
+            get {
+                return ResourceManager.GetString("SmallButtonFontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 开始对局 的本地化字符串。
         /// </summary>
         public static string StartGame {
             get {
                 return ResourceManager.GetString("StartGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 认输 的本地化字符串。
+        /// </summary>
+        public static string Surrender {
+            get {
+                return ResourceManager.GetString("Surrender", resourceCulture);
             }
         }
         
@@ -215,7 +260,7 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
-        ///   查找类似 悔棋提示 的本地化字符串。
+        ///   查找类似 悔棋 的本地化字符串。
         /// </summary>
         public static string Undo {
             get {
@@ -229,6 +274,15 @@ namespace CSharp_Final.Properties {
         public static string UndoAsk {
             get {
                 return ResourceManager.GetString("UndoAsk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 悔棋提示 的本地化字符串。
+        /// </summary>
+        public static string UndoInfo {
+            get {
+                return ResourceManager.GetString("UndoInfo", resourceCulture);
             }
         }
         

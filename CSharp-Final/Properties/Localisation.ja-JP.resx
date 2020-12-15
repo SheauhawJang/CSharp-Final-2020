@@ -127,6 +127,9 @@
   <data name="BanT44" xml:space="preserve">
     <value>四四反則</value>
   </data>
+  <data name="Bantip" xml:space="preserve">
+    <value />
+  </data>
   <data name="BanTitle" xml:space="preserve">
     <value>反則警告</value>
   </data>
@@ -136,11 +139,17 @@
   <data name="ButtonFont" xml:space="preserve">
     <value>Yu GothicUI</value>
   </data>
+  <data name="ButtonFontSize" xml:space="preserve">
+    <value>32</value>
+  </data>
   <data name="GameOver" xml:space="preserve">
     <value>ゲーム終了</value>
   </data>
   <data name="PeaceNotice" xml:space="preserve">
     <value>引き分けです！</value>
+  </data>
+  <data name="PeaceRequest" xml:space="preserve">
+    <value />
   </data>
   <data name="PlayerBlack" xml:space="preserve">
     <value>黒</value>
@@ -160,11 +169,32 @@
   <data name="RecordSaveNotice" xml:space="preserve">
     <value>棋譜がこのファイルに保存されました：</value>
   </data>
+  <data name="SmallButtonFont" xml:space="preserve">
+    <value>Yu GothicUI</value>
+  </data>
+  <data name="SmallButtonFontSize" xml:space="preserve">
+    <value>16</value>
+  </data>
   <data name="StartGame" xml:space="preserve">
     <value>対局開始</value>
   </data>
+  <data name="Surrender" xml:space="preserve">
+    <value />
+  </data>
   <data name="TimeoutNotice" xml:space="preserve">
     <value>はタイムアウトです！</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>撤回</value>
+  </data>
+  <data name="UndoAsk" xml:space="preserve">
+    <value>は撤回を要求します！</value>
+  </data>
+  <data name="UndoInfo" xml:space="preserve">
+    <value>撤回リクエスト</value>
+  </data>
+  <data name="UndoNotice" xml:space="preserve">
+    <value>は撤回した！</value>
   </data>
   <data name="WinNotice" xml:space="preserve">
     <value>の勝利！</value>

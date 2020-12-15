@@ -46,7 +46,7 @@ namespace CSharp_Final.Manager
     public class EConfig
     {
         public int Time { get; set; } = 3600;
-        public string Lang { get; set; } = "en-US";
+        public string Lang { get; set; } = "ja-JP";
     }
 
     public static class Config

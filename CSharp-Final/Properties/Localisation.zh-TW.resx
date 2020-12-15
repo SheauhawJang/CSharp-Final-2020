@@ -127,6 +127,9 @@
   <data name="BanT44" xml:space="preserve">
     <value>四四禁手</value>
   </data>
+  <data name="Bantip" xml:space="preserve">
+    <value />
+  </data>
   <data name="BanTitle" xml:space="preserve">
     <value>禁手警告</value>
   </data>
@@ -144,6 +147,9 @@
   </data>
   <data name="PeaceNotice" xml:space="preserve">
     <value>和棋！</value>
+  </data>
+  <data name="PeaceRequest" xml:space="preserve">
+    <value />
   </data>
   <data name="PlayerBlack" xml:space="preserve">
     <value>黑方</value>
@@ -163,11 +169,32 @@
   <data name="RecordSaveNotice" xml:space="preserve">
     <value>棋譜已保存至{0}</value>
   </data>
+  <data name="SmallButtonFont" xml:space="preserve">
+    <value>Microsoft JhengHei</value>
+  </data>
+  <data name="SmallButtonFontSize" xml:space="preserve">
+    <value>16</value>
+  </data>
   <data name="StartGame" xml:space="preserve">
     <value>開始對局</value>
   </data>
+  <data name="Surrender" xml:space="preserve">
+    <value />
+  </data>
   <data name="TimeoutNotice" xml:space="preserve">
     <value>超時！</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>悔棋</value>
+  </data>
+  <data name="UndoAsk" xml:space="preserve">
+    <value>請求悔棋！</value>
+  </data>
+  <data name="UndoInfo" xml:space="preserve">
+    <value>悔棋提示</value>
+  </data>
+  <data name="UndoNotice" xml:space="preserve">
+    <value>已悔棋！</value>
   </data>
   <data name="WinNotice" xml:space="preserve">
     <value>赢了！</value>
