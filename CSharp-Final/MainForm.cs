@@ -99,6 +99,7 @@ namespace CSharp_Final
         private void MainForm_Load_Control()
         {
             Localisation.Culture = new CultureInfo(Config.EnConfig.Lang);
+            ReplayTimer.Interval = Config.EnConfig.Speed;
             Text = Localisation.ApplicationName;
             Font buttonfont = new Font(Localisation.SmallButtonFont,
                 Convert.ToSingle(Localisation.SmallButtonFontSize));
@@ -112,6 +113,14 @@ namespace CSharp_Final
                 (Config.PlayerI.Avatar, 0);
             HeadPictureII.BackgroundImage = Avatar.GetBitmap
                 (Config.PlayerII.Avatar, 1);
+
+            开始对局ToolStripMenuItem.Text = Localisation.StartGame;
+            读取棋谱ToolStripMenuItem.Text = Localisation.RecordGame;
+            对局配置ToolStripMenuItem.Text = Localisation.ConfigGame;
+            悔棋ToolStripMenuItem.Text = Localisation.Undo;
+            认输ToolStripMenuItem.Text = Localisation.Surrender;
+            请求和棋ToolStripMenuItem.Text = Localisation.PeaceBF;
+            禁手点提示ToolStripMenuItem.Text = Localisation.BantipF;
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -134,7 +143,7 @@ namespace CSharp_Final
             Announcement.StartGame();
             ButtonAccess.SetStartButton(false);
             ButtonAccess.SetToolButton(true);
-            Invalidate();
+            Refresh();
         }
 
         private void InfoPanel_Paint(object sender, PaintEventArgs e)
@@ -166,7 +175,7 @@ namespace CSharp_Final
             Control control = (Control)sender;
             Graphics g = control.CreateGraphics();
             Font font = new Font(Localisation.ButtonFont, 32);
-            Point location = new Point(0, 5);
+            Point location = new Point(0, Convert.ToInt32(Localisation.ButtonFontSize));
             Size size = control.Size;
             Rectangle rect = new Rectangle(location, size);
             SolidBrush brush = new SolidBrush(Color.Black);
@@ -178,6 +187,8 @@ namespace CSharp_Final
             string text = "";
             if (control == StartButton)
                 text = Localisation.StartGame;
+            if (control == RecordButton)
+                text = Localisation.RecordGame;
             if (control == ConfigButton)
                 text = Localisation.ConfigGame;
             g.DrawString(text, font, brush, rect, format);
@@ -198,12 +209,7 @@ namespace CSharp_Final
         }
         private void SurrenderButton_Click(object sender, EventArgs e)
         {
-            WinningInfo info = new WinningInfo
-            {
-                Winner = Piece.CurrectColorID ^ 1,
-                WinWay = "SURRENDER"
-            };
-            Announcement.Announce(info);
+            SurrenderPiece.Surrender(Piece.CurrectColorID ^ 1);
         }
 
         private void NamePanel_Paint(object sender, PaintEventArgs e)
@@ -227,9 +233,27 @@ namespace CSharp_Final
             ConfigForm form = new ConfigForm();
             form.ShowDialog();
             MainForm_Load_Control();
-            Invalidate();
-            foreach (Control control in Controls)
-                control.Invalidate();
+            Refresh();
+        }
+
+        private void RecordButton_Click(object sender, EventArgs e)
+        {
+            if (OpenRecordDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    Replayer.ReplayStart(Record.InputRecord(OpenRecordDialog.FileName));
+                    ReplayTimer.Start();
+                    ButtonAccess.SetStartButton(false);
+                    Refresh();
+                }
+                catch { }
+            }
+        }
+
+        private void ReplayTimer_Tick(object sender, EventArgs e)
+        {
+            Replayer.ReplayNext(BoardPanel, (Timer)sender);
         }
     }
 }

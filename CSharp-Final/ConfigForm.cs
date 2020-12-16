@@ -32,6 +32,7 @@ namespace CSharp_Final
             PlayerIIAvatarPicture.BackgroundImage = 
                 Avatar.GetBitmap(Config.PlayerII.Avatar, 1);
             TimerLimitUpdown.Value = Config.EnConfig.Time;
+            ReplaySpeedUpdown.Value = Config.EnConfig.Speed;
             switch (Config.EnConfig.Lang)
             {
                 case "zh-CN":
@@ -66,6 +67,7 @@ namespace CSharp_Final
             Config.PlayerII.Name = PlayerIINameText.Text;
             Config.PlayerII.Avatar = PlayerIIAvatarText.Text;
             Config.EnConfig.Time = (int)TimerLimitUpdown.Value;
+            Config.EnConfig.Speed = (int)ReplaySpeedUpdown.Value;
             switch (LangCombo.SelectedIndex)
             {
                 case 1:
@@ -82,10 +84,11 @@ namespace CSharp_Final
                     break;
             }
             Config.WriteConfig();
+            Config.GetConfig();
             Close();
         }
 
-        private void PlayerIAvatorOpenButton_Click(object sender, EventArgs e)
+        private void PlayerAvatorOpenButton_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             TextBox text = button == PlayerIAvatorOpenButton ?
@@ -97,6 +100,14 @@ namespace CSharp_Final
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void ClearAvatarButton_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            TextBox text = button == ClearIAvatarButton ?
+                PlayerIAvatarText : PlayerIIAvatarText;
+            text.Clear();
         }
     }
 }

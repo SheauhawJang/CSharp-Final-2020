@@ -179,6 +179,58 @@ namespace CSharp_Final.Manager
                 }
         }
     }
+    public static class Announcement
+    {
+        public static bool Playing { get; set; } = false;
+        public static void Announce(WinningInfo info)
+        {
+            PlayAccess.Ability = false;
+            PlayAccess.UpdateCursor();
+            Clock.Stop();
+            ButtonAccess.SetStartButton(true);
+            ButtonAccess.SetToolButton(false);
+            List<Location> his = Piece.History;
+            string boxtext = string.Format("{0}{1}\n",
+                info.Winner == 0 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
+                Localisation.WinNotice);
+            if (info.Winner < 0)
+                boxtext = string.Format("{0}\n", Localisation.PeaceNotice);
+            switch (info.WinWay)
+            {
+                case "TIMEOUT":
+                    boxtext += string.Format("{2}:{0}{1}\n",
+                        info.Winner == 1 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
+                        Localisation.TimeoutNotice, Localisation.ReasonNotice);
+                    break;
+                case "SURRENDER":
+                    boxtext += string.Format("{2}:{0}{1}\n",
+                        info.Winner == 1 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
+                        Localisation.SurrenderNotice, Localisation.ReasonNotice);
+                    break;
+                case "REQUEST":
+                    boxtext += string.Format("{1}:{0}\n",
+                        Localisation.PeaceRequestNotice, Localisation.ReasonNotice);
+                    break;
+            }
+            if (!PlayAccess.Replay)
+            {
+                Record record = new Record(his, info);
+                record.OutputRecord();
+                boxtext += string.Format("{1}{0}\n", record.FileName, Localisation.RecordSaveNotice);
+            }
+            else
+                PlayAccess.Replay = false;
+            MessageBox.Show(boxtext, Localisation.GameOver, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void StartGame()
+        {
+            Piece.Clear();
+            PlayAccess.Ability = true;
+            PlayAccess.UpdateCursor(0);
+            Clock.Start();
+        }
+    }
     public static class Piece
     {
         public static Bitmap BlackPiece { get => Resources.BlackPiece; }
@@ -252,7 +304,7 @@ namespace CSharp_Final.Manager
             PlayAccess.UpdateCursor(CurrectColorID);
             sender.Invalidate(last.NetRectangle);
         }
-        public static void SetCheckPiece(Location loc, Control sender, bool replay = false)
+        public static void SetCheckPiece(Location loc, Control sender, bool ai = false)
         {
             int checkAns = SetPiece(loc, sender);
             if (checkAns >= 1)
@@ -261,10 +313,14 @@ namespace CSharp_Final.Manager
                 WinFather = InfoSet.ConnectAt(loc).ConnectFather[way];
                 WinMother = InfoSet.ConnectAt(loc).ConnectMother[way];
                 DrawWinLine(sender);
-                WinningInfo info = new WinningInfo { Winner = CurrectColorID ^ 1 };
-                Announcement.Announce(info);
+                if (!PlayAccess.Replay)
+                {
+                    WinningInfo info = new WinningInfo { Winner = CurrectColorID ^ 1 };
+                    Announcement.Announce(info);
+                }
             }
-            else if (History.Count == NetConfig.NetSize * NetConfig.NetSize)
+            else if (History.Count == NetConfig.NetSize * NetConfig.NetSize 
+                && !PlayAccess.Replay)
             {
                 WinningInfo info = new WinningInfo { WinWay = "PEACE" };
                 Announcement.Announce(info);
@@ -375,56 +431,6 @@ namespace CSharp_Final.Manager
         public int Winner { get; set; }
         public string WinWay { get; set; } = "";
     }
-    public static class Announcement
-    {
-        public static bool Playing { get; set; } = false;
-        public static void Announce(WinningInfo info)
-        {
-            PlayAccess.Ability = false;
-            PlayAccess.UpdateCursor();
-            Clock.Stop();
-            ButtonAccess.SetStartButton(true);
-            ButtonAccess.SetToolButton(false);
-            List<Location> his = Piece.History;
-            string boxtext = string.Format("{0}{1}\n", 
-                info.Winner == 0 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
-                Localisation.WinNotice);
-            if (info.Winner < 0)
-                boxtext = string.Format("{0}\n", Localisation.PeaceNotice);
-            switch (info.WinWay)
-            {
-                case "TIMEOUT":
-                    boxtext += string.Format("{2}:{0}{1}\n", 
-                        info.Winner == 1 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
-                        Localisation.TimeoutNotice, Localisation.ReasonNotice);
-                    break;
-                case "SURRENDER":
-                    boxtext += string.Format("{2}:{0}{1}\n",
-                        info.Winner == 1 ? Localisation.PlayerBlack : Localisation.PlayerWhite,
-                        Localisation.SurrenderNotice, Localisation.ReasonNotice);
-                    break;
-                case "REQUEST":
-                    boxtext += string.Format("{1}:{0}\n",
-                        Localisation.PeaceRequestNotice, Localisation.ReasonNotice);
-                    break;
-            }
-            if (!PlayAccess.Replay)
-            {
-                Record record = new Record(his);
-                record.OutputRecord();
-                boxtext += string.Format("{1}{0}\n", record.FileName, Localisation.RecordSaveNotice);
-            }
-            MessageBox.Show(boxtext, Localisation.GameOver, MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        public static void StartGame()
-        {
-            Piece.Clear();
-            PlayAccess.Ability = true;
-            PlayAccess.UpdateCursor(0);
-            Clock.Start();
-        }
-    }
     public static class Clock
     {
         public static int PlayerI { get; set; }
@@ -478,7 +484,8 @@ namespace CSharp_Final.Manager
         public static void Start()
         {
             PlayerI = PlayerII = Config.EnConfig.Time;
-            timerI.Start();
+            if (!PlayAccess.Replay)
+                timerI.Start();
             playerI.BackColor = nowColor;
         }
 
@@ -493,15 +500,21 @@ namespace CSharp_Final.Manager
         {
             if (now == 0)
             {
-                timerI.Stop();
-                timerII.Start();
+                if (!PlayAccess.Replay)
+                {
+                    timerI.Stop();
+                    timerII.Start();
+                }
                 playerI.BackColor = Color.Transparent;
                 playerII.BackColor = nowColor;
             }
             else
             {
-                timerI.Start();
-                timerII.Stop();
+                if (!PlayAccess.Replay)
+                {
+                    timerI.Start();
+                    timerII.Stop();
+                }
                 playerI.BackColor = nowColor;
                 playerII.BackColor = Color.Transparent;
             }

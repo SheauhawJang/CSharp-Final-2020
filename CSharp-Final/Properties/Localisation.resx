@@ -133,6 +133,9 @@
   <data name="Bantip" xml:space="preserve">
     <value>禁点</value>
   </data>
+  <data name="BantipF" xml:space="preserve">
+    <value>禁手点提示</value>
+  </data>
   <data name="BanTitle" xml:space="preserve">
     <value>禁手警告</value>
   </data>
@@ -143,7 +146,7 @@
     <value>华文行楷</value>
   </data>
   <data name="ButtonFontSize" xml:space="preserve">
-    <value>32</value>
+    <value>5</value>
   </data>
   <data name="ConfigGame" xml:space="preserve">
     <value>对局配置</value>
@@ -156,6 +159,9 @@
   </data>
   <data name="PeaceB" xml:space="preserve">
     <value>求和</value>
+  </data>
+  <data name="PeaceBF" xml:space="preserve">
+    <value>请求和棋</value>
   </data>
   <data name="PeaceInfo" xml:space="preserve">
     <value>和棋提示</value>
@@ -180,6 +186,9 @@
   </data>
   <data name="RecordFileError" xml:space="preserve">
     <value>文件已损坏！</value>
+  </data>
+  <data name="RecordGame" xml:space="preserve">
+    <value>读取棋谱</value>
   </data>
   <data name="RecordSaveNotice" xml:space="preserve">
     <value>棋谱已保存至</value>

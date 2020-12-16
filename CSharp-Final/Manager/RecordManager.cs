@@ -25,9 +25,10 @@ namespace CSharp_Final.Manager
         readonly static int size = NetConfig.NetSize;
         public string DateName { get; private set; }
         public string FileName => string.Format("Records/Record-{0}.record", DateName);
+        public WinningInfo Result { get; private set; }
         static char ToHexChar(int x)
         {
-            if (x >= size || x < 0)
+            if (x > size || x < 0)
                 return '!';
             if (x < 10)
                 return (char)(x + '0');
@@ -55,15 +56,24 @@ namespace CSharp_Final.Manager
             return ans;
         }
         static List<char> ToCharList(BigInteger x) => string.Format("{0:X}", x).ToList();
-        public Record(List<Location> his)
+        public Record(List<Location> his, WinningInfo winner)
         {
             History = his;
+            Result = winner;
             Hex = new List<char>();
             foreach (Location loc in History)
             {
                 Hex.Add(ToHexChar(loc.X));
                 Hex.Add(ToHexChar(loc.Y));
             }
+            Hex.Add(ToHexChar(size));
+            if (Result.Winner < 0)
+                Hex.Add(ToHexChar(size));
+            else
+                Hex.Add(ToHexChar(Result.Winner));
+            foreach (char ch in Result.WinWay)
+                for (int di = 0; di < 16; ++di)
+                    Hex.Add(ToHexChar((ch >> di) & 1));
             Dec = ToBigInteger(Hex);
             DateTime now = DateTime.Now;
             DateName = string.Format("{0:0000}{1:00}{2:00}{3:00}{4:00}{5:00}",
@@ -102,14 +112,21 @@ namespace CSharp_Final.Manager
             for (int i = 0; i < History.Count; ++i)
                 save.WriteLine("{2}: ({0}, {1})", History[i].X, History[i].Y, 
                     (i & 1) == 0 ? "Black" : "White");
+            if (Result.Winner > 0)
+                save.WriteLine(string.Format("Winner is {0}.",
+                    Result.Winner == 0 ? "Black" : "White"));
+            else
+                save.WriteLine("Peace");
+            save.WriteLine(Result.WinWay);
             save.Close();
         }
         public static Record InputRecord(string fileName)
         {
-            Record ans = new Record(new List<Location>());
+            Record ans = new Record(new List<Location>(), new WinningInfo());
             try
             {
                 StreamReader save = new StreamReader(fileName);
+                save.ReadLine(); save.ReadLine();
                 List<char> hex = save.ReadLine().ToList();
                 long hexHA = Convert.ToInt64(save.ReadLine());
                 long hexHB = Convert.ToInt64(save.ReadLine());
@@ -129,16 +146,50 @@ namespace CSharp_Final.Manager
                     throw new RecordInfoExpection("HEX_DEC_Diff");
                 ans.Hex = hex;
                 ans.Dec = dec;
-                for (int i = 0; i < ans.Hex.Count; i += 2)
+                int i = 0;
+                for (i = 0; hex[i] != ToHexChar(size); i += 2)
                     ans.History.Add(new Location(ToDecDight(hex[i]), ToDecDight(hex[i + 1])));
+                ans.Result.Winner = hex[i + 1] == ToHexChar(size) ? -1 : ToDecDight(hex[i + 1]);
+                for (i += 2; i < hex.Count; i += 16)
+                {
+                    int p = 0;
+                    for (int j = 0; j < 16; ++j)
+                        if ((ToDecDight(hex[i + j]) & 1) == 1)
+                            p |= 1 << j;
+                    ans.Result.WinWay += (char)p;
+                }
             }
             catch
             {
-                ans = new Record(new List<Location>());
                 MessageBox.Show(Localisation.RecordFileError, Localisation.RecordError, 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new RecordInfoExpection("Error!");
             }
             return ans;
+        }
+    }
+
+    public static class Replayer
+    {
+        public static List<Location> History { get; private set; }
+        public static WinningInfo Result { get; private set; }
+        public static void ReplayStart(Record record)
+        {
+            History = record.History;
+            Result = record.Result;
+            PlayAccess.Replay = true;
+            Piece.Clear();
+            Clock.Start();
+        }
+        public static void ReplayNext(Control sender, Timer timer)
+        {
+            if (Piece.CurrectID == History.Count)
+            {
+                timer.Stop();
+                Announcement.Announce(Result);
+                return;
+            }
+            Piece.SetCheckPiece(History[Piece.CurrectID], sender);
         }
     }
 }

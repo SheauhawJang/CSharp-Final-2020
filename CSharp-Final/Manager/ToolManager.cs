@@ -15,17 +15,17 @@ namespace CSharp_Final.Manager
         {
             if (Piece.History.Count == 0)
                 return;
-            string name = Piece.CurrectColorID == 1 ? 
+            string name = Piece.CurrectColorID == 1 ?
                 Localisation.PlayerBlack : Localisation.PlayerWhite;
-            if (MessageBox.Show(string.Format("{0}{1}", 
-                name, Localisation.UndoAsk), 
-                Localisation.UndoInfo, MessageBoxButtons.YesNo, 
+            if (MessageBox.Show(string.Format("{0}{1}",
+                name, Localisation.UndoAsk),
+                Localisation.UndoInfo, MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                MessageBox.Show(string.Format("{0}{1}", name,
-                    Localisation.UndoNotice), Localisation.UndoInfo, 
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Piece.RemovePiece(sender);
+                MessageBox.Show(string.Format("{0}{1}", name,
+                    Localisation.UndoNotice), Localisation.UndoInfo,
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
@@ -65,6 +65,19 @@ namespace CSharp_Final.Manager
                 };
                 Announcement.Announce(info);
             }
+        }
+    }
+
+    public static class SurrenderPiece
+    {
+        public static void Surrender(int id)
+        {
+            WinningInfo info = new WinningInfo
+            {
+                Winner = id,
+                WinWay = "SURRENDER"
+            };
+            Announcement.Announce(info);
         }
     }
 

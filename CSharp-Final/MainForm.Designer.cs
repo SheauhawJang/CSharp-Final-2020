@@ -52,17 +52,18 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.RecordButton = new System.Windows.Forms.Panel();
             this.ConfigButton = new System.Windows.Forms.Panel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.全局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.对局PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开始对局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.读取棋谱ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.对局配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.对局PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.悔棋ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.请求和棋ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.认输ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.禁手提示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.禁手点提示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReplayTimer = new System.Windows.Forms.Timer(this.components);
             this.InfoPanelI.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureI)).BeginInit();
@@ -71,12 +72,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // OpenRecordDialog
             // 
             this.OpenRecordDialog.FileName = "openFileDialog1";
+            this.OpenRecordDialog.Filter = "棋谱文件|*.record|所有文件|*.*";
             // 
             // InfoPanelI
             // 
@@ -265,7 +267,7 @@
             this.TipButton.Name = "TipButton";
             this.TipButton.Size = new System.Drawing.Size(100, 40);
             this.TipButton.TabIndex = 6;
-            this.TipButton.Text = "禁手";
+            this.TipButton.Text = "禁手点";
             this.TipButton.UseVisualStyleBackColor = true;
             this.TipButton.Click += new System.EventHandler(this.TipButton_Click);
             // 
@@ -292,7 +294,7 @@
             this.RecordButton.Name = "RecordButton";
             this.RecordButton.Size = new System.Drawing.Size(250, 75);
             this.RecordButton.TabIndex = 4;
-            this.RecordButton.Click += new System.EventHandler(this.StartButton_Click);
+            this.RecordButton.Click += new System.EventHandler(this.RecordButton_Click);
             this.RecordButton.Paint += new System.Windows.Forms.PaintEventHandler(this.StartButton_Paint);
             this.RecordButton.MouseEnter += new System.EventHandler(this.StartButton_MouseEnter);
             this.RecordButton.MouseLeave += new System.EventHandler(this.StartButton_MouseLeave);
@@ -309,17 +311,17 @@
             this.ConfigButton.MouseEnter += new System.EventHandler(this.StartButton_MouseEnter);
             this.ConfigButton.MouseLeave += new System.EventHandler(this.StartButton_MouseLeave);
             // 
-            // menuStrip1
+            // MenuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.全局ToolStripMenuItem,
             this.对局PToolStripMenuItem,
             this.关于AToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1424, 25);
-            this.menuStrip1.TabIndex = 7;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MenuStrip.Name = "MenuStrip";
+            this.MenuStrip.Size = new System.Drawing.Size(1424, 25);
+            this.MenuStrip.TabIndex = 7;
+            this.MenuStrip.Text = "menuStrip1";
             // 
             // 全局ToolStripMenuItem
             // 
@@ -331,16 +333,74 @@
             this.全局ToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
             this.全局ToolStripMenuItem.Text = "全局(&G)";
             // 
+            // 开始对局ToolStripMenuItem
+            // 
+            this.开始对局ToolStripMenuItem.Name = "开始对局ToolStripMenuItem";
+            this.开始对局ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
+            this.开始对局ToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.开始对局ToolStripMenuItem.Text = "开始对局";
+            this.开始对局ToolStripMenuItem.Click += new System.EventHandler(this.StartButton_Click);
+            // 
+            // 读取棋谱ToolStripMenuItem
+            // 
+            this.读取棋谱ToolStripMenuItem.Name = "读取棋谱ToolStripMenuItem";
+            this.读取棋谱ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.读取棋谱ToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.读取棋谱ToolStripMenuItem.Text = "读取棋谱";
+            // 
+            // 对局配置ToolStripMenuItem
+            // 
+            this.对局配置ToolStripMenuItem.Name = "对局配置ToolStripMenuItem";
+            this.对局配置ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.对局配置ToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.对局配置ToolStripMenuItem.Text = "对局配置";
+            this.对局配置ToolStripMenuItem.Click += new System.EventHandler(this.ConfigButton_Click);
+            // 
             // 对局PToolStripMenuItem
             // 
             this.对局PToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.悔棋ToolStripMenuItem,
             this.请求和棋ToolStripMenuItem,
             this.认输ToolStripMenuItem,
-            this.禁手提示ToolStripMenuItem});
+            this.禁手点提示ToolStripMenuItem});
             this.对局PToolStripMenuItem.Name = "对局PToolStripMenuItem";
             this.对局PToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
             this.对局PToolStripMenuItem.Text = "对局(&P)";
+            // 
+            // 悔棋ToolStripMenuItem
+            // 
+            this.悔棋ToolStripMenuItem.Enabled = false;
+            this.悔棋ToolStripMenuItem.Name = "悔棋ToolStripMenuItem";
+            this.悔棋ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.悔棋ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.悔棋ToolStripMenuItem.Text = "悔棋";
+            this.悔棋ToolStripMenuItem.Click += new System.EventHandler(this.UndoButton_Click);
+            // 
+            // 请求和棋ToolStripMenuItem
+            // 
+            this.请求和棋ToolStripMenuItem.Enabled = false;
+            this.请求和棋ToolStripMenuItem.Name = "请求和棋ToolStripMenuItem";
+            this.请求和棋ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.请求和棋ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.请求和棋ToolStripMenuItem.Text = "请求和棋";
+            this.请求和棋ToolStripMenuItem.Click += new System.EventHandler(this.PeaceButton_Click);
+            // 
+            // 认输ToolStripMenuItem
+            // 
+            this.认输ToolStripMenuItem.Enabled = false;
+            this.认输ToolStripMenuItem.Name = "认输ToolStripMenuItem";
+            this.认输ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.认输ToolStripMenuItem.Text = "认输";
+            this.认输ToolStripMenuItem.Click += new System.EventHandler(this.SurrenderButton_Click);
+            // 
+            // 禁手点提示ToolStripMenuItem
+            // 
+            this.禁手点提示ToolStripMenuItem.Enabled = false;
+            this.禁手点提示ToolStripMenuItem.Name = "禁手点提示ToolStripMenuItem";
+            this.禁手点提示ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.禁手点提示ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.禁手点提示ToolStripMenuItem.Text = "禁手点提示";
+            this.禁手点提示ToolStripMenuItem.Click += new System.EventHandler(this.TipButton_Click);
             // 
             // 关于AToolStripMenuItem
             // 
@@ -348,53 +408,10 @@
             this.关于AToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
             this.关于AToolStripMenuItem.Text = "关于(&A)";
             // 
-            // 开始对局ToolStripMenuItem
+            // ReplayTimer
             // 
-            this.开始对局ToolStripMenuItem.Name = "开始对局ToolStripMenuItem";
-            this.开始对局ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.开始对局ToolStripMenuItem.Text = "开始对局";
-            this.开始对局ToolStripMenuItem.Click += new System.EventHandler(this.StartButton_Click);
-            // 
-            // 读取棋谱ToolStripMenuItem
-            // 
-            this.读取棋谱ToolStripMenuItem.Name = "读取棋谱ToolStripMenuItem";
-            this.读取棋谱ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.读取棋谱ToolStripMenuItem.Text = "读取棋谱";
-            // 
-            // 对局配置ToolStripMenuItem
-            // 
-            this.对局配置ToolStripMenuItem.Name = "对局配置ToolStripMenuItem";
-            this.对局配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.对局配置ToolStripMenuItem.Text = "对局配置";
-            this.对局配置ToolStripMenuItem.Click += new System.EventHandler(this.ConfigButton_Click);
-            // 
-            // 悔棋ToolStripMenuItem
-            // 
-            this.悔棋ToolStripMenuItem.Name = "悔棋ToolStripMenuItem";
-            this.悔棋ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.悔棋ToolStripMenuItem.Text = "悔棋";
-            this.悔棋ToolStripMenuItem.Click += new System.EventHandler(this.UndoButton_Click);
-            // 
-            // 请求和棋ToolStripMenuItem
-            // 
-            this.请求和棋ToolStripMenuItem.Name = "请求和棋ToolStripMenuItem";
-            this.请求和棋ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.请求和棋ToolStripMenuItem.Text = "请求和棋";
-            this.请求和棋ToolStripMenuItem.Click += new System.EventHandler(this.PeaceButton_Click);
-            // 
-            // 认输ToolStripMenuItem
-            // 
-            this.认输ToolStripMenuItem.Name = "认输ToolStripMenuItem";
-            this.认输ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.认输ToolStripMenuItem.Text = "认输";
-            this.认输ToolStripMenuItem.Click += new System.EventHandler(this.SurrenderButton_Click);
-            // 
-            // 禁手提示ToolStripMenuItem
-            // 
-            this.禁手提示ToolStripMenuItem.Name = "禁手提示ToolStripMenuItem";
-            this.禁手提示ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.禁手提示ToolStripMenuItem.Text = "禁手提示";
-            this.禁手提示ToolStripMenuItem.Click += new System.EventHandler(this.TipButton_Click);
+            this.ReplayTimer.Interval = 1000;
+            this.ReplayTimer.Tick += new System.EventHandler(this.ReplayTimer_Tick);
             // 
             // MainForm
             // 
@@ -413,7 +430,7 @@
             this.Controls.Add(this.InfoPanelII);
             this.Controls.Add(this.InfoPanelI);
             this.Controls.Add(this.BoardPanel);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.MenuStrip);
             this.Name = "MainForm";
             this.Text = "连珠五子棋对战程序";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -425,8 +442,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.HeadPictureII)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.MenuStrip.ResumeLayout(false);
+            this.MenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,17 +473,18 @@
         private System.Windows.Forms.Button TipButton;
         private System.Windows.Forms.Panel RecordButton;
         private System.Windows.Forms.Panel ConfigButton;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 全局ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 开始对局ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 读取棋谱ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 对局配置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 对局PToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 悔棋ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 请求和棋ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 认输ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 禁手提示ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem;
+        public System.Windows.Forms.MenuStrip MenuStrip;
+        public System.Windows.Forms.ToolStripMenuItem 全局ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem 开始对局ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem 读取棋谱ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem 对局配置ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem 对局PToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem 悔棋ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem 请求和棋ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem 认输ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem 禁手点提示ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem;
+        private System.Windows.Forms.Timer ReplayTimer;
     }
 }
 

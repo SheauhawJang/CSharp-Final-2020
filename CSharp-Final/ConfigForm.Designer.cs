@@ -30,6 +30,8 @@ namespace CSharp_Final
         private void InitializeComponent()
         {
             this.PlayerIGroup = new System.Windows.Forms.GroupBox();
+            this.ClearIAvatarButton = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.PlayerIAvatarPicture = new System.Windows.Forms.PictureBox();
             this.PlayerIAvatorOpenButton = new System.Windows.Forms.Button();
             this.PlayerIAvatarText = new System.Windows.Forms.TextBox();
@@ -43,6 +45,8 @@ namespace CSharp_Final
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.PlayerIIGroup = new System.Windows.Forms.GroupBox();
+            this.ClearIIAvatarButton = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.PlayerIIAvatarPicture = new System.Windows.Forms.PictureBox();
             this.PlayerIIAvatorOpenButton = new System.Windows.Forms.Button();
             this.PlayerIIAvatarText = new System.Windows.Forms.TextBox();
@@ -54,16 +58,21 @@ namespace CSharp_Final
             this.SubmitButton = new System.Windows.Forms.Button();
             this.AvatarOpenDialog = new System.Windows.Forms.OpenFileDialog();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.ReplaySpeedUpdown = new System.Windows.Forms.NumericUpDown();
             this.PlayerIGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIAvatarPicture)).BeginInit();
             this.EnvironmentGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TimerLimitUpdown)).BeginInit();
             this.PlayerIIGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIIAvatarPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpdown)).BeginInit();
             this.SuspendLayout();
             // 
             // PlayerIGroup
             // 
+            this.PlayerIGroup.Controls.Add(this.ClearIAvatarButton);
+            this.PlayerIGroup.Controls.Add(this.label9);
             this.PlayerIGroup.Controls.Add(this.PlayerIAvatarPicture);
             this.PlayerIGroup.Controls.Add(this.PlayerIAvatorOpenButton);
             this.PlayerIGroup.Controls.Add(this.PlayerIAvatarText);
@@ -77,6 +86,26 @@ namespace CSharp_Final
             this.PlayerIGroup.TabIndex = 0;
             this.PlayerIGroup.TabStop = false;
             this.PlayerIGroup.Text = "PlayerI";
+            // 
+            // ClearIAvatarButton
+            // 
+            this.ClearIAvatarButton.Location = new System.Drawing.Point(114, 362);
+            this.ClearIAvatarButton.Name = "ClearIAvatarButton";
+            this.ClearIAvatarButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearIAvatarButton.TabIndex = 5;
+            this.ClearIAvatarButton.Text = "恢复默认";
+            this.ClearIAvatarButton.UseVisualStyleBackColor = true;
+            this.ClearIAvatarButton.Click += new System.EventHandler(this.ClearAvatarButton_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 9F);
+            this.label9.Location = new System.Drawing.Point(12, 366);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(56, 15);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "200×240";
             // 
             // PlayerIAvatarPicture
             // 
@@ -96,7 +125,7 @@ namespace CSharp_Final
             this.PlayerIAvatorOpenButton.TabIndex = 2;
             this.PlayerIAvatorOpenButton.Text = "浏览";
             this.PlayerIAvatorOpenButton.UseVisualStyleBackColor = true;
-            this.PlayerIAvatorOpenButton.Click += new System.EventHandler(this.PlayerIAvatorOpenButton_Click);
+            this.PlayerIAvatorOpenButton.Click += new System.EventHandler(this.PlayerAvatorOpenButton_Click);
             // 
             // PlayerIAvatarText
             // 
@@ -143,8 +172,10 @@ namespace CSharp_Final
             // EnvironmentGroup
             // 
             this.EnvironmentGroup.Controls.Add(this.LangCombo);
+            this.EnvironmentGroup.Controls.Add(this.ReplaySpeedUpdown);
             this.EnvironmentGroup.Controls.Add(this.TimerLimitUpdown);
             this.EnvironmentGroup.Controls.Add(this.label6);
+            this.EnvironmentGroup.Controls.Add(this.label11);
             this.EnvironmentGroup.Controls.Add(this.label5);
             this.EnvironmentGroup.Location = new System.Drawing.Point(500, 20);
             this.EnvironmentGroup.Name = "EnvironmentGroup";
@@ -202,12 +233,14 @@ namespace CSharp_Final
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(7, 21);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.Size = new System.Drawing.Size(71, 12);
             this.label5.TabIndex = 0;
-            this.label5.Text = "时间限制";
+            this.label5.Text = "时间限制(s)";
             // 
             // PlayerIIGroup
             // 
+            this.PlayerIIGroup.Controls.Add(this.ClearIIAvatarButton);
+            this.PlayerIIGroup.Controls.Add(this.label10);
             this.PlayerIIGroup.Controls.Add(this.PlayerIIAvatarPicture);
             this.PlayerIIGroup.Controls.Add(this.PlayerIIAvatorOpenButton);
             this.PlayerIIGroup.Controls.Add(this.PlayerIIAvatarText);
@@ -221,6 +254,26 @@ namespace CSharp_Final
             this.PlayerIIGroup.TabIndex = 0;
             this.PlayerIIGroup.TabStop = false;
             this.PlayerIIGroup.Text = "PlayerII";
+            // 
+            // ClearIIAvatarButton
+            // 
+            this.ClearIIAvatarButton.Location = new System.Drawing.Point(114, 362);
+            this.ClearIIAvatarButton.Name = "ClearIIAvatarButton";
+            this.ClearIIAvatarButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearIIAvatarButton.TabIndex = 5;
+            this.ClearIIAvatarButton.Text = "恢复默认";
+            this.ClearIIAvatarButton.UseVisualStyleBackColor = true;
+            this.ClearIIAvatarButton.Click += new System.EventHandler(this.ClearAvatarButton_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Arial", 9F);
+            this.label10.Location = new System.Drawing.Point(12, 366);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(56, 15);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "200×240";
             // 
             // PlayerIIAvatarPicture
             // 
@@ -240,6 +293,7 @@ namespace CSharp_Final
             this.PlayerIIAvatorOpenButton.TabIndex = 2;
             this.PlayerIIAvatorOpenButton.Text = "浏览";
             this.PlayerIIAvatorOpenButton.UseVisualStyleBackColor = true;
+            this.PlayerIIAvatorOpenButton.Click += new System.EventHandler(this.PlayerAvatorOpenButton_Click);
             // 
             // PlayerIIAvatarText
             // 
@@ -306,7 +360,7 @@ namespace CSharp_Final
             // AvatarOpenDialog
             // 
             this.AvatarOpenDialog.FileName = "AvatarOpenDialog";
-            this.AvatarOpenDialog.Filter = "JPEG文件|*.jpg;*.jpeg|GIF文件|*.gif|BMP文件|*.bmp";
+            this.AvatarOpenDialog.Filter = "JPEG文件|*.jpg;*.jpeg|GIF文件|*.gif|BMP文件|*.bmp|PNG文件|*.png|所有文件|*.*";
             // 
             // CancelButton
             // 
@@ -319,12 +373,42 @@ namespace CSharp_Final
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 121);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 12);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "回放延迟(ms)";
+            // 
+            // ReplaySpeedUpdown
+            // 
+            this.ReplaySpeedUpdown.Location = new System.Drawing.Point(9, 140);
+            this.ReplaySpeedUpdown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.ReplaySpeedUpdown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ReplaySpeedUpdown.Name = "ReplaySpeedUpdown";
+            this.ReplaySpeedUpdown.Size = new System.Drawing.Size(180, 21);
+            this.ReplaySpeedUpdown.TabIndex = 1;
+            this.ReplaySpeedUpdown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // ConfigForm
             // 
             this.AcceptButton = this.SubmitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.CancelButton;
             this.ClientSize = new System.Drawing.Size(745, 471);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SubmitButton);
@@ -333,7 +417,7 @@ namespace CSharp_Final
             this.Controls.Add(this.PlayerIIGroup);
             this.Controls.Add(this.PlayerIGroup);
             this.Name = "ConfigForm";
-            this.Text = "Configer";
+            this.Text = "Config";
             this.Load += new System.EventHandler(this.ClearConfigButton_Click);
             this.PlayerIGroup.ResumeLayout(false);
             this.PlayerIGroup.PerformLayout();
@@ -344,6 +428,7 @@ namespace CSharp_Final
             this.PlayerIIGroup.ResumeLayout(false);
             this.PlayerIIGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIIAvatarPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpdown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -375,5 +460,11 @@ namespace CSharp_Final
         private System.Windows.Forms.Button SubmitButton;
         private System.Windows.Forms.OpenFileDialog AvatarOpenDialog;
         private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button ClearIAvatarButton;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button ClearIIAvatarButton;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown ReplaySpeedUpdown;
+        private System.Windows.Forms.Label label11;
     }
 }

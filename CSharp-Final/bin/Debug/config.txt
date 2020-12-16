@@ -5,5 +5,5 @@ PlayerII :
 	Name = &KON Automaton
 	Avatar = &
 Environment :
-	Time = &3
+	Time = &3600
 	Lang = &ja-JP

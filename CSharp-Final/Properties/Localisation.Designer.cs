@@ -107,6 +107,15 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 禁手点提示 的本地化字符串。
+        /// </summary>
+        public static string BantipF {
+            get {
+                return ResourceManager.GetString("BantipF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 禁手警告 的本地化字符串。
         /// </summary>
         public static string BanTitle {
@@ -134,7 +143,7 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
-        ///   查找类似 32 的本地化字符串。
+        ///   查找类似 5 的本地化字符串。
         /// </summary>
         public static string ButtonFontSize {
             get {
@@ -175,6 +184,15 @@ namespace CSharp_Final.Properties {
         public static string PeaceB {
             get {
                 return ResourceManager.GetString("PeaceB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请求和棋 的本地化字符串。
+        /// </summary>
+        public static string PeaceBF {
+            get {
+                return ResourceManager.GetString("PeaceBF", resourceCulture);
             }
         }
         
@@ -247,6 +265,15 @@ namespace CSharp_Final.Properties {
         public static string RecordFileError {
             get {
                 return ResourceManager.GetString("RecordFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 读取棋谱 的本地化字符串。
+        /// </summary>
+        public static string RecordGame {
+            get {
+                return ResourceManager.GetString("RecordGame", resourceCulture);
             }
         }
         

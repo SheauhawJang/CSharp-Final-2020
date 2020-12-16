@@ -131,7 +131,10 @@ Reason:</value>
     <value>4 4 Forbidden</value>
   </data>
   <data name="Bantip" xml:space="preserve">
-    <value>Ban Tip</value>
+    <value>Forbidden</value>
+  </data>
+  <data name="BantipF" xml:space="preserve">
+    <value>Show forbidden location</value>
   </data>
   <data name="BanTitle" xml:space="preserve">
     <value>Forbidden Warning</value>
@@ -140,10 +143,10 @@ Reason:</value>
     <value>Long Connection Forbidden</value>
   </data>
   <data name="ButtonFont" xml:space="preserve">
-    <value>Arial</value>
+    <value>Cambria</value>
   </data>
   <data name="ButtonFontSize" xml:space="preserve">
-    <value>32</value>
+    <value>0</value>
   </data>
   <data name="ConfigGame" xml:space="preserve">
     <value>Config</value>
@@ -156,6 +159,9 @@ Reason:</value>
   </data>
   <data name="PeaceB" xml:space="preserve">
     <value>Draw</value>
+  </data>
+  <data name="PeaceBF" xml:space="preserve">
+    <value>Apply for draw</value>
   </data>
   <data name="PeaceInfo" xml:space="preserve">
     <value>Draw Requestion</value>
@@ -180,6 +186,9 @@ Reason:</value>
   </data>
   <data name="RecordFileError" xml:space="preserve">
     <value>Record file damaged!</value>
+  </data>
+  <data name="RecordGame" xml:space="preserve">
+    <value>Record</value>
   </data>
   <data name="RecordSaveNotice" xml:space="preserve">
     <value>Record has saved to </value>

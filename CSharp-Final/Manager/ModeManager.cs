@@ -40,8 +40,8 @@ namespace CSharp_Final.Manager
     }
     public static class ButtonAccess
     {
-        static Form mainForm;
-        public static Form MainForm
+        static MainForm mainForm;
+        public static MainForm MainForm
         {
             private get => mainForm;
             set { if (mainForm == null) mainForm = value; }
@@ -50,6 +50,8 @@ namespace CSharp_Final.Manager
         {
             mainForm.Controls["StartButton"].Enabled = access;
             mainForm.Controls["RecordButton"].Enabled = access;
+            mainForm.开始对局ToolStripMenuItem.Enabled = access;
+            mainForm.读取棋谱ToolStripMenuItem.Enabled = access;
         }
         public static void SetToolButton(bool access)
         {
@@ -57,6 +59,10 @@ namespace CSharp_Final.Manager
             mainForm.Controls["TipButton"].Enabled = access;
             mainForm.Controls["SurrenderButton"].Enabled = access;
             mainForm.Controls["PeaceButton"].Enabled = access;
+            mainForm.悔棋ToolStripMenuItem.Enabled = access;
+            mainForm.请求和棋ToolStripMenuItem.Enabled = access;
+            mainForm.认输ToolStripMenuItem.Enabled = access;
+            mainForm.禁手点提示ToolStripMenuItem.Enabled = access;
         }
     }
     public class Player
@@ -75,12 +81,15 @@ namespace CSharp_Final.Manager
     {
         public int Time { get; set; } = 3600;
         public string Lang { get; set; } = "zh-CN";
+        public int Speed { get; set; } = 300;
     }
 
     public static class Config
     {
-        public static Player PlayerI { get; set; } = new Player("Sheauhaw Jang");
-        public static Player PlayerII { get; set; } = new Player("KON Automaton");
+        readonly static string[] defname =
+            new string[2] { "Sheauhaw Jang", "KON Automaton" };
+        public static Player PlayerI { get; set; } = new Player(defname[0]);
+        public static Player PlayerII { get; set; } = new Player(defname[1]);
         public static EConfig EnConfig { get; set; } = new EConfig();
         public static Cursor CursorWrite { get; } = 
             new Cursor(new MemoryStream(Resources.WhiteCursor));
@@ -99,6 +108,16 @@ namespace CSharp_Final.Manager
                 }
             return s;
         }
+
+        static bool IsPro(string s, char ch)
+        {
+            for (int i = 0; i < s.Length; ++i)
+                if (s[i] == '&')
+                    return false;
+                else if (s[i] == ch)
+                    return true;
+            return false;
+        }
         const char bigSplitor = ':';
         const char smallSplitor = '=';
         public static void GetConfig()
@@ -113,22 +132,26 @@ namespace CSharp_Final.Manager
             {
                 if (config.EndOfStream)
                     return;
-                string pro = Container(config.ReadLine());
-                while (pro.Contains(bigSplitor))
+                string pro = config.ReadLine();
+                while (IsPro(pro, bigSplitor))
                 {
+                    pro = Container(pro);
                     if (config.EndOfStream)
                         return;
-                    string info = Container(config.ReadLine());
+                    string info = config.ReadLine();
                     while (true)
                     {
-                        if (info.Contains(bigSplitor))
+                        if (IsPro(info, bigSplitor))
                         {
                             pro = info;
                             break;
                         }
+                        info = Container(info);
                         string[] infos = info.Split(smallSplitor);
                         string infoHead = infos[0];
-                        string infoContain = string.Join(" ", infos, 1, infos.Length - 1);
+                        string infoContain = string.Join(
+                            Convert.ToString(smallSplitor), infos, 
+                            1, infos.Length - 1);
                         switch (pro.Split(bigSplitor)[0])
                         {
                             case "PlayerI":
@@ -137,6 +160,8 @@ namespace CSharp_Final.Manager
                                     case "Name":
                                         if (infoContain.Length > 0)
                                             PlayerI.Name = infoContain;
+                                        else
+                                            PlayerI.Name = defname[0];
                                         break;
                                     case "Avatar":
                                         PlayerI.Avatar = infoContain;
@@ -149,6 +174,8 @@ namespace CSharp_Final.Manager
                                     case "Name":
                                         if (infoContain.Length > 0)
                                             PlayerII.Name = infoContain;
+                                        else
+                                            PlayerII.Name = defname[1];
                                         break;
                                     case "Avatar":
                                         PlayerII.Avatar = infoContain;
@@ -159,17 +186,24 @@ namespace CSharp_Final.Manager
                                 switch (infoHead)
                                 {
                                     case "Time":
-                                        EnConfig.Time = Convert.ToInt32(infoContain);
+                                        int xt = Convert.ToInt32(infoContain);
+                                        if (xt >= 1 && xt < 100 * 60 * 60)
+                                            EnConfig.Time = xt;
                                         break;
                                     case "Lang":
                                         EnConfig.Lang = infoContain;
+                                        break;
+                                    case "Speed":
+                                        int xv = Convert.ToInt32(infoContain);
+                                        if (xv >= 1 && xv <= 10 * 1000)
+                                            EnConfig.Time = xv;
                                         break;
                                 }
                                 break;
                         }
                         if (config.EndOfStream)
                             return;
-                        info = Container(config.ReadLine());
+                        info = config.ReadLine();
                     }
                 }
             }
