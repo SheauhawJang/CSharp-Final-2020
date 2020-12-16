@@ -71,6 +71,15 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Begin {
+            get {
+                return ResourceManager.GetStream("Begin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
         internal static byte[] BlackCursor {
@@ -101,6 +110,15 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Ending {
+            get {
+                return ResourceManager.GetStream("Ending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap Head_I {
@@ -117,6 +135,24 @@ namespace CSharp_Final.Properties {
             get {
                 object obj = ResourceManager.GetObject("Head_II", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream SetPiece {
+            get {
+                return ResourceManager.GetStream("SetPiece", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Welcome {
+            get {
+                return ResourceManager.GetStream("Welcome", resourceCulture);
             }
         }
         
@@ -147,6 +183,15 @@ namespace CSharp_Final.Properties {
             get {
                 object obj = ResourceManager.GetObject("WhitePool", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream WinnerPiece {
+            get {
+                return ResourceManager.GetStream("WinnerPiece", resourceCulture);
             }
         }
     }

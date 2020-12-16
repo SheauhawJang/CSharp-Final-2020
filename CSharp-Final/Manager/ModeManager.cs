@@ -18,6 +18,10 @@ namespace CSharp_Final.Manager
         public static bool Ability { get; set; } = false;
         public static bool Replay { get; set; } = false;
         static Control area;
+        public static Cursor CursorBlack { get; } =
+            new Cursor(new MemoryStream(Resources.BlackCursor));
+        public static Cursor CursorWhite { get; } =
+            new Cursor(new MemoryStream(Resources.WhiteCursor));
         public static Control Area
         {
             private get => area;
@@ -31,9 +35,9 @@ namespace CSharp_Final.Manager
             if (!Ability)
                 area.Cursor = Cursors.Arrow;
             else if (x == 0)
-                area.Cursor = Config.CursorBlack;
+                area.Cursor = CursorBlack;
             else if (x == 1)
-                area.Cursor = Config.CursorWrite;
+                area.Cursor = CursorWhite;
             else
                 area.Cursor = Cursors.Hand;
         }
@@ -91,10 +95,6 @@ namespace CSharp_Final.Manager
         public static Player PlayerI { get; set; } = new Player(defname[0]);
         public static Player PlayerII { get; set; } = new Player(defname[1]);
         public static EConfig EnConfig { get; set; } = new EConfig();
-        public static Cursor CursorWrite { get; } = 
-            new Cursor(new MemoryStream(Resources.WhiteCursor));
-        public static Cursor CursorBlack { get; } =
-            new Cursor(new MemoryStream(Resources.BlackCursor));
         static string Container(string s)
         {
             for (int i = 0; i < s.Length; ++i)

@@ -180,6 +180,7 @@ namespace CSharp_Final.Manager
             PlayAccess.Replay = true;
             Piece.Clear();
             Clock.Start();
+            BGM.Play(1);
         }
         public static void ReplayNext(Control sender, Timer timer)
         {

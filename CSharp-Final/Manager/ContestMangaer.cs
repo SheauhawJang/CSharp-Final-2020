@@ -221,6 +221,7 @@ namespace CSharp_Final.Manager
             else
                 PlayAccess.Replay = false;
             MessageBox.Show(boxtext, Localisation.GameOver, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            BGM.Play(0);
         }
 
         public static void StartGame()
@@ -229,6 +230,7 @@ namespace CSharp_Final.Manager
             PlayAccess.Ability = true;
             PlayAccess.UpdateCursor(0);
             Clock.Start();
+            BGM.Play(1);
         }
     }
     public static class Piece
@@ -313,6 +315,7 @@ namespace CSharp_Final.Manager
                 WinFather = InfoSet.ConnectAt(loc).ConnectFather[way];
                 WinMother = InfoSet.ConnectAt(loc).ConnectMother[way];
                 DrawWinLine(sender);
+                SoundE.WinnerPiece.Play();
                 if (!PlayAccess.Replay)
                 {
                     WinningInfo info = new WinningInfo { Winner = CurrectColorID ^ 1 };
@@ -339,9 +342,12 @@ namespace CSharp_Final.Manager
                     History.Add(loc);
                     InfoSet.UpdateConnect(); 
                     PlayAccess.UpdateCursor(CurrectColorID);
+                    SoundE.SetPiece.Play();
                     for (int i = 0; i < 4; ++i)
                         if (InfoSet.ConnectAt(loc).Connect[i] >= 5)
                             return (i << 1) | 1;
+                    if (CheckExciting(loc))
+                        BGM.Play(2);
                     return 0;
                 case -33:
                     BanedInfo += Localisation.BanT33; break;
@@ -366,6 +372,35 @@ namespace CSharp_Final.Manager
                     return ban;
             }
             return 1;
+        }
+        public static bool CheckExciting(Location loc)
+        {
+            PieceInfo nowPiece = InfoSet.PieceAt(loc);
+            ConnectInfo nowConnect = InfoSet.ConnectAt(loc);
+            for (int i = 0; i < 4; ++i)
+                if (nowConnect.Connect[i] == 5)
+                    return false;
+            for (int i = 0; i < 4; ++i)
+            {
+                Manhattan off = ConnectInfo.ConnectWay[i];
+                Location[] parentP = new Location[2];
+                parentP[0] = nowConnect.ConnectFather[i].GetOffset(-off);
+                parentP[1] = nowConnect.ConnectFather[i].GetOffset(off * nowConnect.Connect[i]);
+                int alive = 0;
+                for (int k = 0; k < 2; ++k)
+                    if (InfoSet.AliveAt(parentP[k]))
+                    {
+                        ++alive;
+                        Manhattan nowoff = off * (k == 0 ? -1 : 1);
+                        Location island = parentP[k].GetOffset(nowoff);
+                        if (island.InRange && !InfoSet.PieceAt(island).Empty
+                            && InfoSet.PieceAt(island).Color == nowPiece.Color)
+                            if (InfoSet.ConnectAt(island).Connect[i] + nowConnect.Connect[i] == 4)
+                                return true;
+                    }
+                if (nowConnect.Connect[i] == 4 && alive >= 1) return true;
+            }
+            return false;
         }
         static int CheckPieceRule(Location loc)
         {

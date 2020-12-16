@@ -6,4 +6,4 @@ PlayerII :
 	Avatar = &
 Environment :
 	Time = &3600
-	Lang = &ja-JP
+	Lang = &zh-CN

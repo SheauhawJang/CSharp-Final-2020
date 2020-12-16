@@ -109,5 +109,11 @@ namespace CSharp_Final
                 PlayerIAvatarText : PlayerIIAvatarText;
             text.Clear();
         }
+
+        private void ConfigForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("???", "?", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                e.Cancel = true;
+        }
     }
 }

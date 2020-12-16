@@ -41,8 +41,10 @@ namespace CSharp_Final
             this.label1 = new System.Windows.Forms.Label();
             this.EnvironmentGroup = new System.Windows.Forms.GroupBox();
             this.LangCombo = new System.Windows.Forms.ComboBox();
+            this.ReplaySpeedUpdown = new System.Windows.Forms.NumericUpDown();
             this.TimerLimitUpdown = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.PlayerIIGroup = new System.Windows.Forms.GroupBox();
             this.ClearIIAvatarButton = new System.Windows.Forms.Button();
@@ -58,15 +60,13 @@ namespace CSharp_Final
             this.SubmitButton = new System.Windows.Forms.Button();
             this.AvatarOpenDialog = new System.Windows.Forms.OpenFileDialog();
             this.CancelButton = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.ReplaySpeedUpdown = new System.Windows.Forms.NumericUpDown();
             this.PlayerIGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIAvatarPicture)).BeginInit();
             this.EnvironmentGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpdown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimerLimitUpdown)).BeginInit();
             this.PlayerIIGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIIAvatarPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpdown)).BeginInit();
             this.SuspendLayout();
             // 
             // PlayerIGroup
@@ -197,6 +197,28 @@ namespace CSharp_Final
             this.LangCombo.Size = new System.Drawing.Size(180, 20);
             this.LangCombo.TabIndex = 2;
             // 
+            // ReplaySpeedUpdown
+            // 
+            this.ReplaySpeedUpdown.Location = new System.Drawing.Point(9, 140);
+            this.ReplaySpeedUpdown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.ReplaySpeedUpdown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ReplaySpeedUpdown.Name = "ReplaySpeedUpdown";
+            this.ReplaySpeedUpdown.Size = new System.Drawing.Size(180, 21);
+            this.ReplaySpeedUpdown.TabIndex = 1;
+            this.ReplaySpeedUpdown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // TimerLimitUpdown
             // 
             this.TimerLimitUpdown.Location = new System.Drawing.Point(9, 40);
@@ -227,6 +249,15 @@ namespace CSharp_Final
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 0;
             this.label6.Text = "语言";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 121);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 12);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "回放延迟(ms)";
             // 
             // label5
             // 
@@ -373,37 +404,6 @@ namespace CSharp_Final
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(7, 121);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(77, 12);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "回放延迟(ms)";
-            // 
-            // ReplaySpeedUpdown
-            // 
-            this.ReplaySpeedUpdown.Location = new System.Drawing.Point(9, 140);
-            this.ReplaySpeedUpdown.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.ReplaySpeedUpdown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.ReplaySpeedUpdown.Name = "ReplaySpeedUpdown";
-            this.ReplaySpeedUpdown.Size = new System.Drawing.Size(180, 21);
-            this.ReplaySpeedUpdown.TabIndex = 1;
-            this.ReplaySpeedUpdown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // ConfigForm
             // 
             this.AcceptButton = this.SubmitButton;
@@ -418,17 +418,18 @@ namespace CSharp_Final
             this.Controls.Add(this.PlayerIGroup);
             this.Name = "ConfigForm";
             this.Text = "Config";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigForm_FormClosing);
             this.Load += new System.EventHandler(this.ClearConfigButton_Click);
             this.PlayerIGroup.ResumeLayout(false);
             this.PlayerIGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIAvatarPicture)).EndInit();
             this.EnvironmentGroup.ResumeLayout(false);
             this.EnvironmentGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpdown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimerLimitUpdown)).EndInit();
             this.PlayerIIGroup.ResumeLayout(false);
             this.PlayerIIGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIIAvatarPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpdown)).EndInit();
             this.ResumeLayout(false);
 
         }

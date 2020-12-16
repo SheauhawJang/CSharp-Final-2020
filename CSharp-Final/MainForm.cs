@@ -129,6 +129,9 @@ namespace CSharp_Final
             Clock.SetTimer(TimerI, TimerII);
             Clock.SetPanel(InfoPanelI, InfoPanelII);
             ButtonAccess.MainForm = this;
+            BGM.Initialize();
+            BGM.Welcome.Play();
+            SoundE.Initialize();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -254,6 +257,12 @@ namespace CSharp_Final
         private void ReplayTimer_Tick(object sender, EventArgs e)
         {
             Replayer.ReplayNext(BoardPanel, (Timer)sender);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("???", "?", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                e.Cancel = true;
         }
     }
 }

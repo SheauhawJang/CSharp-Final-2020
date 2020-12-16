@@ -433,6 +433,7 @@
             this.Controls.Add(this.MenuStrip);
             this.Name = "MainForm";
             this.Text = "连珠五子棋对战程序";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.InfoPanelI.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ColorPictureI)).EndInit();
