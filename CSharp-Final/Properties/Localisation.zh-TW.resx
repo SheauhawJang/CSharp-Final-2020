@@ -151,8 +151,59 @@
   <data name="ButtonFontSize" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ConfigAIPing" xml:space="preserve">
+    <value>AI 延遲(ms)</value>
+  </data>
+  <data name="ConfigAvator" xml:space="preserve">
+    <value>頭像</value>
+  </data>
+  <data name="ConfigAvatorClear" xml:space="preserve">
+    <value>恢復默認</value>
+  </data>
+  <data name="ConfigAvatorPreview" xml:space="preserve">
+    <value>頭像預覽</value>
+  </data>
+  <data name="ConfigCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="ConfigEnvirnment" xml:space="preserve">
+    <value>環境變量</value>
+  </data>
   <data name="ConfigGame" xml:space="preserve">
     <value>對局配置</value>
+  </data>
+  <data name="ConfigLanguage" xml:space="preserve">
+    <value>語言</value>
+  </data>
+  <data name="ConfigMusic" xml:space="preserve">
+    <value>音樂</value>
+  </data>
+  <data name="ConfigMusicAndSound" xml:space="preserve">
+    <value>音樂與音效</value>
+  </data>
+  <data name="ConfigName" xml:space="preserve">
+    <value>姓名</value>
+  </data>
+  <data name="ConfigRecordPing" xml:space="preserve">
+    <value>回放延遲(ms)</value>
+  </data>
+  <data name="ConfigSound" xml:space="preserve">
+    <value>音效</value>
+  </data>
+  <data name="ConfigSubmit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="ConfigTimeLimit" xml:space="preserve">
+    <value>時間限制(s)</value>
+  </data>
+  <data name="ConfigUndo" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="ExitInfo" xml:space="preserve">
+    <value>退出提示</value>
+  </data>
+  <data name="ExitInfoText" xml:space="preserve">
+    <value>您確定要退出嗎？</value>
   </data>
   <data name="GameMenu" xml:space="preserve">
     <value>對局(&amp;P)</value>

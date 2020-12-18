@@ -53,6 +53,22 @@ namespace CSharp_Final
                     LangCombo.SelectedIndex = 0;
                     break;
             }
+
+            label1.Text = label4.Text = Localisation.ConfigName;
+            label2.Text = label3.Text = Localisation.ConfigAvator;
+            label7.Text = label8.Text = Localisation.ConfigAvatorPreview;
+            ClearIAvatarButton.Text = ClearIIAvatarButton.Text = Localisation.ConfigAvatorClear;
+            label5.Text = Localisation.ConfigTimeLimit;
+            label6.Text = Localisation.ConfigLanguage;
+            label11.Text = Localisation.ConfigRecordPing;
+            label12.Text = Localisation.ConfigMusicAndSound;
+            BGMCheck.Text = Localisation.ConfigMusic;
+            SoundCheck.Text = Localisation.ConfigSound;
+            label13.Text = Localisation.ConfigAIPing;
+            EnvironmentGroup.Text = Localisation.ConfigEnvirnment;
+            SubmitButton.Text = Localisation.ConfigSubmit;
+            ClearButton.Text = Localisation.ConfigUndo;
+            CancelButton.Text = Localisation.ConfigCancel;
         }
 
         private void PlayerAvatarText_TextChanged(object sender, EventArgs e)

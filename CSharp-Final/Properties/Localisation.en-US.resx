@@ -151,8 +151,59 @@ Reason:</value>
   <data name="ButtonFontSize" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ConfigAIPing" xml:space="preserve">
+    <value>AI Ping /ms</value>
+  </data>
+  <data name="ConfigAvator" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="ConfigAvatorClear" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="ConfigAvatorPreview" xml:space="preserve">
+    <value>Avatar Preview</value>
+  </data>
+  <data name="ConfigCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ConfigEnvirnment" xml:space="preserve">
+    <value>Environment</value>
+  </data>
   <data name="ConfigGame" xml:space="preserve">
     <value>Config</value>
+  </data>
+  <data name="ConfigLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="ConfigMusic" xml:space="preserve">
+    <value>Music</value>
+  </data>
+  <data name="ConfigMusicAndSound" xml:space="preserve">
+    <value>Music and Sound</value>
+  </data>
+  <data name="ConfigName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ConfigRecordPing" xml:space="preserve">
+    <value>Record Ping /ms</value>
+  </data>
+  <data name="ConfigSound" xml:space="preserve">
+    <value>Sound</value>
+  </data>
+  <data name="ConfigSubmit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="ConfigTimeLimit" xml:space="preserve">
+    <value>Time Limit /s</value>
+  </data>
+  <data name="ConfigUndo" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="ExitInfo" xml:space="preserve">
+    <value>Quit Notice</value>
+  </data>
+  <data name="ExitInfoText" xml:space="preserve">
+    <value>Are you sure you want to quit?</value>
   </data>
   <data name="GameMenu" xml:space="preserve">
     <value>Game(&amp;P)</value>

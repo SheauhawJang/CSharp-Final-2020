@@ -161,11 +161,164 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 AI 延迟(ms) 的本地化字符串。
+        /// </summary>
+        public static string ConfigAIPing {
+            get {
+                return ResourceManager.GetString("ConfigAIPing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 头像 的本地化字符串。
+        /// </summary>
+        public static string ConfigAvator {
+            get {
+                return ResourceManager.GetString("ConfigAvator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 恢复默认 的本地化字符串。
+        /// </summary>
+        public static string ConfigAvatorClear {
+            get {
+                return ResourceManager.GetString("ConfigAvatorClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 头像预览 的本地化字符串。
+        /// </summary>
+        public static string ConfigAvatorPreview {
+            get {
+                return ResourceManager.GetString("ConfigAvatorPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 取消 的本地化字符串。
+        /// </summary>
+        public static string ConfigCancel {
+            get {
+                return ResourceManager.GetString("ConfigCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 环境变量 的本地化字符串。
+        /// </summary>
+        public static string ConfigEnvirnment {
+            get {
+                return ResourceManager.GetString("ConfigEnvirnment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 对局配置 的本地化字符串。
         /// </summary>
         public static string ConfigGame {
             get {
                 return ResourceManager.GetString("ConfigGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 语言 的本地化字符串。
+        /// </summary>
+        public static string ConfigLanguage {
+            get {
+                return ResourceManager.GetString("ConfigLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 音乐 的本地化字符串。
+        /// </summary>
+        public static string ConfigMusic {
+            get {
+                return ResourceManager.GetString("ConfigMusic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 音乐与音效 的本地化字符串。
+        /// </summary>
+        public static string ConfigMusicAndSound {
+            get {
+                return ResourceManager.GetString("ConfigMusicAndSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 姓名 的本地化字符串。
+        /// </summary>
+        public static string ConfigName {
+            get {
+                return ResourceManager.GetString("ConfigName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 回放延迟(ms) 的本地化字符串。
+        /// </summary>
+        public static string ConfigRecordPing {
+            get {
+                return ResourceManager.GetString("ConfigRecordPing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 音效 的本地化字符串。
+        /// </summary>
+        public static string ConfigSound {
+            get {
+                return ResourceManager.GetString("ConfigSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提交 的本地化字符串。
+        /// </summary>
+        public static string ConfigSubmit {
+            get {
+                return ResourceManager.GetString("ConfigSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 时间限制(s) 的本地化字符串。
+        /// </summary>
+        public static string ConfigTimeLimit {
+            get {
+                return ResourceManager.GetString("ConfigTimeLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 重置 的本地化字符串。
+        /// </summary>
+        public static string ConfigUndo {
+            get {
+                return ResourceManager.GetString("ConfigUndo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 退出提示 的本地化字符串。
+        /// </summary>
+        public static string ExitInfo {
+            get {
+                return ResourceManager.GetString("ExitInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 您确定要退出吗？ 的本地化字符串。
+        /// </summary>
+        public static string ExitInfoText {
+            get {
+                return ResourceManager.GetString("ExitInfoText", resourceCulture);
             }
         }
         

@@ -310,9 +310,8 @@ namespace CSharp_Final
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("您真的要退出吗？", "退出提示", 
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) 
-                == DialogResult.Cancel)
+            if (MessageBox.Show(Localisation.ExitInfoText, Localisation.ExitInfo, 
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                 e.Cancel = true;
         }
 
