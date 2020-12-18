@@ -53,7 +53,7 @@ namespace CSharp_Final
                     LangCombo.SelectedIndex = 0;
                     break;
             }
-
+            Text = Localisation.ConfigGame;
             label1.Text = label4.Text = Localisation.ConfigName;
             label2.Text = label3.Text = Localisation.ConfigAvator;
             label7.Text = label8.Text = Localisation.ConfigAvatorPreview;
@@ -69,6 +69,7 @@ namespace CSharp_Final
             SubmitButton.Text = Localisation.ConfigSubmit;
             ClearButton.Text = Localisation.ConfigUndo;
             CancelButton.Text = Localisation.ConfigCancel;
+            PlayerIAvatorOpenButton.Text = PlayerIIAvatorOpenButton.Text = Localisation.ConfigOpen;
         }
 
         private void PlayerAvatarText_TextChanged(object sender, EventArgs e)

@@ -184,6 +184,9 @@ Reason:</value>
   <data name="ConfigName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="ConfigOpen" xml:space="preserve">
+    <value>View</value>
+  </data>
   <data name="ConfigRecordPing" xml:space="preserve">
     <value>Record Ping /ms</value>
   </data>
