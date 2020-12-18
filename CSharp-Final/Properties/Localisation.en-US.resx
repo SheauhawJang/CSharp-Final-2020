@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutMenu" xml:space="preserve">
+    <value>&amp;About</value>
+  </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>Renju Gomoku Application</value>
   </data>
@@ -151,8 +154,18 @@ Reason:</value>
   <data name="ConfigGame" xml:space="preserve">
     <value>Config</value>
   </data>
+  <data name="GameMenu" xml:space="preserve">
+    <value>Game(&amp;P)</value>
+  </data>
   <data name="GameOver" xml:space="preserve">
     <value>GameOver</value>
+  </data>
+  <data name="GlobalMenu" xml:space="preserve">
+    <value>&amp;Global</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo.en-US.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PeaceAsk" xml:space="preserve">
     <value> request draw!</value>
@@ -181,6 +194,9 @@ Reason:</value>
   <data name="ReasonNotice" xml:space="preserve">
     <value>Reason</value>
   </data>
+  <data name="RecordEnd" xml:space="preserve">
+    <value>Record ended!</value>
+  </data>
   <data name="RecordError" xml:space="preserve">
     <value>Record error!</value>
   </data>
@@ -190,8 +206,14 @@ Reason:</value>
   <data name="RecordGame" xml:space="preserve">
     <value>Record</value>
   </data>
+  <data name="RecordPause" xml:space="preserve">
+    <value>Pause/Continue replay</value>
+  </data>
   <data name="RecordSaveNotice" xml:space="preserve">
     <value>Record has saved to </value>
+  </data>
+  <data name="RecordStop" xml:space="preserve">
+    <value>Stop replay</value>
   </data>
   <data name="SmallButtonFont" xml:space="preserve">
     <value>Arial</value>

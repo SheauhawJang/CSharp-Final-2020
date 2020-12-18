@@ -60,6 +60,8 @@ namespace CSharp_Final
             // Points
             for (int i = 0; i < Piece.History.Count; ++i)
                 Piece.DrawPiece((Panel)sender, Piece.History[i], i);
+            if (Piece.History.Count > 0)
+                Piece.DrawPiece((Panel)sender, Piece.History.Last(), Piece.History.Count - 1, true);
             // WinLine
             Piece.DrawWinLine((Panel)sender);
             // Tips
@@ -70,10 +72,36 @@ namespace CSharp_Final
         {
             if (e.Button != MouseButtons.Left) return;
             if (!PlayAccess.Ability) return;
+
             Location loc = Manager.Location.GetFromPoint(e.Location);
             Piece.SetCheckPiece(loc, (Panel)sender);
         }
-
+        private void AITimer_Tick(object sender, EventArgs e)
+        {
+            Player p = Piece.CurrectColorId == 0 ? Config.PlayerI : Config.PlayerII;
+            if (p.AI > 0)
+            {
+                try
+                {
+                    if (BackCalculate.NowThread == null)
+                    {
+                        BackCalculate.Saver = new AnswerSaver();
+                        BackCalculate.NowThread = new System.Threading.Thread(BackCalculate.Saver.Get);
+                        BackCalculate.NowThread.IsBackground = true;
+                        BackCalculate.NowThread.Start();
+                    }
+                    else if (!BackCalculate.NowThread.IsAlive)
+                    {
+                        Piece.SetCheckPiece(BackCalculate.Saver.Ans, BoardPanel, true);
+                        BackCalculate.NowThread = null;
+                    }
+                }
+                catch
+                {
+                    SurrenderPiece.Surrender(Piece.CurrectColorId);
+                }
+            }
+        }
         private void BoardPanel_Layout(object sender, LayoutEventArgs e)
         {
             PlayAccess.Area = (Panel)sender;
@@ -100,6 +128,7 @@ namespace CSharp_Final
         {
             Localisation.Culture = new CultureInfo(Config.EnConfig.Lang);
             ReplayTimer.Interval = Config.EnConfig.Speed;
+            AITimer.Interval = Config.EnConfig.AISpeed;
             Text = Localisation.ApplicationName;
             Font buttonfont = new Font(Localisation.SmallButtonFont,
                 Convert.ToSingle(Localisation.SmallButtonFontSize));
@@ -113,6 +142,14 @@ namespace CSharp_Final
                 (Config.PlayerI.Avatar, 0);
             HeadPictureII.BackgroundImage = Avatar.GetBitmap
                 (Config.PlayerII.Avatar, 1);
+            ComputerPictureI.BackgroundImage = Avatar.GetBitmap
+                (Config.PlayerI.Avatar, 0);
+            ComputerPictureII.BackgroundImage = Avatar.GetBitmap
+                (Config.PlayerII.Avatar, 1);
+            ComputerPictureI.Image = Config.PlayerI.AI == 0 ? Resources.computer_unused
+                : Config.PlayerI.AI == 1 ?  Resources.computer : Resources.computer_super;
+            ComputerPictureII.Image = Config.PlayerII.AI == 0 ? Resources.computer_unused
+                : Config.PlayerII.AI == 1 ? Resources.computer : Resources.computer_super;
 
             开始对局ToolStripMenuItem.Text = Localisation.StartGame;
             读取棋谱ToolStripMenuItem.Text = Localisation.RecordGame;
@@ -121,22 +158,33 @@ namespace CSharp_Final
             认输ToolStripMenuItem.Text = Localisation.Surrender;
             请求和棋ToolStripMenuItem.Text = Localisation.PeaceBF;
             禁手点提示ToolStripMenuItem.Text = Localisation.BantipF;
+            暂停继续播放ToolStripMenuItem.Text = Localisation.RecordPause;
+            中止播放ToolStripMenuItem.Text = Localisation.RecordStop;
+            全局ToolStripMenuItem.Text = Localisation.GlobalMenu;
+            对局ToolStripMenuItem.Text = Localisation.GameMenu;
+            关于ToolStripMenuItem.Text = Localisation.AboutMenu;
+
+            BGM.Play();
+
+            LogoPicture.BackgroundImage = Localisation.logo;
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
             Config.GetConfig();
             MainForm_Load_Control();
             Clock.SetTimer(TimerI, TimerII);
+            Clock.SetAITimer(AITimer);
             Clock.SetPanel(InfoPanelI, InfoPanelII);
             ButtonAccess.MainForm = this;
             BGM.Initialize();
-            BGM.Welcome.Play();
+            BGM.Play(0);
             SoundE.Initialize();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            Clock.Tick(sender == TimerI ? 0 : 1);
+            int id = sender == TimerI ? 0 : 1;
+            Clock.Tick(id);
             ClockPanelI.Invalidate();
             ClockPanelII.Invalidate();
         }
@@ -212,7 +260,7 @@ namespace CSharp_Final
         }
         private void SurrenderButton_Click(object sender, EventArgs e)
         {
-            SurrenderPiece.Surrender(Piece.CurrectColorID ^ 1);
+            SurrenderPiece.Surrender(Piece.CurrectColorId ^ 1);
         }
 
         private void NamePanel_Paint(object sender, PaintEventArgs e)
@@ -248,6 +296,7 @@ namespace CSharp_Final
                     Replayer.ReplayStart(Record.InputRecord(OpenRecordDialog.FileName));
                     ReplayTimer.Start();
                     ButtonAccess.SetStartButton(false);
+                    ButtonAccess.SetReplayButton(true);
                     Refresh();
                 }
                 catch { }
@@ -261,8 +310,41 @@ namespace CSharp_Final
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("???", "?", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (MessageBox.Show("您真的要退出吗？", "退出提示", 
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) 
+                == DialogResult.Cancel)
                 e.Cancel = true;
+        }
+
+        private void ComputerPicture_Click(object sender, EventArgs e)
+        {
+            PictureBox box = (PictureBox)sender;
+            int player = box == ComputerPictureI ? 0 : 1;
+            Player pcon = player == 0 ? Config.PlayerI : Config.PlayerII;
+            pcon.AI = (pcon.AI + 1) % 3;
+            if (pcon.AI == 0)
+                box.Image = Resources.computer_unused;
+            else if (pcon.AI == 1)
+                box.Image = Resources.computer;
+            else
+                box.Image = Resources.computer_super;
+        }
+
+        private void BoardPanel_DoubleClick(object sender, EventArgs e)
+        {
+            if (PlayAccess.Replay)
+                ReplayTimer.Enabled = !ReplayTimer.Enabled;
+        }
+
+        private void 关于AToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutForm().Show();
+        }
+
+        private void 中止播放ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReplayTimer.Stop();
+            Announcement.Announce(new WinningInfo() { Winner = -2 });
         }
     }
 }

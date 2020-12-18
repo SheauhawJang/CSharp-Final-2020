@@ -31,8 +31,13 @@ namespace CSharp_Final
             PlayerIIAvatarText.Text = Config.PlayerII.Avatar;
             PlayerIIAvatarPicture.BackgroundImage = 
                 Avatar.GetBitmap(Config.PlayerII.Avatar, 1);
-            TimerLimitUpdown.Value = Config.EnConfig.Time;
-            ReplaySpeedUpdown.Value = Config.EnConfig.Speed;
+            TimerLimitUpDown.Value = Config.EnConfig.Time;
+            ReplaySpeedUpDown.Value = Config.EnConfig.Speed;
+            AISpeedUpDown.Value = Config.EnConfig.AISpeed;
+            if (Config.EnConfig.Music)
+                BGMCheck.Checked = true;
+            if (Config.EnConfig.Sound)
+                SoundCheck.Checked = true;
             switch (Config.EnConfig.Lang)
             {
                 case "zh-CN":
@@ -66,8 +71,11 @@ namespace CSharp_Final
             Config.PlayerI.Avatar = PlayerIAvatarText.Text;
             Config.PlayerII.Name = PlayerIINameText.Text;
             Config.PlayerII.Avatar = PlayerIIAvatarText.Text;
-            Config.EnConfig.Time = (int)TimerLimitUpdown.Value;
-            Config.EnConfig.Speed = (int)ReplaySpeedUpdown.Value;
+            Config.EnConfig.Time = (int)TimerLimitUpDown.Value;
+            Config.EnConfig.Speed = (int)ReplaySpeedUpDown.Value;
+            Config.EnConfig.AISpeed = (int)AISpeedUpDown.Value;
+            Config.EnConfig.Music = BGMCheck.Checked;
+            Config.EnConfig.Sound = SoundCheck.Checked;
             switch (LangCombo.SelectedIndex)
             {
                 case 1:
@@ -112,8 +120,7 @@ namespace CSharp_Final
 
         private void ConfigForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("???", "?", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
-                e.Cancel = true;
+
         }
     }
 }

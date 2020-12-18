@@ -1,0 +1,13 @@
+PlayerI :
+	Name = &Sheauhaw Jang
+	Avatar = &
+PlayerII :
+	Name = &KON Automaton
+	Avatar = &
+Environment :
+	Time = &3600
+	Lang = &ja-JP
+	Speed = &300
+	AI = &300
+	Music = &1
+	Sound = &1

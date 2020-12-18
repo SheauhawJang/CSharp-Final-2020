@@ -54,6 +54,8 @@ namespace CSharp_Final.Manager
         {
             mainForm.Controls["StartButton"].Enabled = access;
             mainForm.Controls["RecordButton"].Enabled = access;
+            mainForm.Controls["ComputerPictureI"].Enabled = access;
+            mainForm.Controls["ComputerPictureII"].Enabled = access;
             mainForm.开始对局ToolStripMenuItem.Enabled = access;
             mainForm.读取棋谱ToolStripMenuItem.Enabled = access;
         }
@@ -68,10 +70,15 @@ namespace CSharp_Final.Manager
             mainForm.认输ToolStripMenuItem.Enabled = access;
             mainForm.禁手点提示ToolStripMenuItem.Enabled = access;
         }
+        public static void SetReplayButton(bool access)
+        {
+            mainForm.暂停继续播放ToolStripMenuItem.Enabled = access;
+            mainForm.中止播放ToolStripMenuItem.Enabled = access;
+        }
     }
     public class Player
     {
-        public bool AI { get; set; }
+        public int AI { get; set; } = 0;
         public string Name { get; set; }
         public string Avatar { get; set; }
 
@@ -86,6 +93,11 @@ namespace CSharp_Final.Manager
         public int Time { get; set; } = 3600;
         public string Lang { get; set; } = "zh-CN";
         public int Speed { get; set; } = 300;
+        public int AISpeed { get; set; } = 300;
+
+        public bool Music { get; set; } = true;
+        public bool Sound { get; set; } = true;
+
     }
 
     public static class Config
@@ -196,7 +208,18 @@ namespace CSharp_Final.Manager
                                     case "Speed":
                                         int xv = Convert.ToInt32(infoContain);
                                         if (xv >= 1 && xv <= 10 * 1000)
-                                            EnConfig.Time = xv;
+                                            EnConfig.Speed = xv;
+                                        break;
+                                    case "AI":
+                                        int xi = Convert.ToInt32(infoContain);
+                                        if (xi >= 1 && xi <= 10 * 1000)
+                                            EnConfig.AISpeed = xi;
+                                        break;
+                                    case "Music":
+                                        EnConfig.Music = infoContain == "1";
+                                        break;
+                                    case "Sound":
+                                        EnConfig.Sound = infoContain == "1";
                                         break;
                                 }
                                 break;
@@ -228,6 +251,10 @@ namespace CSharp_Final.Manager
             config.WriteLine("Environment :");
             config.WriteLine("\tTime = &{0}", EnConfig.Time);
             config.WriteLine("\tLang = &{0}", EnConfig.Lang);
+            config.WriteLine("\tSpeed = &{0}", EnConfig.Speed);
+            config.WriteLine("\tAI = &{0}", EnConfig.AISpeed);
+            config.WriteLine("\tMusic = &{0}", EnConfig.Music ? 1 : 0);
+            config.WriteLine("\tSound = &{0}", EnConfig.Sound ? 1 : 0);
             config.Close();
         }
     }

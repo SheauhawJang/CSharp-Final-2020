@@ -15,9 +15,10 @@ namespace CSharp_Final.Manager
         {
             if (Piece.History.Count == 0)
                 return;
-            string name = Piece.CurrectColorID == 1 ?
+            string name = Piece.CurrectColorId == 1 ?
                 Localisation.PlayerBlack : Localisation.PlayerWhite;
-            if (MessageBox.Show(string.Format("{0}{1}",
+            Player p = Piece.CurrectColorId == 0 ? Config.PlayerI : Config.PlayerII;
+            if (p.AI > 0 || MessageBox.Show(string.Format("{0}{1}",
                 name, Localisation.UndoAsk),
                 Localisation.UndoInfo, MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -51,9 +52,10 @@ namespace CSharp_Final.Manager
     {
         public static void Peace()
         {
-            string name = Piece.CurrectColorID == 0 ?
+            string name = Piece.CurrectColorId == 0 ?
                 Localisation.PlayerBlack : Localisation.PlayerWhite;
-            if (MessageBox.Show(string.Format("{0}{1}",
+            Player p = Piece.CurrectColorId == 1 ? Config.PlayerI : Config.PlayerII;
+            if (p.AI > 0 || MessageBox.Show(string.Format("{0}{1}",
                 name, Localisation.PeaceAsk),
                 Localisation.PeaceInfo, MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)

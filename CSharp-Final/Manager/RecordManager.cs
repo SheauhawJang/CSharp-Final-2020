@@ -184,13 +184,13 @@ namespace CSharp_Final.Manager
         }
         public static void ReplayNext(Control sender, Timer timer)
         {
-            if (Piece.CurrectID == History.Count)
+            if (Piece.CurrectId == History.Count)
             {
                 timer.Stop();
                 Announcement.Announce(Result);
                 return;
             }
-            Piece.SetCheckPiece(History[Piece.CurrectID], sender);
+            Piece.SetCheckPiece(History[Piece.CurrectId], sender);
         }
     }
 }

@@ -61,6 +61,15 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 关于(&amp;A) 的本地化字符串。
+        /// </summary>
+        public static string AboutMenu {
+            get {
+                return ResourceManager.GetString("AboutMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 连珠五子棋对战程序 的本地化字符串。
         /// </summary>
         public static string ApplicationName {
@@ -161,11 +170,39 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 对局(&amp;P) 的本地化字符串。
+        /// </summary>
+        public static string GameMenu {
+            get {
+                return ResourceManager.GetString("GameMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 游戏结束 的本地化字符串。
         /// </summary>
         public static string GameOver {
             get {
                 return ResourceManager.GetString("GameOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 全局(&amp;G) 的本地化字符串。
+        /// </summary>
+        public static string GlobalMenu {
+            get {
+                return ResourceManager.GetString("GlobalMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap logo {
+            get {
+                object obj = ResourceManager.GetObject("logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -251,6 +288,15 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 回放结束！ 的本地化字符串。
+        /// </summary>
+        public static string RecordEnd {
+            get {
+                return ResourceManager.GetString("RecordEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 棋谱错误 的本地化字符串。
         /// </summary>
         public static string RecordError {
@@ -278,11 +324,29 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
+        ///   查找类似 暂停/恢复播放 的本地化字符串。
+        /// </summary>
+        public static string RecordPause {
+            get {
+                return ResourceManager.GetString("RecordPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 棋谱已保存至 的本地化字符串。
         /// </summary>
         public static string RecordSaveNotice {
             get {
                 return ResourceManager.GetString("RecordSaveNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 中止播放 的本地化字符串。
+        /// </summary>
+        public static string RecordStop {
+            get {
+                return ResourceManager.GetString("RecordStop", resourceCulture);
             }
         }
         

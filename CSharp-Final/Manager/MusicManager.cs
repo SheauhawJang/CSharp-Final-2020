@@ -25,9 +25,8 @@ namespace CSharp_Final.Manager
         static void MediaExcitingLoop(object sender, EventArgs e)
         {
             MediaPlayer media = (MediaPlayer)sender;
-            media.Position = new TimeSpan(0);
-            Begin.Position = new TimeSpan(0);
             media.Stop();
+            Begin.Position = new TimeSpan(0);
             Begin.Play();
         }
         public static void Initialize()
@@ -48,10 +47,12 @@ namespace CSharp_Final.Manager
             if (index >= 0 && index < 3)
                 Current = index;
             for (int i = 0; i < 3; ++i)
-                if (i == Current)
+                if (i == Current && Config.EnConfig.Music)
                     Players[i].Play();
                 else
                     Players[i].Stop();
+            if (index == 2)
+                Current = 1;
         }
         public static void Stop()
         {
@@ -67,7 +68,6 @@ namespace CSharp_Final.Manager
         static void MediaLoop(object sender, EventArgs e)
         {
             MediaPlayer media = (MediaPlayer)sender;
-            media.Position = new TimeSpan(0);
             media.Stop();
         }
         public static void Initialize()
@@ -76,6 +76,18 @@ namespace CSharp_Final.Manager
             WinnerPiece.Open(new Uri("./sounds/WinnerPiece.wav", UriKind.Relative));
             SetPiece.MediaEnded += MediaLoop;
             WinnerPiece.MediaEnded += MediaLoop;
+        }
+
+        public static void PlaySetPiece()
+        {
+            if (Config.EnConfig.Sound)
+                SetPiece.Play();
+        }
+
+        public static void PlayWinnerPiece()
+        {
+            if (Config.EnConfig.Sound)
+                WinnerPiece.Play();
         }
     }
 }

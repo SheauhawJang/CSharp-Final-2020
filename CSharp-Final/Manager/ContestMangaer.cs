@@ -49,7 +49,7 @@ namespace CSharp_Final.Manager
         public static Manhattan operator -(Manhattan a) => (-1) * a;
         public int Distance { get => X + Y; }
     }
-    public struct Location
+    public struct Location : IComparable
     {
         public int X { get; private set; }
         public int Y { get; private set; }
@@ -91,23 +91,44 @@ namespace CSharp_Final.Manager
         public Point PieceCorner => GetCorner(PieceSize);
         public Rectangle PieceRectangle => GetRectangle(PieceSize);
         public Rectangle NetRectangle => GetRectangle(new Size(NetConfig.NetD, NetConfig.NetD));
+        public int CompareTo(object obj)
+        {
+            Location b = (Location)obj;
+            if (X.CompareTo(b.X) != 0)
+                return X.CompareTo(b.X);
+            if (Y.CompareTo(b.Y) != 0)
+                return Y.CompareTo(b.Y);
+            return 0;
+        }
     }
-    public class PieceInfo
+    public class PieceInfo : ICloneable
     {
         public int Id { get; set; }
         public static Color ColorFromInt(int x) => 
             (x & 1) == 0 ? Color.Black : Color.White;
-        public Color Color { get => ColorFromInt(Id); }
+
+        public object Clone() => MemberwiseClone();
+        public int ColorId => Id & 1;
+        public Color Color => ColorFromInt(Id);
         public bool Empty => Id < 0;
         public static int NullNumber => -65536;
         public PieceInfo() { Id = NullNumber; }
         public PieceInfo(int x) { Id = x; }
     }
-    public class ConnectInfo
+    public class ConnectInfo : ICloneable
     {
         public int[] Connect { get; set; } = new int[] { 0, 0, 0, 0 };
         public Location[] ConnectFather { get; set; }
             = new Location[4] { Location.Null, Location.Null, Location.Null, Location.Null };
+
+        public object Clone()
+        {
+            return new ConnectInfo
+            {
+                Connect = (int[])Connect.Clone(),
+                ConnectFather = (Location[])ConnectFather.Clone()
+            };
+        }
         public Location[] ConnectMother
         {
             get
@@ -123,21 +144,38 @@ namespace CSharp_Final.Manager
             = new Manhattan[] { new Manhattan(0, 1), new Manhattan(1, 1), 
                             new Manhattan(1, 0), new Manhattan(-1, 1) };
     }
-    public class PieceInfoSet
+    public class PieceInfoSet : ICloneable
     {
         public List<Location> History { get; set; } = new List<Location>();
         public PieceInfo[,] Pieces { get; set; } 
             = new PieceInfo[NetConfig.NetSize, NetConfig.NetSize];
         public ConnectInfo[,] Connects { get; set; } 
             = new ConnectInfo[NetConfig.NetSize, NetConfig.NetSize];
+        public object Clone()
+        {
+            PieceInfoSet nobj = new PieceInfoSet();
+            for (int i = 0; i < Pieces.GetLength(0); ++i)
+                for (int j = 0; j < Pieces.GetLength(1); ++j)
+                    nobj.Pieces[i, j] = (PieceInfo)Pieces[i, j].Clone();
+            for (int i = 0; i < Connects.GetLength(0); ++i)
+                for (int j = 0; j < Connects.GetLength(1); ++j)
+                    nobj.Connects[i, j] = (ConnectInfo)Connects[i, j].Clone();
+            foreach (Location loc in History)
+                nobj.History.Add(loc);
+            return nobj;
+        }
         public ref PieceInfo PieceAt(Location loc) => ref Pieces[loc.X, loc.Y];
         public ref ConnectInfo ConnectAt(Location loc) => ref Connects[loc.X, loc.Y];
         public bool AliveAt(Location loc) => loc.InRange && PieceAt(loc).Empty;
+        public bool AliveAt(int x, int y) => AliveAt(new Location(x, y));
         public PieceInfoSet()
         {
             for (int i = 0; i < NetConfig.NetSize; ++i)
                 for (int j = 0; j < NetConfig.NetSize; ++j)
-                     Pieces[i, j] = new PieceInfo();
+                    Pieces[i, j] = new PieceInfo();
+            for (int i = 0; i < NetConfig.NetSize; ++i)
+                for (int j = 0; j < NetConfig.NetSize; ++j)
+                    Connects[i, j] = new ConnectInfo();
         }
         public void UpdateConnect()
         {
@@ -187,7 +225,9 @@ namespace CSharp_Final.Manager
             PlayAccess.Ability = false;
             PlayAccess.UpdateCursor();
             Clock.Stop();
+            BackCalculate.NowThread = null;
             ButtonAccess.SetStartButton(true);
+            ButtonAccess.SetReplayButton(false);
             ButtonAccess.SetToolButton(false);
             List<Location> his = Piece.History;
             string boxtext = string.Format("{0}{1}\n",
@@ -195,6 +235,8 @@ namespace CSharp_Final.Manager
                 Localisation.WinNotice);
             if (info.Winner < 0)
                 boxtext = string.Format("{0}\n", Localisation.PeaceNotice);
+            if (info.Winner == -2)
+                boxtext = "";
             switch (info.WinWay)
             {
                 case "TIMEOUT":
@@ -219,7 +261,11 @@ namespace CSharp_Final.Manager
                 boxtext += string.Format("{1}{0}\n", record.FileName, Localisation.RecordSaveNotice);
             }
             else
-                PlayAccess.Replay = false;
+            {
+                PlayAccess.Replay = false; 
+                boxtext += string.Format("{0}\n", Localisation.RecordEnd);
+
+            }
             MessageBox.Show(boxtext, Localisation.GameOver, MessageBoxButtons.OK, MessageBoxIcon.Information);
             BGM.Play(0);
         }
@@ -248,8 +294,8 @@ namespace CSharp_Final.Manager
             get => InfoSet.Pieces; 
             set => InfoSet.Pieces = value; 
         }
-        public static int CurrectID => History.Count;
-        public static int CurrectColorID => CurrectID & 1;
+        public static int CurrectId => History.Count;
+        public static int CurrectColorId => CurrectId & 1;
         public static Color CurrectColor => PieceInfo.ColorFromInt(History.Count);
         public static PieceInfo GetInfo(Location loc) => Infos[loc.X, loc.Y];
         public static Location WinFather { get; private set; } = Location.Null;
@@ -259,7 +305,8 @@ namespace CSharp_Final.Manager
             InfoSet = new PieceInfoSet();
             WinFather = WinMother = Location.Null;
         }
-        public static void DrawPiece(Control sender, Location loc, int i)
+        readonly static int[,] lineD = new int[4, 2] { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+        public static void DrawPiece(Control sender, Location loc, int i, bool noti = false)
         {
             Control panel = sender;
             List<Location> tips = new List<Location>();
@@ -281,7 +328,7 @@ namespace CSharp_Final.Manager
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
             };
-            SolidBrush fontBrush = new SolidBrush(reColor);
+            SolidBrush fontBrush = new SolidBrush(noti ? Color.Red : reColor);
             g.DrawString(Convert.ToString(i + 1), font, fontBrush, rect, format);
         }
         public static void DrawWinLine(Control sender)
@@ -299,11 +346,11 @@ namespace CSharp_Final.Manager
         public static void RemovePiece(Control sender)
         {
             Location last = History.Last();
-            Clock.Swap(CurrectColorID);
+            Clock.Swap(CurrectColorId);
             InfoSet.PieceAt(last) = new PieceInfo();
             History.Remove(last);
             InfoSet.UpdateConnect();
-            PlayAccess.UpdateCursor(CurrectColorID);
+            PlayAccess.UpdateCursor(CurrectColorId);
             sender.Invalidate(last.NetRectangle);
         }
         public static void SetCheckPiece(Location loc, Control sender, bool ai = false)
@@ -315,17 +362,17 @@ namespace CSharp_Final.Manager
                 WinFather = InfoSet.ConnectAt(loc).ConnectFather[way];
                 WinMother = InfoSet.ConnectAt(loc).ConnectMother[way];
                 DrawWinLine(sender);
-                SoundE.WinnerPiece.Play();
+                SoundE.PlayWinnerPiece();
                 if (!PlayAccess.Replay)
                 {
-                    WinningInfo info = new WinningInfo { Winner = CurrectColorID ^ 1 };
+                    WinningInfo info = new WinningInfo { Winner = CurrectColorId ^ 1 };
                     Announcement.Announce(info);
                 }
             }
             else if (History.Count == NetConfig.NetSize * NetConfig.NetSize 
                 && !PlayAccess.Replay)
             {
-                WinningInfo info = new WinningInfo { WinWay = "PEACE" };
+                WinningInfo info = new WinningInfo { Winner = -1 };
                 Announcement.Announce(info);
             }
         }
@@ -336,17 +383,20 @@ namespace CSharp_Final.Manager
             switch (checkAns)
             {
                 case 1:
-                    DrawPiece(sender, loc, History.Count);
-                    Clock.Swap(CurrectColorID);
+                    Location last = History.Count > 0 ? History.Last() : Location.Null;
+                    DrawPiece(sender, loc, History.Count, true);
+                    Clock.Swap(CurrectColorId);
                     InfoSet.PieceAt(loc).Id = History.Count;
                     History.Add(loc);
                     InfoSet.UpdateConnect(); 
-                    PlayAccess.UpdateCursor(CurrectColorID);
-                    SoundE.SetPiece.Play();
+                    PlayAccess.UpdateCursor(CurrectColorId);
+                    SoundE.PlaySetPiece();
+                    if (!last.IsNull)
+                        DrawPiece(sender, last, History.Count - 2, false);
                     for (int i = 0; i < 4; ++i)
                         if (InfoSet.ConnectAt(loc).Connect[i] >= 5)
                             return (i << 1) | 1;
-                    if (CheckExciting(loc))
+                    if (CheckExciting(loc) != null)
                         BGM.Play(2);
                     return 0;
                 case -33:
@@ -361,25 +411,27 @@ namespace CSharp_Final.Manager
             MessageBox.Show(BanedInfo, BanedTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return -2;
         }
-        public static int CheckPiece(Location loc)
+        public static int CheckPiece(Location loc, PieceInfoSet p = null)
         {
             if (!loc.InRange) return 0;
             if (History.Contains(loc)) return 0;
-            if (CurrectColor == Color.Black)
+            if (CurrectColorId == 0)
             {
-                int ban = CheckPieceRule(loc);
+                int ban = CheckPieceRule(loc, p ?? Piece.InfoSet);
                 if (ban < 0)
                     return ban;
             }
             return 1;
         }
-        public static bool CheckExciting(Location loc)
+        public static Location[] CheckExciting(Location loc, PieceInfoSet InfoSet = null)
         {
+            if (InfoSet == null)
+                InfoSet = Piece.InfoSet;
             PieceInfo nowPiece = InfoSet.PieceAt(loc);
             ConnectInfo nowConnect = InfoSet.ConnectAt(loc);
             for (int i = 0; i < 4; ++i)
                 if (nowConnect.Connect[i] == 5)
-                    return false;
+                    return null;
             for (int i = 0; i < 4; ++i)
             {
                 Manhattan off = ConnectInfo.ConnectWay[i];
@@ -395,21 +447,32 @@ namespace CSharp_Final.Manager
                         Location island = parentP[k].GetOffset(nowoff);
                         if (island.InRange && !InfoSet.PieceAt(island).Empty
                             && InfoSet.PieceAt(island).Color == nowPiece.Color)
-                            if (InfoSet.ConnectAt(island).Connect[i] + nowConnect.Connect[i] == 4)
-                                return true;
+                        {
+                            --alive;
+                            int sum = InfoSet.ConnectAt(island).Connect[i] + nowConnect.Connect[i];
+                            if (sum >= 4 && (sum == 4 || nowPiece.ColorId == 1))
+                                return new Location[1] { parentP[k] };
+                        }
                     }
-                if (nowConnect.Connect[i] == 4 && alive >= 1) return true;
+                if (nowConnect.Connect[i] == 4 && alive >= 1)
+                {
+                    if (!InfoSet.AliveAt(parentP[0]) || CheckPieceRule(parentP[0], InfoSet) < 0)
+                        return new Location[1] { parentP[1] };
+                    if (!InfoSet.AliveAt(parentP[1]) || CheckPieceRule(parentP[1], InfoSet) < 0)
+                        return new Location[1] { parentP[0] };
+                    return parentP;
+                }
             }
-            return false;
+            return null;
         }
-        static int CheckPieceRule(Location loc)
+        static int CheckPieceRule(Location loc, PieceInfoSet InfoSet)
         {
-            int ban = CheckPieceRuleUnsafe(loc);
+            int ban = CheckPieceRuleUnsafe(loc, InfoSet);
             InfoSet.PieceAt(loc).Id = PieceInfo.NullNumber;
             InfoSet.UpdateConnect();
             return ban;
         }
-        static int CheckPieceRuleUnsafe(Location loc)
+        static int CheckPieceRuleUnsafe(Location loc, PieceInfoSet InfoSet)
         {
             InfoSet.PieceAt(loc).Id = History.Count;
             InfoSet.UpdateConnect();
@@ -435,21 +498,38 @@ namespace CSharp_Final.Manager
                     {
                         ++alive;
                         Manhattan nowoff = off * (k == 0 ? -1 : 1);
-                        Location island = parentP[k].GetOffset(nowoff);
+                        Manhattan renowoff = nowoff * -1;
+                        Location island = parentP[k] + nowoff;
+                        if (island.InRange && !InfoSet.PieceAt(island).Empty
+                            && InfoSet.PieceAt(island).Color == nowPiece.Color)
+                            if (InfoSet.ConnectAt(island).Connect[i] + nowConnect.Connect[i] == 4)
+                                ++yon;
                         if (island.InRange && !InfoSet.PieceAt(island).Empty
                             && InfoSet.PieceAt(island).Color == nowPiece.Color)
                         {
                             --alive;
                             int islandnum = InfoSet.ConnectAt(island).Connect[i];
                             if (islandnum + nowConnect.Connect[i] == 3)
-                                if (InfoSet.AliveAt(parentP[k ^ 1])
-                                    && InfoSet.AliveAt(island.GetOffset(nowoff * islandnum)))
+                            {
+                                int sanalive = 0;
+                                if (InfoSet.AliveAt(parentP[k ^ 1]))
+                                {
+                                    Location ren = parentP[k ^ 1] + renowoff;
+                                    if (!(ren.InRange && !InfoSet.PieceAt(ren).Empty
+                                        && InfoSet.PieceAt(ren).Color == nowPiece.Color))
+                                        ++sanalive;
+                                }
+                                if (InfoSet.AliveAt(island.GetOffset(nowoff * islandnum)))
+                                {
+                                    Location ren = island + nowoff * islandnum + nowoff;
+                                    if (!(ren.InRange && !InfoSet.PieceAt(ren).Empty
+                                        && InfoSet.PieceAt(ren).Color == nowPiece.Color))
+                                        ++sanalive;
+                                }
+                                if (sanalive == 2)
                                     ++san;
+                            }
                         }
-                        if (island.InRange && !InfoSet.PieceAt(island).Empty
-                            && InfoSet.PieceAt(island).Color == nowPiece.Color)
-                            if (InfoSet.ConnectAt(island).Connect[i] + nowConnect.Connect[i] == 4)
-                                ++yon;
                     }
                 if (nowConnect.Connect[i] == 4 && alive >= 1) ++yon;
                 if (nowConnect.Connect[i] == 3 && alive == 2) ++san;
@@ -470,7 +550,7 @@ namespace CSharp_Final.Manager
     {
         public static int PlayerI { get; set; }
         public static int PlayerII { get; set; }
-        static Timer timerI, timerII;
+        static Timer timerI, timerII, aiTimer;
         static Panel playerI, playerII;
         readonly static Color nowColor = Color.SpringGreen;
         public static void SetTimer(Timer a, Timer b)
@@ -480,6 +560,7 @@ namespace CSharp_Final.Manager
             if (timerII == null)
                 timerII = b;
         }
+        public static void SetAITimer(Timer c) => aiTimer = c;
         public static void SetPanel(Panel a, Panel b)
         {
             if (playerI == null)
@@ -520,7 +601,12 @@ namespace CSharp_Final.Manager
         {
             PlayerI = PlayerII = Config.EnConfig.Time;
             if (!PlayAccess.Replay)
+            {
                 timerI.Start();
+                aiTimer.Start();
+                PlayAccess.Ability = Config.PlayerI.AI == 0;
+                PlayAccess.UpdateCursor(0);
+            }
             playerI.BackColor = nowColor;
         }
 
@@ -528,6 +614,7 @@ namespace CSharp_Final.Manager
         {
             timerI.Stop();
             timerII.Stop();
+            aiTimer.Stop();
             playerI.BackColor = playerII.BackColor = Color.Transparent;
         }
 
@@ -552,6 +639,12 @@ namespace CSharp_Final.Manager
                 }
                 playerI.BackColor = nowColor;
                 playerII.BackColor = Color.Transparent;
+            }
+            if (!PlayAccess.Replay)
+            {
+                Player checker = now == 0 ? Config.PlayerII : Config.PlayerI;
+                PlayAccess.Ability = checker.AI == 0;
+                PlayAccess.UpdateCursor(now ^ 1);
             }
         }
     }

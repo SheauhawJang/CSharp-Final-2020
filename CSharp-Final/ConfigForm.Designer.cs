@@ -40,10 +40,15 @@ namespace CSharp_Final
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.EnvironmentGroup = new System.Windows.Forms.GroupBox();
+            this.SoundCheck = new System.Windows.Forms.CheckBox();
+            this.BGMCheck = new System.Windows.Forms.CheckBox();
             this.LangCombo = new System.Windows.Forms.ComboBox();
-            this.ReplaySpeedUpdown = new System.Windows.Forms.NumericUpDown();
-            this.TimerLimitUpdown = new System.Windows.Forms.NumericUpDown();
+            this.AISpeedUpDown = new System.Windows.Forms.NumericUpDown();
+            this.ReplaySpeedUpDown = new System.Windows.Forms.NumericUpDown();
+            this.TimerLimitUpDown = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.PlayerIIGroup = new System.Windows.Forms.GroupBox();
@@ -63,8 +68,9 @@ namespace CSharp_Final
             this.PlayerIGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIAvatarPicture)).BeginInit();
             this.EnvironmentGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpdown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TimerLimitUpdown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AISpeedUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TimerLimitUpDown)).BeginInit();
             this.PlayerIIGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIIAvatarPicture)).BeginInit();
             this.SuspendLayout();
@@ -110,7 +116,7 @@ namespace CSharp_Final
             // PlayerIAvatarPicture
             // 
             this.PlayerIAvatarPicture.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_I;
-            this.PlayerIAvatarPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PlayerIAvatarPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PlayerIAvatarPicture.Location = new System.Drawing.Point(9, 140);
             this.PlayerIAvatarPicture.Name = "PlayerIAvatarPicture";
             this.PlayerIAvatarPicture.Size = new System.Drawing.Size(180, 216);
@@ -171,10 +177,15 @@ namespace CSharp_Final
             // 
             // EnvironmentGroup
             // 
+            this.EnvironmentGroup.Controls.Add(this.SoundCheck);
+            this.EnvironmentGroup.Controls.Add(this.BGMCheck);
             this.EnvironmentGroup.Controls.Add(this.LangCombo);
-            this.EnvironmentGroup.Controls.Add(this.ReplaySpeedUpdown);
-            this.EnvironmentGroup.Controls.Add(this.TimerLimitUpdown);
+            this.EnvironmentGroup.Controls.Add(this.AISpeedUpDown);
+            this.EnvironmentGroup.Controls.Add(this.ReplaySpeedUpDown);
+            this.EnvironmentGroup.Controls.Add(this.TimerLimitUpDown);
             this.EnvironmentGroup.Controls.Add(this.label6);
+            this.EnvironmentGroup.Controls.Add(this.label13);
+            this.EnvironmentGroup.Controls.Add(this.label12);
             this.EnvironmentGroup.Controls.Add(this.label11);
             this.EnvironmentGroup.Controls.Add(this.label5);
             this.EnvironmentGroup.Location = new System.Drawing.Point(500, 20);
@@ -183,6 +194,26 @@ namespace CSharp_Final
             this.EnvironmentGroup.TabIndex = 0;
             this.EnvironmentGroup.TabStop = false;
             this.EnvironmentGroup.Text = "Environment";
+            // 
+            // SoundCheck
+            // 
+            this.SoundCheck.AutoSize = true;
+            this.SoundCheck.Location = new System.Drawing.Point(97, 190);
+            this.SoundCheck.Name = "SoundCheck";
+            this.SoundCheck.Size = new System.Drawing.Size(48, 16);
+            this.SoundCheck.TabIndex = 3;
+            this.SoundCheck.Text = "音效";
+            this.SoundCheck.UseVisualStyleBackColor = true;
+            // 
+            // BGMCheck
+            // 
+            this.BGMCheck.AutoSize = true;
+            this.BGMCheck.Location = new System.Drawing.Point(9, 190);
+            this.BGMCheck.Name = "BGMCheck";
+            this.BGMCheck.Size = new System.Drawing.Size(48, 16);
+            this.BGMCheck.TabIndex = 3;
+            this.BGMCheck.Text = "音乐";
+            this.BGMCheck.UseVisualStyleBackColor = true;
             // 
             // LangCombo
             // 
@@ -197,45 +228,67 @@ namespace CSharp_Final
             this.LangCombo.Size = new System.Drawing.Size(180, 20);
             this.LangCombo.TabIndex = 2;
             // 
-            // ReplaySpeedUpdown
+            // AISpeedUpDown
             // 
-            this.ReplaySpeedUpdown.Location = new System.Drawing.Point(9, 140);
-            this.ReplaySpeedUpdown.Maximum = new decimal(new int[] {
+            this.AISpeedUpDown.Location = new System.Drawing.Point(9, 240);
+            this.AISpeedUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.ReplaySpeedUpdown.Minimum = new decimal(new int[] {
+            this.AISpeedUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.ReplaySpeedUpdown.Name = "ReplaySpeedUpdown";
-            this.ReplaySpeedUpdown.Size = new System.Drawing.Size(180, 21);
-            this.ReplaySpeedUpdown.TabIndex = 1;
-            this.ReplaySpeedUpdown.Value = new decimal(new int[] {
+            this.AISpeedUpDown.Name = "AISpeedUpDown";
+            this.AISpeedUpDown.Size = new System.Drawing.Size(180, 21);
+            this.AISpeedUpDown.TabIndex = 1;
+            this.AISpeedUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // TimerLimitUpdown
+            // ReplaySpeedUpDown
             // 
-            this.TimerLimitUpdown.Location = new System.Drawing.Point(9, 40);
-            this.TimerLimitUpdown.Maximum = new decimal(new int[] {
+            this.ReplaySpeedUpDown.Location = new System.Drawing.Point(9, 140);
+            this.ReplaySpeedUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.ReplaySpeedUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ReplaySpeedUpDown.Name = "ReplaySpeedUpDown";
+            this.ReplaySpeedUpDown.Size = new System.Drawing.Size(180, 21);
+            this.ReplaySpeedUpDown.TabIndex = 1;
+            this.ReplaySpeedUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // TimerLimitUpDown
+            // 
+            this.TimerLimitUpDown.Location = new System.Drawing.Point(9, 40);
+            this.TimerLimitUpDown.Maximum = new decimal(new int[] {
             359999,
             0,
             0,
             0});
-            this.TimerLimitUpdown.Minimum = new decimal(new int[] {
+            this.TimerLimitUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.TimerLimitUpdown.Name = "TimerLimitUpdown";
-            this.TimerLimitUpdown.Size = new System.Drawing.Size(180, 21);
-            this.TimerLimitUpdown.TabIndex = 1;
-            this.TimerLimitUpdown.Value = new decimal(new int[] {
+            this.TimerLimitUpDown.Name = "TimerLimitUpDown";
+            this.TimerLimitUpDown.Size = new System.Drawing.Size(180, 21);
+            this.TimerLimitUpDown.TabIndex = 1;
+            this.TimerLimitUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -249,6 +302,24 @@ namespace CSharp_Final
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 0;
             this.label6.Text = "语言";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 221);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(65, 12);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "AI延迟(ms)";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 171);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(65, 12);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "音乐与音效";
             // 
             // label11
             // 
@@ -309,7 +380,7 @@ namespace CSharp_Final
             // PlayerIIAvatarPicture
             // 
             this.PlayerIIAvatarPicture.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_II;
-            this.PlayerIIAvatarPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PlayerIIAvatarPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.PlayerIIAvatarPicture.Location = new System.Drawing.Point(9, 140);
             this.PlayerIIAvatarPicture.Name = "PlayerIIAvatarPicture";
             this.PlayerIIAvatarPicture.Size = new System.Drawing.Size(180, 216);
@@ -418,15 +489,15 @@ namespace CSharp_Final
             this.Controls.Add(this.PlayerIGroup);
             this.Name = "ConfigForm";
             this.Text = "Config";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigForm_FormClosing);
             this.Load += new System.EventHandler(this.ClearConfigButton_Click);
             this.PlayerIGroup.ResumeLayout(false);
             this.PlayerIGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIAvatarPicture)).EndInit();
             this.EnvironmentGroup.ResumeLayout(false);
             this.EnvironmentGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpdown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TimerLimitUpdown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AISpeedUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReplaySpeedUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TimerLimitUpDown)).EndInit();
             this.PlayerIIGroup.ResumeLayout(false);
             this.PlayerIIGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerIIAvatarPicture)).EndInit();
@@ -445,7 +516,7 @@ namespace CSharp_Final
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox EnvironmentGroup;
         private System.Windows.Forms.ComboBox LangCombo;
-        private System.Windows.Forms.NumericUpDown TimerLimitUpdown;
+        private System.Windows.Forms.NumericUpDown TimerLimitUpDown;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox PlayerIIGroup;
@@ -465,7 +536,12 @@ namespace CSharp_Final
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button ClearIIAvatarButton;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown ReplaySpeedUpdown;
+        private System.Windows.Forms.NumericUpDown ReplaySpeedUpDown;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox SoundCheck;
+        private System.Windows.Forms.CheckBox BGMCheck;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown AISpeedUpDown;
+        private System.Windows.Forms.Label label13;
     }
 }

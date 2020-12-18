@@ -36,3 +36,4 @@ C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\Interop.WMPLib.d
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\AxInterop.WMPLib.dll
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\WindowsBase.dll
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp-Final.csproj.CopyComplete
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.AboutForm.resources
