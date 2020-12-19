@@ -188,7 +188,7 @@ namespace CSharp_Final
             this.Controls.Add(this.LogoPicture);
             this.Controls.Add(this.pictureBox1);
             this.Name = "AboutForm";
-            this.Text = "關於";
+            this.Text = "About";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPicture)).EndInit();
             this.ResumeLayout(false);

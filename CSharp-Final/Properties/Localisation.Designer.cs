@@ -260,15 +260,6 @@ namespace CSharp_Final.Properties {
         }
         
         /// <summary>
-        ///   查找类似 浏览 的本地化字符串。
-        /// </summary>
-        public static string ConfigOpen {
-            get {
-                return ResourceManager.GetString("ConfigOpen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 回放延迟(ms) 的本地化字符串。
         /// </summary>
         public static string ConfigRecordPing {

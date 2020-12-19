@@ -184,9 +184,6 @@
   <data name="ConfigName" xml:space="preserve">
     <value>姓名</value>
   </data>
-  <data name="ConfigOpen" xml:space="preserve">
-    <value>浏览</value>
-  </data>
   <data name="ConfigRecordPing" xml:space="preserve">
     <value>回放延迟(ms)</value>
   </data>
