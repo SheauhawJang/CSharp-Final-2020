@@ -54,8 +54,8 @@ namespace CSharp_Final.Manager
         {
             mainForm.Controls["StartButton"].Enabled = access;
             mainForm.Controls["RecordButton"].Enabled = access;
-            //mainForm.Controls["ComputerPictureI"].Enabled = access;
-            //mainForm.Controls["ComputerPictureII"].Enabled = access;
+            mainForm.Controls["ComputerPictureI"].Enabled = access;
+            mainForm.Controls["ComputerPictureII"].Enabled = access;
             mainForm.开始对局ToolStripMenuItem.Enabled = access;
             mainForm.读取棋谱ToolStripMenuItem.Enabled = access;
         }

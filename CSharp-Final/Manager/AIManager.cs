@@ -38,13 +38,13 @@ namespace CSharp_Final.Manager
                     return 1L << 50;
                 if (sets[3, 1, 1] > 0)
                     return -(1L << 50);
-                if (cchoser != mycolor && (sets[2, 0, 0] + sets[2, 0, 1]) * 2 + sets[2, 0, 2] >= 2)
+                if (cchoser != mycolor && sets[2, 0, 1] * 2 + sets[2, 0, 0] >= 2)
                     return 1L << 40;
-                if (cchoser == mycolor && (sets[2, 1, 0] + sets[2, 1, 1]) * 2 + sets[2, 1, 2] >= 2)
+                if (cchoser == mycolor && sets[2, 1, 1] * 2 + sets[2, 1, 0] >= 2)
                     return -(1L << 40);
-                if ((sets[2, 1, 0] + sets[2, 1, 1]) * 2 + sets[2, 1, 2] >= 2)
+                if (sets[2, 0, 1] * 2 + sets[2, 0, 0] >= 2)
                     return 1L << 40;
-                if ((sets[2, 0, 0] + sets[2, 0, 1]) * 2 + sets[2, 0, 2] >= 2)
+                if (sets[2, 1, 1] * 2 + sets[2, 1, 0] >= 2)
                     return -(1L << 40);
                 for (int i = 0; i < 3; ++i)
                     for (int j = 0; j < 2; ++j)
@@ -130,8 +130,7 @@ namespace CSharp_Final.Manager
                                 if (island.InRange && !Info.PieceAt(island).Empty
                                     && Info.PieceAt(island).Color == nowPiece.Color)
                                 {
-                                    if (nowPiece.ColorId == 0)
-                                        --alive;
+                                    --alive;
                                     int islandnum = Info.ConnectAt(island).Connect[w];
                                     int sum = islandnum + nowConnect.Connect[w];
                                     if (sum >= 4 && (sum == 4 || nowPiece.ColorId == 1))
@@ -278,8 +277,8 @@ namespace CSharp_Final.Manager
                         dep = 1;
                     if (Piece.CurrectColorId == 1 && Config.PlayerII.AI == 2)
                         dep = 1;
-                    //if (Piece.CurrectId < 10)
-                        //dep = 0;
+                    if (Piece.CurrectId < 10)
+                        dep = 0;
                     Location[] locs = GetAliveLoc(Piece.CurrectColorId == 0);
                     foreach(Location loc in locs)
                     {
@@ -305,9 +304,12 @@ namespace CSharp_Final.Manager
                     foreach (Location loc in locs)
                     {
                         AddPiece(loc, Piece.CurrectColorId);
+                        bool win = false;
                         for (int i = 0; i < 4; ++i)
                             if (p.ConnectAt(loc).Connect[i] >= 5)
-                                return loc;
+                                win = true;
+                        if (win)
+                            return loc;
                         long next = Search(1, 1L << 61, max, Piece.CurrectColorId, dep);
                         if (next > max)
                         {
@@ -360,6 +362,9 @@ namespace CSharp_Final.Manager
             {
                 AddPiece(loc, choser);
                 bool win = false;
+                for (int i = 0; i < 4; ++i)
+                    if (p.ConnectAt(loc).Connect[i] >= 5)
+                        win = true;
                 long ncho;
                 if (win)
                     ncho = (dep & 1) == 0 ? (1L << 60) : -(1L << 60);

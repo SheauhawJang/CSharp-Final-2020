@@ -448,8 +448,7 @@ namespace CSharp_Final.Manager
                         if (island.InRange && !InfoSet.PieceAt(island).Empty
                             && InfoSet.PieceAt(island).Color == nowPiece.Color)
                         {
-                            if (nowPiece.ColorId == 0)
-                                --alive;
+                            --alive;
                             int sum = InfoSet.ConnectAt(island).Connect[i] + nowConnect.Connect[i];
                             if (sum >= 4 && (sum == 4 || nowPiece.ColorId == 1))
                                 return new Location[1] { parentP[k] };
