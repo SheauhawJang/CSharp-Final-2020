@@ -353,7 +353,7 @@ namespace CSharp_Final.Manager
             PlayAccess.UpdateCursor(CurrectColorId);
             sender.Invalidate(last.NetRectangle);
         }
-        public static int SetCheckPiece(Location loc, Control sender, bool ai = false)
+        public static void SetCheckPiece(Location loc, Control sender, bool ai = false)
         {
             int checkAns = SetPiece(loc, sender);
             if (checkAns >= 1)
@@ -375,7 +375,6 @@ namespace CSharp_Final.Manager
                 WinningInfo info = new WinningInfo { Winner = -1 };
                 Announcement.Announce(info);
             }
-            return checkAns;
         }
         static int SetPiece(Location loc, Control sender)
         {
@@ -389,7 +388,7 @@ namespace CSharp_Final.Manager
                     Clock.Swap(CurrectColorId);
                     InfoSet.PieceAt(loc).Id = History.Count;
                     History.Add(loc);
-                    InfoSet.UpdateConnect();
+                    InfoSet.UpdateConnect(); 
                     PlayAccess.UpdateCursor(CurrectColorId);
                     SoundE.PlaySetPiece();
                     if (!last.IsNull)

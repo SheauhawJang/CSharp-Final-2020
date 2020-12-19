@@ -20,7 +20,6 @@ namespace CSharp_Final
         public MainForm()
         {
             InitializeComponent();
-            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void MainForm_Paint(object sender, PaintEventArgs e)
@@ -93,8 +92,7 @@ namespace CSharp_Final
                     }
                     else if (!BackCalculate.NowThread.IsAlive)
                     {
-                        if (Piece.SetCheckPiece(BackCalculate.Saver.Ans, BoardPanel, true) < 0)
-                            SurrenderPiece.Surrender(Piece.CurrectColorId);
+                        Piece.SetCheckPiece(BackCalculate.Saver.Ans, BoardPanel, true);
                         BackCalculate.NowThread = null;
                     }
                 }
@@ -149,7 +147,7 @@ namespace CSharp_Final
             ComputerPictureII.BackgroundImage = Avatar.GetBitmap
                 (Config.PlayerII.Avatar, 1);
             ComputerPictureI.Image = Config.PlayerI.AI == 0 ? Resources.computer_unused
-                : Config.PlayerI.AI == 1 ? Resources.computer : Resources.computer_super;
+                : Config.PlayerI.AI == 1 ?  Resources.computer : Resources.computer_super;
             ComputerPictureII.Image = Config.PlayerII.AI == 0 ? Resources.computer_unused
                 : Config.PlayerII.AI == 1 ? Resources.computer : Resources.computer_super;
 
@@ -262,7 +260,7 @@ namespace CSharp_Final
         }
         private void SurrenderButton_Click(object sender, EventArgs e)
         {
-            SurrenderPiece.Surrender(Piece.CurrectColorId);
+            SurrenderPiece.Surrender(Piece.CurrectColorId ^ 1);
         }
 
         private void NamePanel_Paint(object sender, PaintEventArgs e)
@@ -312,7 +310,7 @@ namespace CSharp_Final
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show(Localisation.ExitInfoText, Localisation.ExitInfo,
+            if (MessageBox.Show(Localisation.ExitInfoText, Localisation.ExitInfo, 
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                 e.Cancel = true;
         }

@@ -76,7 +76,7 @@ namespace CSharp_Final.Manager
         {
             WinningInfo info = new WinningInfo
             {
-                Winner = id ^ 1,
+                Winner = id,
                 WinWay = "SURRENDER"
             };
             Announcement.Announce(info);

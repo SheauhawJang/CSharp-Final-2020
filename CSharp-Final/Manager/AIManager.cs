@@ -38,21 +38,21 @@ namespace CSharp_Final.Manager
                     return 1L << 50;
                 if (sets[3, 1, 1] > 0)
                     return -(1L << 50);
-                if (cchoser != mycolor && sets[2, 0, 2] * 2 + sets[2, 0, 0] + sets[2, 0, 1] >= 2)
+                if (cchoser != mycolor && sets[2, 0, 1] * 2 + sets[2, 0, 0] >= 2)
                     return 1L << 40;
-                if (cchoser == mycolor && sets[2, 1, 2] * 2 + sets[2, 1, 0] + sets[2, 1, 1] >= 2)
+                if (cchoser == mycolor && sets[2, 1, 1] * 2 + sets[2, 1, 0] >= 2)
                     return -(1L << 40);
-                if (sets[2, 0, 2] * 2 + sets[2, 0, 0] + sets[2, 0, 1] >= 2)
+                if (sets[2, 0, 1] * 2 + sets[2, 0, 0] >= 2)
                     return 1L << 40;
-                if (sets[2, 1, 2] * 2 + sets[2, 1, 0] + sets[2, 1, 1] >= 2)
+                if (sets[2, 1, 1] * 2 + sets[2, 1, 0] >= 2)
                     return -(1L << 40);
                 for (int i = 0; i < 3; ++i)
                     for (int j = 0; j < 2; ++j)
                         for (int k = 0; k < 3; ++k)
                         {
-                            long x = 1L << 12 * i + 4 * k;
+                            long x = 1L << 6 * i + 2 * k;
                             if (j != cchoser)
-                                x <<= 2;
+                                x <<= 1;
                             if (j == 0)
                                 ans += x * sets[i, j, k];
                             else
@@ -221,11 +221,11 @@ namespace CSharp_Final.Manager
         static Location[] GetAliveLoc(bool check = false)
         {
             List<Location> ans = new List<Location>();
-            for (int i = 0; i < NetConfig.NetSize; ++i)
-                for (int j = 0; j < NetConfig.NetSize; ++j)
-                    if (CheckAliveLoc(i, j))
-                        if (!check || Piece.CheckPiece(new Location(i, j), p) >= 0)
-                            ans.Add(new Location(i, j));
+                for (int i = 0; i < NetConfig.NetSize; ++i)
+                    for (int j = 0; j < NetConfig.NetSize; ++j)
+                        if (CheckAliveLoc(i, j))
+                            if (!check || Piece.CheckPiece(new Location(i, j), p) >= 0)
+                                ans.Add(new Location(i, j));
             return ans.ToArray();
         }
         static void AddPiece(Location loc, int id)
@@ -277,6 +277,8 @@ namespace CSharp_Final.Manager
                         dep = 1;
                     if (Piece.CurrectColorId == 1 && Config.PlayerII.AI == 2)
                         dep = 1;
+                    if (Piece.CurrectId < 10)
+                        dep = 0;
                     Location[] locs = GetAliveLoc(Piece.CurrectColorId == 0);
                     foreach(Location loc in locs)
                     {
@@ -289,18 +291,25 @@ namespace CSharp_Final.Manager
                             }
                         RemovePiece(loc);
                         if (locs.Length == 1)
-                            return loc;
+                            break;
                     }    
-                    for (int i = 0; i < NetConfig.NetSize && locs.Length > 2; ++i)
-                        for (int j = 0; j < NetConfig.NetSize && locs.Length > 2; ++j)
-                            if (!p.Pieces[i, j].Empty && p.Pieces[i, j].ColorId != Piece.CurrectColorId)
-                                locs = Piece.CheckExciting(new Location(i, j), p) ?? locs;
+                    if (locs.Length > 1)
+                        for (int i = 0; i < NetConfig.NetSize; ++i)
+                            for (int j = 0; j < NetConfig.NetSize; ++j)
+                                if (p.Pieces[i, j].ColorId != Piece.CurrectColorId)
+                                    locs = Piece.CheckExciting(new Location(i, j), p) ?? locs;
                     Shuffle(ref locs);
                     long max = -(1L << 62);
                     Location best = Location.Null;
                     foreach (Location loc in locs)
                     {
                         AddPiece(loc, Piece.CurrectColorId);
+                        bool win = false;
+                        for (int i = 0; i < 4; ++i)
+                            if (p.ConnectAt(loc).Connect[i] >= 5)
+                                win = true;
+                        if (win)
+                            return loc;
                         long next = Search(1, 1L << 61, max, Piece.CurrectColorId, dep);
                         if (next > max)
                         {
@@ -309,8 +318,6 @@ namespace CSharp_Final.Manager
                         }
                         RemovePiece(loc);
                     }
-                    if (-max > 1L << 45)
-                        return Location.Null;
                     return best;
                 }
             }
@@ -345,9 +352,9 @@ namespace CSharp_Final.Manager
                     break;
             }
             if (locs.Length > 1)
-                for (int i = 0; i < NetConfig.NetSize && locs.Length > 2; ++i)
-                    for (int j = 0; j < NetConfig.NetSize && locs.Length > 2; ++j)
-                        if (!p.Pieces[i, j].Empty && p.Pieces[i, j].ColorId != choser)
+                for (int i = 0; i < NetConfig.NetSize; ++i)
+                    for (int j = 0; j < NetConfig.NetSize; ++j)
+                        if (p.Pieces[i, j].ColorId != choser)
                             locs = Piece.CheckExciting(new Location(i, j), p) ?? locs;
             Shuffle(ref locs);
             long minmax = (dep & 1) == 0 ? -(1L << 60) : +(1L << 60);
