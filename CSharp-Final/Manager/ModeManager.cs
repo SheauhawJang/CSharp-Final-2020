@@ -47,15 +47,15 @@ namespace CSharp_Final.Manager
         static MainForm mainForm;
         public static MainForm MainForm
         {
-            private get => mainForm;
+            get => mainForm;
             set { if (mainForm == null) mainForm = value; }
         }
         public static void SetStartButton(bool access)
         {
             mainForm.Controls["StartButton"].Enabled = access;
             mainForm.Controls["RecordButton"].Enabled = access;
-            mainForm.Controls["ComputerPictureI"].Enabled = access;
-            mainForm.Controls["ComputerPictureII"].Enabled = access;
+            //mainForm.Controls["ComputerPictureI"].Enabled = access;
+            //mainForm.Controls["ComputerPictureII"].Enabled = access;
             mainForm.开始对局ToolStripMenuItem.Enabled = access;
             mainForm.读取棋谱ToolStripMenuItem.Enabled = access;
         }
