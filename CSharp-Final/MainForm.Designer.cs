@@ -95,7 +95,7 @@
             this.InfoPanelI.Controls.Add(this.ClockPanelI);
             this.InfoPanelI.Controls.Add(this.NamePanelI);
             this.InfoPanelI.Controls.Add(this.HeadPictureI);
-            this.InfoPanelI.Location = new System.Drawing.Point(850, 50);
+            this.InfoPanelI.Location = new System.Drawing.Point(850, 60);
             this.InfoPanelI.Name = "InfoPanelI";
             this.InfoPanelI.Size = new System.Drawing.Size(200, 360);
             this.InfoPanelI.TabIndex = 1;
@@ -149,7 +149,7 @@
             this.InfoPanelII.Controls.Add(this.ClockPanelII);
             this.InfoPanelII.Controls.Add(this.NamePanelII);
             this.InfoPanelII.Controls.Add(this.HeadPictureII);
-            this.InfoPanelII.Location = new System.Drawing.Point(850, 440);
+            this.InfoPanelII.Location = new System.Drawing.Point(850, 450);
             this.InfoPanelII.Name = "InfoPanelII";
             this.InfoPanelII.Size = new System.Drawing.Size(200, 360);
             this.InfoPanelII.TabIndex = 1;
@@ -208,7 +208,7 @@
             // StartButton
             // 
             this.StartButton.BackColor = System.Drawing.Color.PaleVioletRed;
-            this.StartButton.Location = new System.Drawing.Point(1100, 250);
+            this.StartButton.Location = new System.Drawing.Point(1100, 260);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(250, 75);
             this.StartButton.TabIndex = 4;
@@ -222,7 +222,7 @@
             this.BoardPanel.BackColor = System.Drawing.Color.BurlyWood;
             this.BoardPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.BoardPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.BoardPanel.Location = new System.Drawing.Point(50, 50);
+            this.BoardPanel.Location = new System.Drawing.Point(50, 60);
             this.BoardPanel.Name = "BoardPanel";
             this.BoardPanel.Size = new System.Drawing.Size(750, 750);
             this.BoardPanel.TabIndex = 0;
@@ -235,7 +235,7 @@
             // 
             this.UndoButton.Enabled = false;
             this.UndoButton.Font = new System.Drawing.Font("仿宋", 16F);
-            this.UndoButton.Location = new System.Drawing.Point(1100, 690);
+            this.UndoButton.Location = new System.Drawing.Point(1100, 700);
             this.UndoButton.Name = "UndoButton";
             this.UndoButton.Size = new System.Drawing.Size(100, 40);
             this.UndoButton.TabIndex = 6;
@@ -247,7 +247,7 @@
             // 
             this.PeaceButton.Enabled = false;
             this.PeaceButton.Font = new System.Drawing.Font("仿宋", 16F);
-            this.PeaceButton.Location = new System.Drawing.Point(1250, 750);
+            this.PeaceButton.Location = new System.Drawing.Point(1250, 760);
             this.PeaceButton.Name = "PeaceButton";
             this.PeaceButton.Size = new System.Drawing.Size(100, 40);
             this.PeaceButton.TabIndex = 6;
@@ -259,7 +259,7 @@
             // 
             this.SurrenderButton.Enabled = false;
             this.SurrenderButton.Font = new System.Drawing.Font("仿宋", 16F);
-            this.SurrenderButton.Location = new System.Drawing.Point(1100, 750);
+            this.SurrenderButton.Location = new System.Drawing.Point(1100, 760);
             this.SurrenderButton.Name = "SurrenderButton";
             this.SurrenderButton.Size = new System.Drawing.Size(100, 40);
             this.SurrenderButton.TabIndex = 6;
@@ -271,7 +271,7 @@
             // 
             this.TipButton.Enabled = false;
             this.TipButton.Font = new System.Drawing.Font("仿宋", 16F);
-            this.TipButton.Location = new System.Drawing.Point(1250, 690);
+            this.TipButton.Location = new System.Drawing.Point(1250, 700);
             this.TipButton.Name = "TipButton";
             this.TipButton.Size = new System.Drawing.Size(100, 40);
             this.TipButton.TabIndex = 6;
@@ -282,7 +282,7 @@
             // RecordButton
             // 
             this.RecordButton.BackColor = System.Drawing.Color.PaleVioletRed;
-            this.RecordButton.Location = new System.Drawing.Point(1100, 490);
+            this.RecordButton.Location = new System.Drawing.Point(1100, 500);
             this.RecordButton.Name = "RecordButton";
             this.RecordButton.Size = new System.Drawing.Size(250, 75);
             this.RecordButton.TabIndex = 4;
@@ -294,7 +294,7 @@
             // ConfigButton
             // 
             this.ConfigButton.BackColor = System.Drawing.Color.PaleVioletRed;
-            this.ConfigButton.Location = new System.Drawing.Point(1100, 590);
+            this.ConfigButton.Location = new System.Drawing.Point(1100, 600);
             this.ConfigButton.Name = "ConfigButton";
             this.ConfigButton.Size = new System.Drawing.Size(250, 75);
             this.ConfigButton.TabIndex = 4;
@@ -436,7 +436,7 @@
             // LogoPicture
             // 
             this.LogoPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LogoPicture.Location = new System.Drawing.Point(1100, 60);
+            this.LogoPicture.Location = new System.Drawing.Point(1100, 70);
             this.LogoPicture.Name = "LogoPicture";
             this.LogoPicture.Size = new System.Drawing.Size(250, 150);
             this.LogoPicture.TabIndex = 8;
@@ -447,7 +447,7 @@
             this.ComputerPictureII.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_II;
             this.ComputerPictureII.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ComputerPictureII.Image = global::CSharp_Final.Properties.Resources.computer_unused;
-            this.ComputerPictureII.Location = new System.Drawing.Point(1250, 350);
+            this.ComputerPictureII.Location = new System.Drawing.Point(1250, 360);
             this.ComputerPictureII.Name = "ComputerPictureII";
             this.ComputerPictureII.Size = new System.Drawing.Size(100, 120);
             this.ComputerPictureII.TabIndex = 5;
@@ -459,7 +459,7 @@
             this.ComputerPictureI.BackgroundImage = global::CSharp_Final.Properties.Resources.Head_I;
             this.ComputerPictureI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ComputerPictureI.Image = global::CSharp_Final.Properties.Resources.computer_unused;
-            this.ComputerPictureI.Location = new System.Drawing.Point(1100, 350);
+            this.ComputerPictureI.Location = new System.Drawing.Point(1100, 360);
             this.ComputerPictureI.Name = "ComputerPictureI";
             this.ComputerPictureI.Size = new System.Drawing.Size(100, 120);
             this.ComputerPictureI.TabIndex = 5;
@@ -474,7 +474,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1424, 841);
+            this.ClientSize = new System.Drawing.Size(1424, 861);
             this.Controls.Add(this.LogoPicture);
             this.Controls.Add(this.TipButton);
             this.Controls.Add(this.SurrenderButton);

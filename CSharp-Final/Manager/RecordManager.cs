@@ -112,7 +112,7 @@ namespace CSharp_Final.Manager
             for (int i = 0; i < History.Count; ++i)
                 save.WriteLine("{2}: ({0}, {1})", History[i].X, History[i].Y, 
                     (i & 1) == 0 ? "Black" : "White");
-            if (Result.Winner > 0)
+            if (Result.Winner >= 0)
                 save.WriteLine(string.Format("Winner is {0}.",
                     Result.Winner == 0 ? "Black" : "White"));
             else
