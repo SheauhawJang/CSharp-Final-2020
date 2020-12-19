@@ -29,6 +29,11 @@ C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\en-US\CSharp-Fin
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.Properties.Localisation.en-US.resources
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\en-US\CSharp-Final.resources.dll
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.ConfigForm.resources
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\Interop.WMPLib.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp-Final.csproj.ResolveComReference.cache
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\Interop.WMPLib.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\AxInterop.WMPLib.dll
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Debug\WindowsBase.dll
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp-Final.csproj.CopyComplete
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Debug\CSharp_Final.AboutForm.resources

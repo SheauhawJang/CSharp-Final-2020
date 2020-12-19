@@ -5,7 +5,12 @@ C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Release\en-US\CSharp-F
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Release\ja-JP\CSharp-Final.resources.dll
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Release\zh-TW\CSharp-Final.resources.dll
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Release\WindowsBase.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Release\Interop.WMPLib.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\bin\Release\AxInterop.WMPLib.dll
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Release\CSharp-Final.csprojAssemblyReference.cache
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Release\Interop.WMPLib.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Release\AxInterop.WMPLib.dll
+C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Release\CSharp-Final.csproj.ResolveComReference.cache
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Release\CSharp_Final.AboutForm.resources
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Release\CSharp_Final.ConfigForm.resources
 C:\Users\wwwzh\source\repos\CSharp-Final\CSharp-Final\obj\Release\CSharp_Final.MainForm.resources
