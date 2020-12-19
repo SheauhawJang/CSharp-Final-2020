@@ -5,9 +5,9 @@ PlayerII :
 	Name = &KON Automaton
 	Avatar = &
 Environment :
-	Time = &359999
-	Lang = &ja-JP
+	Time = &60
+	Lang = &en-US
 	Speed = &300
 	AI = &100
-	Music = &1
-	Sound = &1
+	Music = &0
+	Sound = &0

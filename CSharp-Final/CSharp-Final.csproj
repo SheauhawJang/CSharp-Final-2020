@@ -231,9 +231,6 @@
     <None Include="Resources\computer_super.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\name.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

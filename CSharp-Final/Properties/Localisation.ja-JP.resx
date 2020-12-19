@@ -184,6 +184,9 @@
   <data name="ConfigName" xml:space="preserve">
     <value>名前</value>
   </data>
+  <data name="ConfigOpen" xml:space="preserve">
+    <value>見る</value>
+  </data>
   <data name="ConfigRecordPing" xml:space="preserve">
     <value>再生のPing(ms)</value>
   </data>
