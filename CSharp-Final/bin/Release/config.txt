@@ -6,8 +6,8 @@ PlayerII :
 	Avatar = &
 Environment :
 	Time = &3600
-	Lang = &ja-JP
-	Speed = &300
-	AI = &300
+	Lang = &zh-TW
+	Speed = &500
+	AI = &1
 	Music = &1
 	Sound = &1
